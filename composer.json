@@ -1,0 +1,33 @@
+{
+    "name": "viropanel/admin-laravel",
+    "description": "Laravel admin panel",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "VitalieZ",
+            "email": "test@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^7.3|^8.0",
+        "illuminate/support": "^8.0",
+        "laravel/ui": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Viropanel\\Admin\\": "src/"
+            
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Viropanel\\Admin\\AdminServiceProvider",
+                "Viropanel\\Admin\\FortifyAdminPresetServiceProvider",
+                "Spatie\\Permission\\PermissionServiceProvider"
+            ]
+        }
+    }
+}
