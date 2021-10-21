@@ -2,13 +2,12 @@
 
 namespace Viropanel\Admin;
 
-use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 use Laravel\Ui\Presets\Preset;
 use Symfony\Component\Finder\SplFileInfo;
-use Viropanel\Admin\Database\Seeders\AdminSeeder;
+use File;
 
 class AdminPreset extends Preset
 {
@@ -78,6 +77,7 @@ class AdminPreset extends Preset
             $filesystem->copyDirectory(__DIR__ . '/resources/views/auth', resource_path('views/auth'));
             $filesystem->copyDirectory(__DIR__ . '/resources/views/layouts', resource_path('views/layouts'));
             $filesystem->copyDirectory(__DIR__ . '/resources/views/admin', resource_path('views/admin'));
+            File::copy(__DIR__ . '/routes/admin.php', base_path('/routes/admin.php'));
 
             collect($filesystem->allFiles(base_path('vendor/laravel/ui/stubs/migrations')))
                 ->each(function (SplFileInfo $file) use ($filesystem) {
@@ -104,14 +104,5 @@ class AdminPreset extends Preset
                     app_path('Http/Controllers/Auth/' . Str::replaceLast('.stub', '.php', $file->getFilename()))
                 );
             });
-    }
-
-    public function register_admin()
-    {
-        $isset_user = User::where('name', 'admin')->where('email', 'admin@admin.loc')->first();
-        if (isset($isset_user)) {
-        } else {
-            new AdminSeeder();
-        }
     }
 }

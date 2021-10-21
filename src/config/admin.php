@@ -37,7 +37,7 @@ return [
 
         'prefix' => 'admin',
 
-        //'middleware' => ['role_or_permission:admin|access_admin_panel'],
+        'middleware' => 'role_or_permission:admin|access_admin_panel',
     ],
 
     /*

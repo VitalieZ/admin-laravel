@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Symfony\Component\Finder\SplFileInfo;
 use Laravel\Ui\UiCommand;
 use Illuminate\Support\Collection;
+use File;
 
 
 class AdminServiceProvider extends ServiceProvider
@@ -21,14 +22,20 @@ class AdminServiceProvider extends ServiceProvider
         $this->publishes([__DIR__ . '/resources/assets' => public_path('assets'),], 'public');
         $this->loadMigrationsFrom(__DIR__ . '/database/migrations', 'admin');
         $this->publishes([__DIR__ . '/database/migrations' => database_path('migrations')], 'migrations');
-        $this->publishes([__DIR__ . '/routes/admin.php' => base_path('routes')], 'migrations');
 
-        UiCommand::macro('admin', function (UiCommand $command) {
+
+        UiCommand::macro('admin-panel', function (UiCommand $command) {
             $adminPreset = new AdminPreset($command);
+            $adminEmptyProject = new AdminEmptyProject($command);
 
             if ($command->option('auth')) {
                 $adminPreset->installAuth();
                 $command->info('Admin CSS auth scaffolding installed successfully.');
+            }
+
+            if ($command->option('empty-project')) {
+                $adminEmptyProject->installEmptyProject();
+                $command->info('Admin files configured successfull.');
             }
         });
     }

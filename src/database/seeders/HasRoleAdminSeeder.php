@@ -15,9 +15,9 @@ class HasRoleAdminSeeder extends Seeder
     public function run()
     {
         DB::table('model_has_roles')->insert([
-            'role_id' => 'admin',
-            'model_type' => 'web',
-            'model_id' => '',
+            'role_id' => '1',
+            'model_type' => 'App\Models\User',
+            'model_id' => '1',
         ]);
     }
 }
