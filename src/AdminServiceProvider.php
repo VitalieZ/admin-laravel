@@ -14,14 +14,14 @@ class AdminServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
+        //$this->loadRoutesFrom(__DIR__ . '/routes/web.php');
         $this->loadViewsFrom(__DIR__ . '/resources/views', 'admin');
         $this->publishes([__DIR__ . '/config/admin.php' => config_path('admin.php')]);
         $this->publishes([__DIR__ . '/config' => config_path()], 'laravel-admin-config');
         $this->publishes([__DIR__ . '/resources/assets' => public_path('assets'),], 'public');
         $this->loadMigrationsFrom(__DIR__ . '/database/migrations', 'admin');
         $this->publishes([__DIR__ . '/database/migrations' => database_path('migrations')], 'migrations');
-        $this->publishes([__DIR__ . '/../../../spatie/laravel-permissions/art/database/migrations/create_permission_tables.php.stub' => $this->getMigrationFileName('create_permission_tables.php'),], 'migrations');
+        $this->publishes([__DIR__ . '/routes/admin.php' => base_path('routes')], 'migrations');
 
         UiCommand::macro('admin', function (UiCommand $command) {
             $adminPreset = new AdminPreset($command);
@@ -35,7 +35,6 @@ class AdminServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->app->singleton(TerminatingMiddleware::class);
     }
 
     /**

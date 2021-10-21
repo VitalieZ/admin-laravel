@@ -77,6 +77,7 @@ class AdminPreset extends Preset
         tap(new Filesystem(), function ($filesystem) {
             $filesystem->copyDirectory(__DIR__ . '/resources/views/auth', resource_path('views/auth'));
             $filesystem->copyDirectory(__DIR__ . '/resources/views/layouts', resource_path('views/layouts'));
+            $filesystem->copyDirectory(__DIR__ . '/resources/views/admin', resource_path('views/admin'));
 
             collect($filesystem->allFiles(base_path('vendor/laravel/ui/stubs/migrations')))
                 ->each(function (SplFileInfo $file) use ($filesystem) {
