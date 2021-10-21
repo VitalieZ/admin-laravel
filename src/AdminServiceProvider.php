@@ -7,6 +7,7 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 use Symfony\Component\Finder\SplFileInfo;
 use Laravel\Ui\UiCommand;
+use Illuminate\Support\Collection;
 
 
 class AdminServiceProvider extends ServiceProvider
@@ -20,6 +21,7 @@ class AdminServiceProvider extends ServiceProvider
         $this->publishes([__DIR__ . '/resources/assets' => public_path('assets'),], 'public');
         $this->loadMigrationsFrom(__DIR__ . '/database/migrations', 'admin');
         $this->publishes([__DIR__ . '/database/migrations' => database_path('migrations')], 'migrations');
+        $this->publishes([__DIR__ . '/../../../spatie/laravel-permissions/art/database/migrations/create_permission_tables.php.stub' => $this->getMigrationFileName('create_permission_tables.php'),], 'migrations');
 
         UiCommand::macro('admin', function (UiCommand $command) {
             $adminPreset = new AdminPreset($command);
@@ -28,12 +30,30 @@ class AdminServiceProvider extends ServiceProvider
                 $adminPreset->installAuth();
                 $command->info('Admin CSS auth scaffolding installed successfully.');
             }
-
-            $command->comment('Please run "npm install && npm run dev" to compile your fresh scaffolding.');
         });
     }
 
     public function register()
     {
+        $this->app->singleton(TerminatingMiddleware::class);
+    }
+
+    /**
+     * Returns existing migration file if found, else uses the current timestamp.
+     *
+     * @return string
+     */
+    protected function getMigrationFileName($migrationFileName): string
+    {
+        $timestamp = date('Y_m_d_His');
+
+        $filesystem = $this->app->make(Filesystem::class);
+
+        return Collection::make($this->app->databasePath() . DIRECTORY_SEPARATOR . 'migrations' . DIRECTORY_SEPARATOR)
+            ->flatMap(function ($path) use ($filesystem, $migrationFileName) {
+                return $filesystem->glob($path . '*_' . $migrationFileName);
+            })
+            ->push($this->app->databasePath() . "/migrations/{$timestamp}_{$migrationFileName}")
+            ->first();
     }
 }

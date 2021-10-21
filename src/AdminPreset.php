@@ -2,11 +2,13 @@
 
 namespace Viropanel\Admin;
 
+use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 use Laravel\Ui\Presets\Preset;
 use Symfony\Component\Finder\SplFileInfo;
+use Viropanel\Admin\Database\Seeders\AdminSeeder;
 
 class AdminPreset extends Preset
 {
@@ -101,5 +103,14 @@ class AdminPreset extends Preset
                     app_path('Http/Controllers/Auth/' . Str::replaceLast('.stub', '.php', $file->getFilename()))
                 );
             });
+    }
+
+    public function register_admin()
+    {
+        $isset_user = User::where('name', 'admin')->where('email', 'admin@admin.loc')->first();
+        if (isset($isset_user)) {
+        } else {
+            new AdminSeeder();
+        }
     }
 }
