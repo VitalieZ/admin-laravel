@@ -14,7 +14,7 @@ class CreateAdminTable extends Migration
     public function up()
     {
 
-        Schema::create(config('admin.database.menu_table'), function (Blueprint $table) {
+        Schema::create('menu_admin', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('parent_id')->default(0);
             $table->integer('order')->default(0);
@@ -26,7 +26,7 @@ class CreateAdminTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create(config('admin.database.categories_table'), function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name', 255);
             $table->string('slug', 255)->unique();
@@ -50,7 +50,7 @@ class CreateAdminTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(config('admin.database.menu_table'));
-        Schema::dropIfExists(config('admin.database.categories_table'));
+        Schema::dropIfExists('menu_admin');
+        Schema::dropIfExists('categories');
     }
 }

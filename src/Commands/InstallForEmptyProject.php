@@ -35,7 +35,7 @@ class InstallForEmptyProject extends Command
     public function artisanComand()
     {
         $this->call('ui:auth');
-        //$this->call('ui:admin', ['--auth']);
+        $this->call('ui', ['name' => 'admin', '--auth']);
         $this->call('vendor:publish', ['--provider' => 'Viropanel\Admin\AdminServiceProvider']);
         $this->call('vendor:publish', ['--provider' => 'Spatie\Permission\PermissionServiceProvider']);
         $this->call('optimize:clear');
@@ -45,13 +45,13 @@ class InstallForEmptyProject extends Command
     public function copyFileWithChengeCode()
     {
         //File::copy(__DIR__ . '/Http/Kernel.php', base_path('/app/Http/Kernel.php'));
-        File::copy(__DIR__ . '/Models/User.php', base_path('/app/Models/User.php'));
-        File::copy(__DIR__ . '/Providers/RouteServiceProvider.php', base_path('/app/Providers/RouteServiceProvider.php'));
+        File::copy(__DIR__ . '/../Models/User.php', base_path('/app/Models/User.php'));
+        File::copy(__DIR__ . '/../Providers/RouteServiceProvider.php', base_path('/app/Providers/RouteServiceProvider.php'));
     }
 
     public function createRolePermission()
     {
-        $this->call('permission:create-role admin');
-        $this->call('permission:create-permission access_admin_panel');
+        $this->call('permission:create-role', ['name' => 'admin']);
+        $this->call('permission:create-permission', ['name' => ' access_admin_panel']);
     }
 }

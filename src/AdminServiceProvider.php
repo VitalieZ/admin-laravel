@@ -4,15 +4,8 @@ namespace Viropanel\Admin;
 
 use Carbon\Laravel\ServiceProvider;
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Support\Str;
-use Symfony\Component\Finder\SplFileInfo;
 use Laravel\Ui\UiCommand;
 use Illuminate\Support\Collection;
-use File;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Cache\RateLimiting\Limit;
-use Illuminate\Support\Facades\RateLimiter;
-use Illuminate\Http\Request;
 
 
 class AdminServiceProvider extends ServiceProvider
@@ -44,7 +37,10 @@ class AdminServiceProvider extends ServiceProvider
         $this->publishes([__DIR__ . '/config' => config_path()], 'laravel-admin-config');
         $this->publishes([__DIR__ . '/resources/assets' => public_path('assets'),], 'public');
         $this->loadMigrationsFrom(__DIR__ . '/database/migrations', 'admin');
-        $this->publishes([__DIR__ . '/database/migrations' => database_path('migrations')], 'migrations');
+        //$this->publishes([__DIR__ . '/database/migrations' => database_path('migrations')], 'migrations');
+        $this->publishes([
+            __DIR__ . '/database/migrations/create_admin_tables.php' => $this->getMigrationFileName('create_permission_tables.php'),
+        ], 'migrations');
 
 
 
