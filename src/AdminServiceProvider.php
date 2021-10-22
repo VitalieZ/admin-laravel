@@ -37,9 +37,8 @@ class AdminServiceProvider extends ServiceProvider
         $this->publishes([__DIR__ . '/config' => config_path()], 'laravel-admin-config');
         $this->publishes([__DIR__ . '/resources/assets' => public_path('assets'),], 'public');
         $this->loadMigrationsFrom(__DIR__ . '/database/migrations', 'admin');
-        //$this->publishes([__DIR__ . '/database/migrations' => database_path('migrations')], 'migrations');
         $this->publishes([
-            __DIR__ . '/database/migrations/create_admin_tables.php' => $this->getMigrationFileName('create_permission_tables.php'),
+            __DIR__ . '/database/migrations/create_admin_tables.php' => $this->getMigrationFileName('create_admin_tables.php'),
         ], 'migrations');
 
         UiCommand::macro('admin', function (UiCommand $command) {
