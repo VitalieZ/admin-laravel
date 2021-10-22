@@ -24,18 +24,12 @@ class AdminServiceProvider extends ServiceProvider
         $this->publishes([__DIR__ . '/database/migrations' => database_path('migrations')], 'migrations');
 
 
-        UiCommand::macro('admin-panel', function (UiCommand $command) {
+        UiCommand::macro('admin', function (UiCommand $command) {
             $adminPreset = new AdminPreset($command);
-            $adminEmptyProject = new AdminEmptyProject($command);
 
             if ($command->option('auth')) {
                 $adminPreset->installAuth();
                 $command->info('Admin CSS auth scaffolding installed successfully.');
-            }
-
-            if ($command->option('empty-project')) {
-                $adminEmptyProject->installEmptyProject();
-                $command->info('Admin files configured successfull.');
             }
         });
     }
