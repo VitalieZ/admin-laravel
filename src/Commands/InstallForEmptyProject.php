@@ -55,6 +55,6 @@ class InstallForEmptyProject extends Command
 
     public function createAdminUser()
     {
-        $this->call('admin-panel:create-admin', ['--name' => 'admin', '--email' => 'admin@admin.loc', '--password' => '12345678']);
+        $this->call('admin-panel:create-admin');
     }
 }
