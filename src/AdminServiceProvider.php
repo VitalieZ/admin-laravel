@@ -9,10 +9,33 @@ use Symfony\Component\Finder\SplFileInfo;
 use Laravel\Ui\UiCommand;
 use Illuminate\Support\Collection;
 use File;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Http\Request;
 
 
 class AdminServiceProvider extends ServiceProvider
 {
+
+    /**
+     * @var array
+     */
+    protected $commands = [
+        Commands\InstallForEmptyProject::class,
+    ];
+
+    /**
+     * The application's route middleware.
+     *
+     * @var array
+     */
+    protected $routeMiddleware = [
+        'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
+        'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
+        'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
+    ];
+
     public function boot()
     {
         //$this->loadRoutesFrom(__DIR__ . '/routes/web.php');
@@ -24,6 +47,8 @@ class AdminServiceProvider extends ServiceProvider
         $this->publishes([__DIR__ . '/database/migrations' => database_path('migrations')], 'migrations');
 
 
+
+
         UiCommand::macro('admin', function (UiCommand $command) {
             $adminPreset = new AdminPreset($command);
 
@@ -32,7 +57,14 @@ class AdminServiceProvider extends ServiceProvider
                 $command->info('Admin CSS auth scaffolding installed successfully.');
             }
         });
+
+        $this->routes(function () {
+            Route::middleware('web')
+                ->namespace($this->namespace)
+                ->group(base_path('routes/admin.php'));
+        });
     }
+
 
     public function register()
     {

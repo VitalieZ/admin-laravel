@@ -44,9 +44,9 @@ class InstallForEmptyProject extends Command
 
     public function copyFileWithChengeCode()
     {
-        File::copy(__DIR__ . '/Http/Kernel.php', base_path('/app/Http/Kernel.php'));
+        //File::copy(__DIR__ . '/Http/Kernel.php', base_path('/app/Http/Kernel.php'));
         File::copy(__DIR__ . '/Models/User.php', base_path('/app/Models/User.php'));
-        File::copy(__DIR__ . '/Providers/RouteServiceProvider.php', base_path('/app/Providers/RouteServiceProvider.php'));
+        //File::copy(__DIR__ . '/Providers/RouteServiceProvider.php', base_path('/app/Providers/RouteServiceProvider.php'));
     }
 
     public function createRolePermission()
