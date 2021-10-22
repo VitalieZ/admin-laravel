@@ -1,15 +1,24 @@
 <?php
 
-namespace Viropanel\Admin;
+namespace Viropanel\Admin\Commands;
 
-use Illuminate\Support\Facades\Artisan;
+use Illuminate\Console\Command;
 use File;
-use Viropanel\Admin\Database\Seeders\AdminSeeder;
 use Viropanel\Admin\Database\Seeders\CreateAdminSeeder;
 use Viropanel\Admin\Database\Seeders\HasRoleAdminSeeder;
 
-class AdminEmptyProject
+
+class InstallForEmptyProject extends Command
 {
+    protected $signature = 'admin-panel:empty-project';
+
+    protected $description = 'Chenge files to project';
+
+    public function handle()
+    {
+        $this->installEmptyProject();
+        $this->info("Role created");
+    }
 
     public function installEmptyProject()
     {
@@ -25,12 +34,12 @@ class AdminEmptyProject
 
     public function artisanComand()
     {
-        Artisan::call('ui:auth');
-        Artisan::call('ui:admin-panel --auth');
-        Artisan::call('vendor:publish --provider="Viropanel\Admin\AdminServiceProvider"');
-        Artisan::call('vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"');
-        Artisan::call('optimize:clear');
-        Artisan::call('migrate');
+        $this->call('ui:auth');
+        //$this->call('ui:admin', ['--auth']);
+        $this->call('vendor:publish', ['--provider' => 'Viropanel\Admin\AdminServiceProvider']);
+        $this->call('vendor:publish', ['--provider' => 'Spatie\Permission\PermissionServiceProvider']);
+        $this->call('optimize:clear');
+        $this->call('migrate');
     }
 
     public function copyFileWithChengeCode()
@@ -42,7 +51,7 @@ class AdminEmptyProject
 
     public function createRolePermission()
     {
-        Artisan::call('permission:create-role admin');
-        Artisan::call('permission:create-permission access_admin_panel');
+        $this->call('permission:create-role admin');
+        $this->call('permission:create-permission access_admin_panel');
     }
 }
