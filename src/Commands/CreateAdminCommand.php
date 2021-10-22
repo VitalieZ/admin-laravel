@@ -3,16 +3,18 @@
 namespace Viropanel\Admin\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\File;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 
-class InstallForEmptyProject extends Command
+class CreateAdminCommand extends Command
 {
-    protected $signature = 'admin-panel:empty-project {--name?} {--email?} {--password?}';
+    protected $signature = 'admin-panel:create-admin 
+        {name? : The name of the admin}
+        {email? : The email of the admin}
+        {password? : The password of the admin}';
 
-    protected $description = 'Create admin for admin panel';
+    protected $description = 'Create user admin for admin panel';
 
     public function handle()
     {
@@ -22,17 +24,30 @@ class InstallForEmptyProject extends Command
 
     public function CreateAdmin()
     {
-        $name = $this->argument('mame') ?? 'Admin';
-        $email = $this->argument('email') ?? 'admin@admin.loc';
-        $password = $this->argument('password') ?? '12345678';
+        $name = $this->argument('name') ?? config('admin.create-damin.name');
+        $email = $this->argument('email') ?? config('admin.create-damin.email');
+        $password = $this->argument('password') ?? config('admin.create-damin.password');
+
+        $isset_user = User::where('email', $email)->first();
+        if (isset($isset_user)) {
+            return "User exists with this email. Try again.\nemail: " . $email;
+        }
+
+        if ($name == config('admin.create-damin.name') and $email == config('admin.create-damin.email')) {
+            $role = 'admin';
+        } else {
+            $this->call('permission:create-role', ['name' => 'user']);
+            $role = 'user';
+        }
 
         $user = User::create([
             'name' => $name,
             'email' => $email,
             'password' => Hash::make($password),
         ]);
-        $user->assignRole('admin');
 
-        return "Admin create: `email: `" . $email . " and `password: `" . $password;
+        $user->assignRole($role);
+
+        return "Admin created:\nemail: " . $email . "\npassword`: " . $password;
     }
 }
