@@ -22,7 +22,7 @@ class AdminServiceProvider extends ServiceProvider
      * @var array
      */
     protected $commands = [
-        Commands\InstallForEmptyProject::class,
+        Commands\InstallForEmptyProject::class
     ];
 
     /**

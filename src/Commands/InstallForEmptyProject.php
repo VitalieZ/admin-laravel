@@ -3,7 +3,7 @@
 namespace Viropanel\Admin\Commands;
 
 use Illuminate\Console\Command;
-use File;
+use Illuminate\Support\Facades\File;
 use Viropanel\Admin\Database\Seeders\CreateAdminSeeder;
 use Viropanel\Admin\Database\Seeders\HasRoleAdminSeeder;
 
