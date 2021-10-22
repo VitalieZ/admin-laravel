@@ -26,11 +26,7 @@ class InstallForEmptyProject extends Command
         $this->artisanComand();
         $this->copyFileWithChengeCode();
 
-        new CreateAdminSeeder();
-
-        $this->createRolePermission();
-
-        new HasRoleAdminSeeder();
+        $this->createAdminUser();
     }
 
     public function artisanComand()
@@ -46,7 +42,7 @@ class InstallForEmptyProject extends Command
 
     public function copyFileWithChengeCode()
     {
-        //File::copy(__DIR__ . '/Http/Kernel.php', base_path('/app/Http/Kernel.php'));
+        File::copy(__DIR__ . '/Http/Kernel.php', base_path('/app/Http/Kernel.php'));
         File::copy(__DIR__ . '/../Models/User.php', base_path('/app/Models/User.php'));
         File::copy(__DIR__ . '/../Providers/RouteServiceProvider.php', base_path('/app/Providers/RouteServiceProvider.php'));
     }
@@ -55,5 +51,10 @@ class InstallForEmptyProject extends Command
     {
         $this->call('permission:create-role', ['name' => 'admin']);
         $this->call('permission:create-permission', ['name' => ' access_admin_panel']);
+    }
+
+    public function createAdminUser()
+    {
+        $this->call('admin-panel:create-admin', ['--name' => 'admin', '--email' => 'admin@admin.loc', '--password' => '12345678']);
     }
 }
