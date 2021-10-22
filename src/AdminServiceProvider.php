@@ -42,9 +42,6 @@ class AdminServiceProvider extends ServiceProvider
             __DIR__ . '/database/migrations/create_admin_tables.php' => $this->getMigrationFileName('create_permission_tables.php'),
         ], 'migrations');
 
-
-
-
         UiCommand::macro('admin', function (UiCommand $command) {
             $adminPreset = new AdminPreset($command);
 

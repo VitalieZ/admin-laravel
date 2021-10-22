@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use Viropanel\Admin\Database\Seeders\CreateAdminSeeder;
 use Viropanel\Admin\Database\Seeders\HasRoleAdminSeeder;
+use Viropanel\Admin\AdminPreset;
 
 
 class InstallForEmptyProject extends Command
@@ -35,7 +36,8 @@ class InstallForEmptyProject extends Command
     public function artisanComand()
     {
         $this->call('ui:auth');
-        $this->call('ui', ['name' => 'admin', '--auth']);
+        $adminPreset = new AdminPreset();
+        $adminPreset->installAuth();
         $this->call('vendor:publish', ['--provider' => 'Viropanel\Admin\AdminServiceProvider']);
         $this->call('vendor:publish', ['--provider' => 'Spatie\Permission\PermissionServiceProvider']);
         $this->call('optimize:clear');

@@ -7,7 +7,7 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 use Laravel\Ui\Presets\Preset;
 use Symfony\Component\Finder\SplFileInfo;
-use File;
+use Illuminate\Support\Facades\File;
 
 class AdminPreset extends Preset
 {
@@ -16,11 +16,7 @@ class AdminPreset extends Preset
 
     public $isFortify = false;
 
-    public function __construct(Command $command, $isFortify = false)
-    {
-        $this->command = $command;
-        $this->isFortify = $isFortify;
-    }
+
 
     public static function getViewPath($path = '')
     {
