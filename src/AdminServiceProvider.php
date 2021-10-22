@@ -57,12 +57,6 @@ class AdminServiceProvider extends ServiceProvider
                 $command->info('Admin CSS auth scaffolding installed successfully.');
             }
         });
-
-        $this->routes(function () {
-            Route::middleware('web')
-                ->namespace($this->namespace)
-                ->group(base_path('routes/admin.php'));
-        });
     }
 
 
