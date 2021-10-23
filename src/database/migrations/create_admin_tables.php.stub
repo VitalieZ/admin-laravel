@@ -61,7 +61,5 @@ class CreateAdminTables extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('menu_admin');
-        Schema::dropIfExists('categories');
     }
 }
