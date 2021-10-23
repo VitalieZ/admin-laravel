@@ -13,7 +13,7 @@
     </div>
     @if ($item->hasChildren())
     <ol class="dd-list">
-        @include(admin::admin.category.customMenuItems',['items' => $item->children()])
+        @include('admin::admin.category.customMenuItems',['items' => $item->children()])
     </ol>
     @endif
 </li>

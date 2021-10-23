@@ -73,6 +73,7 @@
 
 @endsection
 @push('page_scripts')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="{{ asset('assets/plugins/nestable/jquery.nestable.js') }}"></script>
 <script src="{{ asset('assets/plugins/jquery-pjax/jquery.pjax.js') }}"></script>
 <script src="{{ asset('assets/plugins/sweetalert2/dist/sweetalert2.min.js') }}"></script>
