@@ -12,13 +12,6 @@ class AdminServiceProvider extends ServiceProvider
 {
 
     /**
-     * @var array
-     */
-    protected $commands = [
-        Commands\InstallForEmptyProject::class
-    ];
-
-    /**
      * The application's route middleware.
      *
      * @var array
@@ -31,6 +24,11 @@ class AdminServiceProvider extends ServiceProvider
 
     public function boot()
     {
+        $this->commands([
+            Commands\InstallForEmptyProject::class,
+            Commands\InsertBasePermissionsCommand::class,
+            Commands\CreateAdminCommand::class
+        ]);
         //$this->loadRoutesFrom(__DIR__ . '/routes/web.php');
         $this->loadViewsFrom(__DIR__ . '/resources/views', 'admin');
         $this->publishes([__DIR__ . '/config/admin.php' => config_path('admin.php')]);

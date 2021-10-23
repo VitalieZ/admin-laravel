@@ -41,6 +41,10 @@ class CreateAdminTables extends Migration
             $table->tinyInteger('visible')->default('1');
             $table->timestamps();
         });
+
+        Schema::table('users', function (Blueprint $table) {
+            $table->timestamps('deleted_at');
+        });
     }
 
     /**

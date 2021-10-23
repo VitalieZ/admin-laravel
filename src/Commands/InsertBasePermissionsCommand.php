@@ -21,28 +21,39 @@ class InsertBasePermissionsCommand extends Command
     public function PermisonsAdminPanel()
     {
 
-        $isset_permision = Permission::where('name', 'categoty_acces')->first();
-        if (isset($isset_permision)) {
-            return "All permissions already inserted";
+        foreach ($this->perforadminpanel() as $value) {
+            $this->call('permission:create-permission', ['name' => $value]);
         }
-        $i = 0;
 
-        foreach ($this->perforadminpanel() as $item) {
-            $this->call('permission:create-permission', ['name' => $item[$i]]);
-            $i++;
-        }
 
         return "All permissions added.";
     }
 
     protected function perforadminpanel()
     {
-        return [
-            'category_access',
-            'category_show',
-            'category_create',
-            'category_edit',
-            'category_delete',
-        ];
+        $permissions = array(
+            "category_access",
+            "category_show",
+            "category_create",
+            "category_edit",
+            "category_delete",
+            "user_access",
+            "user_show",
+            "user_create",
+            "user_edit",
+            "user_delete",
+            "role_access",
+            "role_show",
+            "role_create",
+            "role_edit",
+            "role_delete",
+            "permission_access",
+            "permission_show",
+            "permission_create",
+            "permission_edit",
+            "permission_delete"
+
+        );
+        return $permissions;
     }
 }
