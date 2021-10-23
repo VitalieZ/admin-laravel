@@ -11,11 +11,6 @@ use Illuminate\Support\Collection;
 class AdminServiceProvider extends ServiceProvider
 {
 
-    /**
-     * The application's route middleware.
-     *
-     * @var array
-     */
     protected $routeMiddleware = [
         'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
         'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,

@@ -21,11 +21,26 @@ class CategoryController extends Controller
     {
         //abort_if(Gate::denies('category_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        $menu = Category::orderBy('ordering', 'asc')->get();
+
+        $mBuilder = \Menu::make('MyNav', function ($m) use ($menu) {
+            foreach ($menu as $item) {
+                if ($item->parent_id == 0) {
+                    $m->add($item->name, env('APP_URL') . '/' . $item->slug)->id($item->id)->attr(['order' => $item->ordering, 'icon' => $item->icon, 'uri' => $item->created_at]);
+                } else {
+                    if ($m->find($item->parent_id)) {
+                        $m->find($item->parent_id)->add($item->name, env('APP_URL') . '/' . $item->slug)->id($item->id)->attr(['ordering' => $item->order, 'icon' => $item->icon, 'uri' => $item->created_at]);
+                    }
+                }
+            }
+        });
+
         $category = Category::orderBy('tree_id', 'asc')->orderBy('parent_id', 'asc')->orderBy('ordering', 'asc')->paginate(4);
         $cat = Category::all()->keyBy('id');
         return view('admin::admin.category.index', [
             'category' => $category,
             'cat' => $cat,
+            'menu' => $mBuilder,
         ]);
     }
 

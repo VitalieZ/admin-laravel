@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @include('admin::assets.styles')
+    @stack('page_css')
     <title>Document</title>
 </head>
 
@@ -240,6 +241,7 @@
     <!-- ./wrapper -->
 
     @include('admin::assets.js')
+    @stack('page_scripts')
 </body>
 
 </html>
