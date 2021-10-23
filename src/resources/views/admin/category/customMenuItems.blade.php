@@ -7,7 +7,7 @@
             @endif
         </a>
         <span class="pull-right dd-nodrag">
-            <a href="{{ route('menuadmin.edit', $item->id) }}"><i class="fa fa-edit"></i></a>
+            <a href="{{ route('menu.edit', $item->id) }}"><i class="fa fa-edit"></i></a>
             <a href="javascript:void(0);" data-id="{{ $item->id}}" class="tree_branch_delete"><i class="fa fa-trash"></i></a>
         </span>
     </div>
