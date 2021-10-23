@@ -14,7 +14,8 @@
         "php": "^7.3|^8.0",
         "illuminate/support": "^8.0",
         "laravel/ui": "^3.0",
-        "spatie/laravel-permission": "^4.0"
+        "spatie/laravel-permission": "^4.0",
+        "lavary/laravel-menu": "^1.8"
     },
     "autoload": {
         "psr-4": {
@@ -27,8 +28,13 @@
             "providers": [
                 "Viropanel\\Admin\\AdminServiceProvider",
                 "Viropanel\\Admin\\FortifyAdminPresetServiceProvider",
-                "Spatie\\Permission\\PermissionServiceProvider"
-            ]
+                "Spatie\\Permission\\PermissionServiceProvider",
+                "Lavary\\Menu\\ServiceProvider"
+            ],
+            "aliases":
+            {
+                "Menu": "Lavary\\Menu\\Facade"
+            }
         }
     }
 }
