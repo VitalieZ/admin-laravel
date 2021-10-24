@@ -1,12 +1,18 @@
 @foreach ($items as $item)
 <li class="dd-item" data-id="{{ $item->id}}">
     <div class="dd-handle">
-        <i class="fa {{ $item->attr('icon')}}"></i>&nbsp;<strong>{{ $item->title }}</strong>&nbsp;&nbsp;&nbsp;<a href="{{ env('APP_URL') }}{{ $item->attr('uri')}}" class="dd-nodrag">
+        <i class="fa {{ $item->attr('icon')}}"></i>&nbsp;<strong>{{ $item->title }}</strong>&nbsp;&nbsp;&nbsp;<a href="{{ env('APP_URL') }}/{{ $item->attr('uri')}}" class="dd-nodrag">
             @if ($item->attr('uri'))
-            {{ env('APP_URL') }}{{ $item->attr('uri')}}
+            {{ env('APP_URL') }}/{{ $item->attr('uri')}}
             @endif
         </a>
         <span class="pull-right dd-nodrag">
+            @if ($item->attr('visible') == 1)
+            <span class="label label-success mr-3">Активен</span>
+            @else
+            <span class="label label-warning mr-3">Удален</span>
+            @endif
+
             <a href="{{ route('menu.edit', $item->id) }}"><i class="fa fa-edit"></i></a>
             <a href="javascript:void(0);" data-id="{{ $item->id}}" class="tree_branch_delete"><i class="fa fa-trash"></i></a>
         </span>

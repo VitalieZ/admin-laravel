@@ -13,7 +13,6 @@ class Category extends Model
         'name',
         'slug',
         'icon',
-        'content',
         'title',
         'keywords',
         'description',

@@ -26,10 +26,10 @@ class CategoryController extends Controller
         $mBuilder = \Menu::make('MyNav', function ($m) use ($menu) {
             foreach ($menu as $item) {
                 if ($item->parent_id == 0) {
-                    $m->add($item->name, env('APP_URL') . '/' . $item->slug)->id($item->id)->attr(['order' => $item->ordering, 'icon' => $item->icon, 'uri' => $item->created_at]);
+                    $m->add($item->name, env('APP_URL') . '/' . $item->slug)->id($item->id)->attr(['order' => $item->ordering, 'icon' => $item->icon, 'uri' => $item->slug, 'visible' => $item->visible]);
                 } else {
                     if ($m->find($item->parent_id)) {
-                        $m->find($item->parent_id)->add($item->name, env('APP_URL') . '/' . $item->slug)->id($item->id)->attr(['ordering' => $item->order, 'icon' => $item->icon, 'uri' => $item->created_at]);
+                        $m->find($item->parent_id)->add($item->name, env('APP_URL') . '/' . $item->slug)->id($item->id)->attr(['ordering' => $item->order, 'icon' => $item->icon, 'uri' => $item->slug, 'visible' => $item->visible]);
                     }
                 }
             }
