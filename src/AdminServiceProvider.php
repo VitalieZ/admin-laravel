@@ -43,11 +43,19 @@ class AdminServiceProvider extends ServiceProvider
                 $command->info('Admin CSS auth scaffolding installed successfully.');
             }
         });
+
+        //register livewire components
+        $this->livewireComponents();
     }
 
 
     public function register()
     {
+    }
+
+    public function livewireComponents()
+    {
+        \Livewire::component('admin::categorycreate', CategoryCreate::class);
     }
 
     /**

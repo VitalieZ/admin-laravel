@@ -35,7 +35,7 @@ class CategoryController extends Controller
             }
         });
 
-        $category = Category::orderBy('tree_id', 'asc')->orderBy('parent_id', 'asc')->orderBy('ordering', 'asc')->paginate(4);
+        $category = Category::orderBy('tree_id', 'asc')->orderBy('parent_id', 'asc')->orderBy('ordering', 'asc')->get()->toArray();
         $cat = Category::all()->keyBy('id');
         return view('admin::admin.category.index', [
             'category' => $category,

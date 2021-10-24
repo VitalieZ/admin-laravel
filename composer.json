@@ -15,7 +15,9 @@
         "illuminate/support": "^8.0",
         "laravel/ui": "^3.0",
         "spatie/laravel-permission": "^4.0",
-        "lavary/laravel-menu": "^1.8"
+        "lavary/laravel-menu": "^1.8",
+        "cviebrock/eloquent-sluggable": "^8.0",
+        "livewire/livewire": "^2.7"
     },
     "autoload": {
         "psr-4": {
