@@ -3,8 +3,6 @@
 namespace Viropanel\Admin\Commands;
 
 use Illuminate\Console\Command;
-use Spatie\Permission\Models\Permission;
-
 
 class InsertBasePermissionsCommand extends Command
 {

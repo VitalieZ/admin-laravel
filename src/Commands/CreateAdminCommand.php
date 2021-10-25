@@ -3,7 +3,7 @@
 namespace Viropanel\Admin\Commands;
 
 use Illuminate\Console\Command;
-use App\Models\User;
+use Viropanel\Admin\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 
