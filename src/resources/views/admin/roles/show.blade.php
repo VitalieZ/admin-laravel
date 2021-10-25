@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('admin::layouts.admin')
 @section('content-header')
 <div class="content-header">
 
@@ -8,21 +8,21 @@
 <div class="col-md-12">
     <div class="card">
         <div class="card-header">
-            {{ trans('global.show') }} {{ trans('cruds.role.title') }}
+            {{ trans('admin::global.show') }} {{ trans('admin::cruds.role.title') }}
         </div>
 
         <div class="card-body">
             <div class="form-group">
                 <div class="form-group">
                     <a class="btn btn-default" href="{{ route('roles.index') }}">
-                        {{ trans('global.back_to_list') }}
+                        {{ trans('admin::global.back_to_list') }}
                     </a>
                 </div>
                 <table class="table table-bordered table-striped">
                     <tbody>
                         <tr>
                             <th>
-                                {{ trans('cruds.role.fields.id') }}
+                                {{ trans('admin::cruds.role.fields.id') }}
                             </th>
                             <td>
                                 {{ $role->id }}
@@ -30,7 +30,7 @@
                         </tr>
                         <tr>
                             <th>
-                                {{ trans('cruds.role.fields.title') }}
+                                {{ trans('admin::cruds.role.fields.title') }}
                             </th>
                             <td>
                                 {{ $role->name }}
@@ -38,7 +38,7 @@
                         </tr>
                         <tr>
                             <th>
-                                {{ trans('cruds.role.fields.permissions') }}
+                                {{ trans('admin::cruds.role.fields.permissions') }}
                             </th>
                             <td>
                                 @foreach($role->permissions as $key => $permissions)
@@ -50,7 +50,7 @@
                 </table>
                 <div class="form-group">
                     <a class="btn btn-default" href="{{ route('roles.index') }}">
-                        {{ trans('global.back_to_list') }}
+                        {{ trans('admin::global.back_to_list') }}
                     </a>
                 </div>
             </div>

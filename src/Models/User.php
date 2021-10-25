@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace Viropanel\Admin\Models;
 
 use \DateTimeInterface;
 use Carbon\Carbon;

@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('admin::layouts.admin')
 @section('title', 'Редактировать роль')
 @section('content-header')
 <div class="content-header">
@@ -9,7 +9,7 @@
 <div class="col-md-12">
     <div class="card">
         <div class="card-header">
-            {{ trans('global.edit') }} {{ trans('cruds.role.title_singular') }}
+            {{ trans('admin::global.edit') }} {{ trans('admin::cruds.role.title_singular') }}
         </div>
 
         <div class="card-body">
@@ -17,12 +17,12 @@
                 @method('PUT')
                 @csrf
                 <div class="form-group">
-                    <label class="required" for="title">{{ trans('cruds.role.fields.title') }}</label>
+                    <label class="required" for="title">{{ trans('admin::cruds.role.fields.title') }}</label>
                     <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name', $role->name) }}" required>
                     @if($errors->has('name'))
                     <span class="text-danger">{{ $errors->first('name') }}</span>
                     @endif
-                    <span class="help-block">{{ trans('cruds.role.fields.title_helper') }}</span>
+                    <span class="help-block">{{ trans('admin::cruds.role.fields.title_helper') }}</span>
                 </div>
                 <div class="form-group">
                     <label>{{ trans('cruds.role.fields.permissions') }}</label>
@@ -34,11 +34,11 @@
                     @if($errors->has('permissions'))
                     <span class="text-danger">{{ $errors->first('permissions') }}</span>
                     @endif
-                    <span class="help-block">{{ trans('cruds.role.fields.permissions_helper') }}</span>
+                    <span class="help-block">{{ trans('admin::cruds.role.fields.permissions_helper') }}</span>
                 </div>
                 <div class="form-group">
                     <button class="btn btn-danger" type="submit">
-                        {{ trans('global.save') }}
+                        {{ trans('admin::global.save') }}
                     </button>
                 </div>
             </form>

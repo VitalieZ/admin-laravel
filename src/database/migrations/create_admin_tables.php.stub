@@ -38,6 +38,7 @@ class CreateAdminTables extends Migration
                 $table->string('description', 255)->nullable();
                 $table->integer('parent_id');
                 $table->integer('ordering');
+                $table->integer('tree_id')->nullable();
                 $table->tinyInteger('visible')->default('0');
                 $table->timestamps();
             });

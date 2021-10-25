@@ -6,10 +6,10 @@
                 <tr>
                     <th width="10">#</th>
                     <th>
-                        {{ trans('cruds.permission.fields.id') }}
+                        {{ trans('admin::cruds.permission.fields.id') }}
                     </th>
                     <th>
-                        {{ trans('cruds.permission.fields.name') }}
+                        {{ trans('admin::cruds.permission.fields.name') }}
                     </th>
                     <th>
                         &nbsp;
@@ -37,21 +37,21 @@
                     <td>
                         @can('permission_show')
                         <a class="btn btn-xs btn-primary" href="{{ route('permissions.show', $permission->id) }}">
-                            {{ trans('global.view') }}
+                            {{ trans('admin::global.view') }}
                         </a>
                         @endcan
 
                         @can('permission_edit')
                         <a class="btn btn-xs btn-info" href="{{ route('permissions.edit', $permission->id) }}">
-                            {{ trans('global.edit') }}
+                            {{ trans('admin::global.edit') }}
                         </a>
                         @endcan
 
                         @can('permission_delete')
-                        <form action="{{ route('permissions.destroy', $permission->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                        <form action="{{ route('permissions.destroy', $permission->id) }}" method="POST" onsubmit="return confirm('{{ trans('admin::global.areYouSure') }}');" style="display: inline-block;">
                             <input type="hidden" name="_method" value="DELETE">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
+                            <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('admin::global.delete') }}">
                         </form>
                         @endcan
 

@@ -2,9 +2,9 @@
 
 namespace Viropanel\Admin\Http\Requests;
 
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Http\FormRequest;
-use Gate;
-use Illuminate\Http\Response;
+
 
 class UpdateCategoryRequest extends FormRequest
 {
@@ -16,7 +16,7 @@ class UpdateCategoryRequest extends FormRequest
     public function authorize()
     {
         return true;
-        //return Gate::allows('category_edit');
+        return Gate::allows('category_edit');
     }
 
     /**

@@ -1,11 +1,11 @@
-@extends('layouts.admin')
+@extends('admin::layouts.admin')
 @section('content-header')
 <div class="content-header">
     @can('user_create')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
             <a class="btn btn-success" href="{{ route('user.create') }}">
-                {{ __('global.add') }} {{ __('cruds.user.title_singular') }}
+                {{ __('admin::global.add') }} {{ __('admin::cruds.user.title_singular') }}
             </a>
         </div>
     </div>
@@ -16,7 +16,7 @@
 <div class="col-md-12">
     <div class="card">
         <div class="card-header">
-            {{ __('cruds.user.title_singular') }} {{ __('global.list') }}
+            {{ __('admin::cruds.user.title_singular') }} {{ __('admin::global.list') }}
         </div>
 
         <div class="card-body">
@@ -28,22 +28,22 @@
 
                             </th>
                             <th>
-                                {{ __('cruds.user.fields.id') }}
+                                {{ __('admin::cruds.user.fields.id') }}
                             </th>
                             <th>
-                                {{ __('cruds.user.fields.name') }}
+                                {{ __('admin::cruds.user.fields.name') }}
                             </th>
                             <th>
-                                {{ __('cruds.assetsHistory.fields.status') }}
+                                {{ __('admin::cruds.assetsHistory.fields.status') }}
                             </th>
                             <th>
-                                {{ __('cruds.user.fields.email') }}
+                                {{ __('admin::cruds.user.fields.email') }}
                             </th>
                             <th>
-                                {{ __('cruds.user.fields.email_verified_at') }}
+                                {{ __('admin::cruds.user.fields.email_verified_at') }}
                             </th>
                             <th>
-                                {{ __('cruds.user.fields.roles') }}
+                                {{ __('admin::cruds.user.fields.roles') }}
                             </th>
                             <th>
                                 &nbsp;
@@ -79,21 +79,21 @@
                             <td>
                                 @can('user_show')
                                 <a class="btn btn-xs btn-primary" href="{{ route('user.show', $user->id) }}">
-                                    {{ __('global.view') }}
+                                    {{ __('admin::global.view') }}
                                 </a>
                                 @endcan
 
                                 @can('user_edit')
                                 <a class="btn btn-xs btn-info" href="{{ route('user.edit', $user->id) }}">
-                                    {{ __('global.edit') }}
+                                    {{ __('admin::global.edit') }}
                                 </a>
                                 @endcan
 
                                 @can('user_delete')
-                                <form action="{{ route('user.destroy', $user->id) }}" method="POST" onsubmit="return confirm('{{ __('global.areYouSure') }}');" style="display: inline-block;">
+                                <form action="{{ route('user.destroy', $user->id) }}" method="POST" onsubmit="return confirm('{{ __('admin::global.areYouSure') }}');" style="display: inline-block;">
                                     <input type="hidden" name="_method" value="DELETE">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                    <input type="submit" class="btn btn-xs btn-danger" value="{{ __('global.delete') }}">
+                                    <input type="submit" class="btn btn-xs btn-danger" value="{{ __('admin::global.delete') }}">
                                 </form>
                                 @endcan
 
@@ -115,7 +115,7 @@
         let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
         @can('user_delete')
         let deleteButtonTrans = '{{ __('
-        global.datatables.delete ') }}'
+        admin::global.datatables.delete ') }}'
         let deleteButton = {
             text: deleteButtonTrans,
             url: "{{ route('users.massDestroy') }}",
@@ -129,13 +129,13 @@
 
                 if (ids.length === 0) {
                     alert('{{ __('
-                        global.datatables.zero_selected ') }}')
+                        admin::global.datatables.zero_selected ') }}')
 
                     return
                 }
 
                 if (confirm('{{ __('
-                        global.areYouSure ') }}')) {
+                        admin::global.areYouSure ') }}')) {
                     $.ajax({
                             headers: {
                                 'x-csrf-token': _token

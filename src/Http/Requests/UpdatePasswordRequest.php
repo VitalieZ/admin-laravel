@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace Viropanel\Admin\Http\Requests;
 
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Response;
-use Illuminate\Validation\Rule;
 
 class UpdatePasswordRequest extends FormRequest
 {

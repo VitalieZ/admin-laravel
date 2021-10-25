@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace Viropanel\Admin\Http\Requests;
 
-use App\Models\Permission;
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Response;
+
 
 class UpdatePermissionRequest extends FormRequest
 {

@@ -7,6 +7,8 @@ use Illuminate\Filesystem\Filesystem;
 use Laravel\Ui\UiCommand;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Gate;
+use Viropanel\Admin\Http\Livewire\Category\CategoryCreate;
+use Viropanel\Admin\Http\Livewire\Permissions\SearchPermissions;
 
 
 class AdminServiceProvider extends ServiceProvider
@@ -27,15 +29,14 @@ class AdminServiceProvider extends ServiceProvider
         ]);
 
         /*Load Translations */
-        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'courier');
+        $this->loadTranslationsFrom(__DIR__ . '/resources/lang', 'admin');
 
         /*Load Views */
         $this->loadViewsFrom(__DIR__ . '/resources/views', 'admin');
 
         /* Publishing Configuration */
         $this->publishes([__DIR__ . '/config/admin.php' => config_path('admin.php')]);
-
-        //$this->publishes([__DIR__ . '/config' => config_path()], 'laravel-admin-config');
+        $this->publishes([__DIR__ . '/config' => config_path()], 'admin');
 
         /* Publishing Public Assets */
         $this->publishes([__DIR__ . '/resources/assets' => public_path('assets'),], 'public');
@@ -71,7 +72,7 @@ class AdminServiceProvider extends ServiceProvider
     public function livewireComponents()
     {
         \Livewire::component('admin::categorycreate', CategoryCreate::class);
-        \Livewire::component('admin::search-permisions', SearchPermisions::class);
+        \Livewire::component('admin::search-permisions', SearchPermissions::class);
     }
 
     /**

@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('admin::layouts.admin')
 @section('content-header')
 <div class="content-header">
 
@@ -8,21 +8,21 @@
 <div class="col-md-12">
     <div class="card">
         <div class="card-header">
-            {{ trans('global.show') }} {{ trans('cruds.permission.name') }}
+            {{ trans('admin::global.show') }} {{ trans('admin::cruds.permission.name') }}
         </div>
 
         <div class="card-body">
             <div class="form-group">
                 <div class="form-group">
                     <a class="btn btn-default" href="{{ route('permissions.index') }}">
-                        {{ trans('global.back_to_list') }}
+                        {{ trans('admin::global.back_to_list') }}
                     </a>
                 </div>
                 <table class="table table-bordered table-striped">
                     <tbody>
                         <tr>
                             <th>
-                                {{ trans('cruds.permission.fields.id') }}
+                                {{ trans('admin::cruds.permission.fields.id') }}
                             </th>
                             <td>
                                 {{ $permission->id }}
@@ -30,7 +30,7 @@
                         </tr>
                         <tr>
                             <th>
-                                {{ trans('cruds.permission.fields.name') }}
+                                {{ trans('admin::cruds.permission.fields.name') }}
                             </th>
                             <td>
                                 {{ $permission->name }}
@@ -40,7 +40,7 @@
                 </table>
                 <div class="form-group">
                     <a class="btn btn-default" href="{{ route('permissions.index') }}">
-                        {{ trans('global.back_to_list') }}
+                        {{ trans('admin::global.back_to_list') }}
                     </a>
                 </div>
             </div>

@@ -1,11 +1,9 @@
 <?php
 
-namespace App\Http\Requests;
+namespace Viropanel\Admin\Http\Requests;
 
-use Spatie\Permission\Models\Permission;
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Response;
 
 class StorePermissionRequest extends FormRequest
 {

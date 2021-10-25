@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace Viropanel\Admin\Http\Livewire\Permissions;
 
 use Livewire\Component;
 use Livewire\WithPagination;
-use App\Providers\AppServiceProvider;
 use Viropanel\Admin\Models\Permission;
 
-class SearchPermisions extends Component
+class SearchPermissions extends Component
 {
     use WithPagination;
 

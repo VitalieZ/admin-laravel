@@ -1,11 +1,11 @@
-@extends('layouts.admin')
+@extends('admin::layouts.admin')
 @section('content-header')
 <div class="content-header">
     @can('role_create')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
             <a class="btn btn-success" href="{{ route('roles.create') }}">
-                {{ trans('global.add') }} {{ trans('cruds.role.title_singular') }}
+                {{ trans('admin::global.add') }} {{ trans('admin::cruds.role.title_singular') }}
             </a>
         </div>
     </div>
@@ -16,7 +16,7 @@
 <div class="col-md-12">
     <div class="card">
         <div class="card-header">
-            {{ trans('global.list') }} {{ trans('cruds.role.title_singular') }}
+            {{ trans('admin::global.list') }} {{ trans('admin::cruds.role.title_singular') }}
         </div>
 
         <div class="card-body">
@@ -28,13 +28,13 @@
 
                             </th>
                             <th>
-                                {{ trans('cruds.role.fields.id') }}
+                                {{ trans('admin::cruds.role.fields.id') }}
                             </th>
                             <th>
-                                {{ trans('cruds.role.fields.title') }}
+                                {{ trans('admin::cruds.role.fields.title') }}
                             </th>
                             <th>
-                                {{ trans('cruds.role.fields.permissions') }}
+                                {{ trans('admin::cruds.role.fields.permissions') }}
                             </th>
                             <th>
                                 &nbsp;
@@ -61,21 +61,21 @@
                             <td>
                                 @can('role_show')
                                 <a class="btn btn-xs btn-primary" href="{{ route('roles.show', $role->id) }}">
-                                    {{ trans('global.view') }}
+                                    {{ trans('admin::global.view') }}
                                 </a>
                                 @endcan
 
                                 @can('role_edit')
                                 <a class="btn btn-xs btn-info" href="{{ route('roles.edit', $role->id) }}">
-                                    {{ trans('global.edit') }}
+                                    {{ trans('admin::global.edit') }}
                                 </a>
                                 @endcan
 
                                 @can('role_delete')
-                                <form action="{{ route('roles.destroy', $role->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                <form action="{{ route('roles.destroy', $role->id) }}" method="POST" onsubmit="return confirm('{{ trans('admin::global.areYouSure') }}');" style="display: inline-block;">
                                     <input type="hidden" name="_method" value="DELETE">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                    <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
+                                    <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('admin::global.delete') }}">
                                 </form>
                                 @endcan
 

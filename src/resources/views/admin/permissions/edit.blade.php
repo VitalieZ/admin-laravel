@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('admin::layouts.admin')
 @section('content-header')
 <div class="content-header">
 
@@ -9,7 +9,7 @@
 
     <div class="card">
         <div class="card-header">
-            {{ trans('global.edit') }} {{ trans('cruds.permission.title_singular') }}
+            {{ trans('admin::global.edit') }} {{ trans('admin::cruds.permission.title_singular') }}
         </div>
 
         <div class="card-body">
@@ -17,16 +17,16 @@
                 @method('PUT')
                 @csrf
                 <div class="form-group">
-                    <label class="required" for="name">{{ trans('cruds.permission.fields.name') }}</label>
+                    <label class="required" for="name">{{ trans('admin::cruds.permission.fields.name') }}</label>
                     <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name', $permission->name) }}" required>
                     @if($errors->has('name'))
                     <span class="text-danger">{{ $errors->first('name') }}</span>
                     @endif
-                    <span class="help-block">{{ trans('cruds.permission.fields.name_helper') }}</span>
+                    <span class="help-block">{{ trans('admin::cruds.permission.fields.name_helper') }}</span>
                 </div>
                 <div class="form-group">
                     <button class="btn btn-danger" type="submit">
-                        {{ trans('global.save') }}
+                        {{ trans('admin::global.save') }}
                     </button>
                 </div>
             </form>

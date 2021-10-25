@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('admin::layouts.admin')
 @section('content-header')
 <div class="content-header">
     @if (session('success'))
@@ -14,7 +14,7 @@
     @can('permission_create')
     <div class="card">
         <div class="card-header">
-            {{ trans('global.create') }} {{ trans('cruds.permission.title_singular') }}
+            {{ trans('admin::global.create') }} {{ trans('admin::cruds.permission.title_singular') }}
         </div>
 
         <div class="card-body">
@@ -24,12 +24,12 @@
                 <div class="input-group input-group-sm">
                     <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name', '') }}" required>
                     <span class="input-group-append">
-                        <button type="submit" class="btn btn-danger btn-flat">{{ trans('global.save') }}</button>
+                        <button type="submit" class="btn btn-danger btn-flat">{{ trans('admin::global.save') }}</button>
                     </span>
                     @if($errors->has('name'))
                     <span class="text-danger">{{ $errors->first('name') }}</span>
                     @endif
-                    <span class="help-block">{{ trans('cruds.permission.fields.name_helper') }}</span>
+                    <span class="help-block">{{ trans('admin::cruds.permission.fields.name_helper') }}</span>
                 </div>
             </form>
         </div>
@@ -37,7 +37,7 @@
     @endcan
     <div class="card">
         <div class="card-header">
-            {{ trans('global.list') }} {{ trans('cruds.permission.title_singular') }}
+            {{ trans('admin::global.list') }} {{ trans('admin::cruds.permission.title_singular') }}
         </div>
         <livewire:admin::search-permisions />
     </div>
@@ -54,7 +54,7 @@
         let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
         @can('permission_delete')
         let deleteButtonTrans = '{{ trans('
-        global.datatables.delete ') }}'
+        admin::global.datatables.delete ') }}'
         let deleteButton = {
             text: deleteButtonTrans,
             url: "{{ route('permissions.massDestroy') }}",
@@ -68,13 +68,13 @@
 
                 if (ids.length === 0) {
                     alert('{{ trans('
-                        global.datatables.zero_selected ') }}')
+                        admin::global.datatables.zero_selected ') }}')
 
                     return
                 }
 
                 if (confirm('{{ trans('
-                        global.areYouSure ') }}')) {
+                        admin::global.areYouSure ') }}')) {
                     $.ajax({
                             headers: {
                                 'x-csrf-token': _token
