@@ -7,7 +7,7 @@ use Viropanel\Admin\Http\Requests\MassDestroyUserRequest;
 use Viropanel\Admin\Http\Requests\StoreUserRequest;
 use Viropanel\Admin\Http\Requests\UpdateUserRequest;
 use Viropanel\Admin\Models\Role;
-use Viropanel\Admin\Models\User;
+use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 

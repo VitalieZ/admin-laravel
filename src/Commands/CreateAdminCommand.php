@@ -3,7 +3,7 @@
 namespace Viropanel\Admin\Commands;
 
 use Illuminate\Console\Command;
-use Viropanel\Admin\Models\User;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 
@@ -24,16 +24,16 @@ class CreateAdminCommand extends Command
 
     public function CreateAdmin()
     {
-        $name = $this->argument('name') ?? config('admin.create-damin.name');
-        $email = $this->argument('email') ?? config('admin.create-damin.email');
-        $password = $this->argument('password') ?? config('admin.create-damin.password');
+        $name = $this->argument('name') ?? config('admin::admin.create-damin.name');
+        $email = $this->argument('email') ?? config('admin::admin.create-damin.email');
+        $password = $this->argument('password') ?? config('admin::admin.create-damin.password');
 
         $isset_user = User::where('email', $email)->first();
         if (isset($isset_user)) {
             return "User exists with this email. Try again.\nemail: " . $email;
         }
 
-        if ($name == config('admin.create-damin.name') and $email == config('admin.create-damin.email')) {
+        if ($name == config('admin::admin.create-damin.name') and $email == config('admin::admin.create-damin.email')) {
             $role = 'admin';
         } else {
             $this->call('permission:create-role', ['name' => 'user']);

@@ -118,6 +118,7 @@
                         <div>
                             <div class=" btn-group pull-right">
                                 <button type="submit" class="btn btn-info d-flex justify-content-right">Отправить</button>
+                                <!-- <button type="submit" class="btn btn-info pull-right disabled" disabled="disabled">loading...</button> -->
                             </div>
                         </div>
                     </div>

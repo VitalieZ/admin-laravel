@@ -25,7 +25,7 @@
                     <span class="help-block">{{ trans('admin::cruds.role.fields.title_helper') }}</span>
                 </div>
                 <div class="form-group">
-                    <label>{{ trans('cruds.role.fields.permissions') }}</label>
+                    <label>{{ trans('admin::cruds.role.fields.permissions') }}</label>
                     <select class="duallistbox" multiple="multiple" name="permissions[]" id="permissions" required>
                         @foreach($permissions as $id => $permissions)
                         <option value="{{ $id }}" {{ (in_array($id, old('permissions', [])) || $role->permissions->contains($id)) ? 'selected' : '' }}>{{ $permissions }}</option>
@@ -46,7 +46,7 @@
     </div>
 </div>
 @endsection
-@section('script'){
+@push('page_scripts')
 <script>
     $(function() {
         //Bootstrap Duallistbox
@@ -58,4 +58,4 @@
         });
     });
 </script>
-@endsection
+@endpush

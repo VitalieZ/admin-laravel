@@ -3,7 +3,6 @@
 namespace Viropanel\Admin\Http\Livewire\Category;
 
 use Livewire\Component;
-use Viropanel\Admin\Http\Requests\StoreCategoryRequest;
 use Viropanel\Admin\Models\Category;
 use Illuminate\Http\Response;
 
@@ -39,7 +38,7 @@ class CategoryCreate extends Component
 
     public function submit()
     {
-        //abort_if(\Gate::denies('category_create'), Response::HTTP_FORBIDDEN, 'You do not have permission to create a category.');
+        abort_if(\Gate::denies('category_create'), Response::HTTP_FORBIDDEN, 'You do not have permission to create a category.');
 
         $validateData = $this->validate();
         $parent_id = $validateData['parent_id'] ?? 0;

@@ -45,7 +45,7 @@
 </div>
 
 @endsection
-@section('script'){
+@push('page_scripts')
 <script>
     $(function() {
         //Bootstrap Duallistbox
@@ -57,4 +57,4 @@
         });
     });
 </script>
-@endsection
+@endpush
