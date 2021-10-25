@@ -121,15 +121,18 @@
                         @endcan
                         @can('user_management_access')
                         <li class="nav-header">Полизыватель</li>
+                        @can('user_access')
                         <li class="nav-item">
                             <a href="{{ route('user.index') }}" class="nav-link">
                                 <i class="fas fa-users"></i>
                                 <p>
                                     Пользыватель
-                                    <span class="badge badge-info right">2</span>
+                                    <span class="badge badge-info right">{{ $countUsers ?? 0 }}</span>
                                 </p>
                             </a>
                         </li>
+                        @endcan
+                        @can('role_access')
                         <li class="nav-item">
                             <a href="{{ route('roles.index') }}" class="nav-link">
                                 <i class="fas fa-user-tag"></i>
@@ -138,6 +141,8 @@
                                 </p>
                             </a>
                         </li>
+                        @endcan
+                        @can('permission_access')
                         <li class="nav-item">
                             <a href="{{ route('permissions.index') }}" class="nav-link">
                                 <i class="fas fa-user-check"></i>
@@ -146,6 +151,7 @@
                                 </p>
                             </a>
                         </li>
+                        @endcan
                         @endcan
                     </ul>
                 </nav>
