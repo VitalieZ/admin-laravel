@@ -4,11 +4,11 @@ namespace Viropanel\Admin\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Viropanel\Admin\Models\Category;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Viropanel\Admin\Http\Requests\StoreCategoryRequest;
 use Viropanel\Admin\Http\Requests\UpdateCategoryRequest;
-use Gate;
+use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response;
 
 class CategoryController extends Controller
 {
@@ -19,7 +19,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //abort_if(Gate::denies('category_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('category_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $menu = Category::orderBy('ordering', 'asc')->get();
 
@@ -51,7 +51,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //abort_if(Gate::denies('category_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('category_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $category = Category::orderBy('tree_id', 'asc')->orderBy('parent_id', 'asc')->orderBy('ordering', 'asc')->get();
         return view('admin::admin.category.create', [
@@ -103,7 +103,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $menu)
     {
-        //abort_if(Gate::denies('category_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('category_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $category = Category::orderBy('tree_id', 'asc')->orderBy('parent_id', 'asc')->orderBy('ordering', 'asc')->get();
         return view('admin::admin.category.edit', [
@@ -158,9 +158,8 @@ class CategoryController extends Controller
      */
     public function destroy(Category $menu)
     {
-        //abort_if(Gate::denies('category_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        // dd($menu);
-        // $menu->delete();
+        abort_if(Gate::denies('category_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         if ($menu->delete()) {
             return redirect()->route('menu.index')->withSuccess('Категория удалена');
         } else {

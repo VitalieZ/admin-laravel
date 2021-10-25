@@ -6,6 +6,7 @@ use Carbon\Laravel\ServiceProvider;
 use Illuminate\Filesystem\Filesystem;
 use Laravel\Ui\UiCommand;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Gate;
 
 
 class AdminServiceProvider extends ServiceProvider
@@ -25,11 +26,20 @@ class AdminServiceProvider extends ServiceProvider
             Commands\CreateAdminCommand::class
         ]);
 
-        //$this->loadRoutesFrom(__DIR__ . '/routes/web.php');
+        /*Load Translations */
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'courier');
+
+        /*Load Views */
         $this->loadViewsFrom(__DIR__ . '/resources/views', 'admin');
+
+        /* Publishing Configuration */
         $this->publishes([__DIR__ . '/config/admin.php' => config_path('admin.php')]);
-        $this->publishes([__DIR__ . '/config' => config_path()], 'laravel-admin-config');
+
+        //$this->publishes([__DIR__ . '/config' => config_path()], 'laravel-admin-config');
+
+        /* Publishing Public Assets */
         $this->publishes([__DIR__ . '/resources/assets' => public_path('assets'),], 'public');
+
         $this->loadMigrationsFrom(__DIR__ . '/database/migrations', 'admin');
         $this->publishes([
             __DIR__ . '/database/migrations/create_admin_tables.php.stub' => $this->getMigrationFileName('create_admin_tables.php'),
@@ -44,6 +54,11 @@ class AdminServiceProvider extends ServiceProvider
             }
         });
 
+        /* Super admin all permissions */
+        Gate::before(function ($user, $ability) {
+            return $user->hasRole('admin') ? true : null;
+        });
+
         //register livewire components
         $this->livewireComponents();
     }
@@ -56,6 +71,7 @@ class AdminServiceProvider extends ServiceProvider
     public function livewireComponents()
     {
         \Livewire::component('admin::categorycreate', CategoryCreate::class);
+        \Livewire::component('admin::search-permisions', SearchPermisions::class);
     }
 
     /**
