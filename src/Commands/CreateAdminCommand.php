@@ -3,7 +3,7 @@
 namespace Viropanel\Admin\Commands;
 
 use Illuminate\Console\Command;
-use App\Models\User;
+use Viropanel\Admin\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 
@@ -36,7 +36,6 @@ class CreateAdminCommand extends Command
         if ($name == 'admin' and $email == 'admin@admin.loc') {
             $role = 'admin';
         } else {
-            $this->call('permission:create-role', ['name' => 'user']);
             $role = 'user';
         }
 

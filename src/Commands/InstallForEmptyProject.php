@@ -48,6 +48,7 @@ class InstallForEmptyProject extends Command
     public function createRolePermission()
     {
         $this->call('permission:create-role', ['name' => 'admin']);
+        $this->call('permission:create-role', ['name' => 'user']);
         $this->call('permission:create-permission', ['name' => ' access_admin_panel']);
         $this->call('admin-panel:insset-permisions');
     }
