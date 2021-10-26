@@ -33,7 +33,7 @@ class CreateAdminCommand extends Command
             return "User exists with this email. Try again.\nemail: " . $email;
         }
 
-        if ($name == config('admin::admin.create-damin.name') and $email == config('admin::admin.create-damin.email')) {
+        if ($name == 'admin' and $email == 'admin@admin.loc') {
             $role = 'admin';
         } else {
             $this->call('permission:create-role', ['name' => 'user']);
