@@ -24,9 +24,9 @@ class CreateAdminCommand extends Command
 
     public function CreateAdmin()
     {
-        $name = $this->argument('name') ?? config('admin::admin.create-damin.name');
-        $email = $this->argument('email') ?? config('admin::admin.create-damin.email');
-        $password = $this->argument('password') ?? config('admin::admin.create-damin.password');
+        $name = $this->argument('name') ?? 'admin';
+        $email = $this->argument('email') ?? 'admin@admin.loc';
+        $password = $this->argument('password') ?? '12345678';
 
         $isset_user = User::where('email', $email)->first();
         if (isset($isset_user)) {
