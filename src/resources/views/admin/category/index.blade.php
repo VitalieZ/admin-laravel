@@ -20,7 +20,7 @@
 </div>
 @endsection
 @section('content')
-<div class="col-md-6">
+<div class="col-md-6" id='pjax-container'>
     <div class="card">
         <!-- /.card-header -->
         <div class="box">
@@ -68,7 +68,7 @@
     </div>
 </div>
 
-@livewire('admin::categorycreate', ['category' => $category])
+@livewire('admin::categorycreate')
 
 @endsection
 @push('page_scripts')
@@ -99,11 +99,14 @@
                 preConfirm: function() {
                     return new Promise(function(resolve) {
                         $.ajax({
-                            method: 'post',
-                            url: 'http://newbarber.loc/admin/auth/menu/' + id,
+                            method: 'POST',
+                            url: "{{ route('massDestroy') }}",
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                                'accept': 'application/json'
+                            },
                             data: {
-                                _method: 'delete',
-                                _token: LA.token,
+                                'ids': id,
                             },
                             success: function(data) {
                                 $.pjax.reload('#pjax-container');
@@ -129,7 +132,7 @@
             var serialize = $('#tree-616ecf2d15e0f').nestable('serialize');
             $.ajax({
                 type: "POST",
-                url: "/menuadminsave",
+                url: "{{ route('orderingcategory') }}",
                 data: {
                     _order: JSON.stringify(serialize),
                 },
@@ -139,8 +142,13 @@
                 },
                 dataType: 'json',
                 success: function(html) {
-                    $.pjax.reload('#pjax-container');
-                    toastr.success('Успешно сохранено!');
+                    $.pjax.reload('#pjax-container', {
+                        timeout: 5000
+                    });
+                    Toast.fire({
+                        type: 'success',
+                        title: "Успешно сохранено"
+                    })
                 },
                 error: function(error) {
 
@@ -161,7 +169,9 @@
         });
 
         $('.tree-616ecf2d15e0f-refresh').click(function() {
-            $.pjax.reload('#pjax-container');
+            $.pjax.reload('#pjax-container', {
+                timeout: 3000
+            });
             toastr.success('Успешно обновлено!');
         });
 
@@ -175,5 +185,32 @@
         //     placement: 'bottomLeft'
         // });
     });
+</script>
+<script>
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        icon: "success",
+        showCloseButton: true,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    });
+
+    window.addEventListener('alert', ({
+        detail: {
+            type,
+            message
+        }
+    }) => {
+        Toast.fire({
+            type: type,
+            title: message
+        })
+    })
 </script>
 @endpush

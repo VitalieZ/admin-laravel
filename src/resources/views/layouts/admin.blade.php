@@ -185,6 +185,33 @@
     @include('admin::assets.js')
     @livewireScripts
     @stack('page_scripts')
+    <script>
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            icon: "success",
+            showCloseButton: true,
+            timer: 2500,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        });
+
+        window.addEventListener('alert', ({
+            detail: {
+                type,
+                message
+            }
+        }) => {
+            Toast.fire({
+                type: type,
+                title: message
+            })
+        })
+    </script>
 </body>
 
 </html>

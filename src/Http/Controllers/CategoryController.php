@@ -8,7 +8,9 @@ use Illuminate\Support\Str;
 use Viropanel\Admin\Http\Requests\StoreCategoryRequest;
 use Viropanel\Admin\Http\Requests\UpdateCategoryRequest;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Viropanel\Admin\Http\Requests\MassDestroyCategoryRequest;
 
 class CategoryController extends Controller
 {
@@ -35,55 +37,10 @@ class CategoryController extends Controller
             }
         });
 
-        $category = Category::orderBy('tree_id', 'asc')->orderBy('parent_id', 'asc')->orderBy('ordering', 'asc')->get()->toArray();
-        $cat = Category::all()->keyBy('id');
         return view('admin::admin.category.index', [
-            'category' => $category,
-            'cat' => $cat,
             'menu' => $mBuilder,
         ]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        abort_if(Gate::denies('category_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        $category = Category::orderBy('tree_id', 'asc')->orderBy('parent_id', 'asc')->orderBy('ordering', 'asc')->get();
-        return view('admin::admin.category.create', [
-            'category' => $category,
-        ]);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreCategoryRequest $request)
-    {
-        ($request->visible == 'on') ? $request->request->add(['visible' => 1]) : $request->request->add(['visible' => 0]);
-        $slug = Str::slug($request->name, '-');
-        $unique_slug = Category::where('slug', $slug)->first();
-        if ($unique_slug !== null) {
-            return redirect()->back()->withErrors(['slug' => 'Измените названия поста'])->withInput();
-        }
-        $request->request->add(['slug' => $slug]);
-        $category = Category::create($request->all());
-        if ($request->category == 0) {
-            $category->tree_id =  $category->id;
-        } else {
-            $category->tree_id = $request->category;
-        }
-        $category->save();
-        return redirect()->route('menu.index')->withSuccess('Категория "' . $request->name . '" добавлена.');
-    }
-
     /**
      * Display the specified resource.
      *
@@ -93,23 +50,6 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Category $menu)
-    {
-        abort_if(Gate::denies('category_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        $category = Category::orderBy('tree_id', 'asc')->orderBy('parent_id', 'asc')->orderBy('ordering', 'asc')->get();
-        return view('admin::admin.category.edit', [
-            'category' => $category,
-            'cat' => $menu,
-        ]);
     }
 
     /**
@@ -150,30 +90,31 @@ class CategoryController extends Controller
         return redirect()->route('menu.index')->withSuccess('Категория "' . $request->name . '" обнавлена.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Category $menu)
-    {
-        abort_if(Gate::denies('category_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        if ($menu->delete()) {
-            return redirect()->route('menu.index')->withSuccess('Категория удалена');
-        } else {
-            return redirect()->route('menu.index')->withSuccess('Категория не может быть удалена, у этои категорий есть постов.');
+    public function massDestroy(MassDestroyCategoryRequest $request)
+    {
+        Category::where('id', request('ids'))->delete();
+    }
+
+    public function categoryorderingsave(Request $request)
+    {
+        $book = json_decode($request->_order, True);
+        $i = 1;
+        if (isset($book)) {
+            foreach ($book as $key => $item) {
+                Category::where('id', $item['id'])
+                    ->update(['parent_id' => 0, 'ordering' => $i]);
+
+                if (isset($item['children'])) {
+                    $parent_id = $item['id'];
+                    foreach ($item['children'] as $key => $item) {
+                        Category::where('id', $item['id'])
+                            ->update(['parent_id' => $parent_id, 'ordering' => $i++]);
+                    }
+                }
+                $i++;
+            }
         }
-        // try {
-        //     $menu->delete();
-        // } catch (\Illuminate\Database\QueryException $e) {
-        //     if ($e->getCode() == "23000") { //23000 is sql code for integrity constraint violation
-        //         // return error to user here
-        //         return redirect()->route('menu.index')->withSuccess('Категория не может быть удалена, у этои категорий есть постов.');
-        //     } else {
-        //         return redirect()->route('menu.index')->withSuccess('Категория удалена');
-        //     }
-        // }
+        return true;
     }
 }

@@ -14,6 +14,8 @@ Route::prefix(config('admin.route.prefix'))->middleware([config('admin.route.mid
     });
 
     //Category
+    Route::post('/categoryorderingsave', [CategoryController::class, 'categoryorderingsave'])->name('orderingcategory');
+    Route::post('/massDestroy', [CategoryController::class, 'massDestroy'])->name('massDestroy');
     Route::resource('menu', CategoryController::class);
 
     //Users
