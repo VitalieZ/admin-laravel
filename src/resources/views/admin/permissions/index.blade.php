@@ -20,7 +20,7 @@
         <div class="card-body">
             <form method="POST" action="{{ route("permissions.store") }}">
                 @csrf
-                <p>{{ trans('cruds.permission.fields.name') }}</p>
+                <p>{{ trans('admin::cruds.permission.fields.name') }}</p>
                 <div class="input-group input-group-sm">
                     <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name', '') }}" required>
                     <span class="input-group-append">

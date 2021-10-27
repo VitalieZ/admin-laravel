@@ -56,7 +56,7 @@
                     <ol class="dd-list">
                         @if ($menu)
 
-                        @include('admin::admin.category.customMenuItems', ['items'=>$menu->roots()])
+                        @include('admin::admin.category.customMenuItems', ['items'=>$menu])
 
                         @endif
                     </ol>
@@ -68,7 +68,7 @@
     </div>
 </div>
 
-@livewire('admin::categorycreate')
+@livewire('admin::categorycreate', ['menu' => $menu])
 
 @endsection
 @push('page_scripts')
@@ -85,6 +85,36 @@
         //     var serialize = $('#tree-616ecf2d15e0f').nestable('serialize');
         //     console.log(serialize);
         // });
+
+        $('.tree_branch_edit').click(function() {
+            var id = $(this).data('id');
+            swal({
+                title: "Вы уверены, что хотите редактировать эту запись?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Подтвердить",
+                showLoaderOnConfirm: true,
+                cancelButtonText: "Отмена",
+                preConfirm: function() {
+                    return new Promise(function(resolve) {
+                        Livewire.emit('edit', {
+                            id: id
+                        });
+                        resolve();
+                    });
+                }
+            }).then(function(result) {
+                var data = result.value;
+                if (typeof data === 'object') {
+                    if (data.status) {
+                        swal(data.message, '', 'success');
+                    } else {
+                        swal(data.message, '', 'error');
+                    }
+                }
+            });
+        });
 
         $('.tree_branch_delete').click(function() {
             var id = $(this).data('id');

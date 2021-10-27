@@ -23,22 +23,10 @@ class CategoryController extends Controller
     {
         abort_if(Gate::denies('category_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $menu = Category::orderBy('ordering', 'asc')->get();
-
-        $mBuilder = \Menu::make('MyNav', function ($m) use ($menu) {
-            foreach ($menu as $item) {
-                if ($item->parent_id == 0) {
-                    $m->add($item->name, env('APP_URL') . '/' . $item->slug)->id($item->id)->attr(['order' => $item->ordering, 'icon' => $item->icon, 'uri' => $item->slug, 'visible' => $item->visible]);
-                } else {
-                    if ($m->find($item->parent_id)) {
-                        $m->find($item->parent_id)->add($item->name, env('APP_URL') . '/' . $item->slug)->id($item->id)->attr(['ordering' => $item->order, 'icon' => $item->icon, 'uri' => $item->slug, 'visible' => $item->visible]);
-                    }
-                }
-            }
-        });
+        $menu = Category::where('parent_id', 0)->orderBy('ordering', 'asc')->get();
 
         return view('admin::admin.category.index', [
-            'menu' => $mBuilder,
+            'menu' => $menu,
         ]);
     }
     /**
@@ -99,22 +87,27 @@ class CategoryController extends Controller
     public function categoryorderingsave(Request $request)
     {
         $book = json_decode($request->_order, True);
-        $i = 1;
         if (isset($book)) {
+            $this->getCat($book);
             foreach ($book as $key => $item) {
                 Category::where('id', $item['id'])
-                    ->update(['parent_id' => 0, 'ordering' => $i]);
-
+                    ->update(['parent_id' => 0, 'ordering' => $key]);
                 if (isset($item['children'])) {
-                    $parent_id = $item['id'];
-                    foreach ($item['children'] as $key => $item) {
-                        Category::where('id', $item['id'])
-                            ->update(['parent_id' => $parent_id, 'ordering' => $i++]);
-                    }
+                    $this->getCat($item['children'], $item['id']);
                 }
-                $i++;
             }
         }
         return true;
+    }
+
+    public function getCat($book, $parent_id = 0)
+    {
+        foreach ($book as $key => $item) {
+            Category::where('id', $item['id'])
+                ->update(['parent_id' => $parent_id, 'ordering' => $key]);
+            if (isset($item['children'])) {
+                $this->getCat($item['children'], $item['id']);
+            }
+        }
     }
 }

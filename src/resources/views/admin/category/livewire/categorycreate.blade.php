@@ -1,7 +1,14 @@
 <div class="col-md-6">
     <div class="box box-success">
         <div class="box-header with-border">
-            <h3 class="box-title">Добавить</h3>
+            <h3 class="box-title">
+                @if($method == 1)
+                Редактировать категорию - {{ $name }}
+                @else
+                Добавить
+                @endif
+
+            </h3>
             <div class="box-tools pull-right">
             </div><!-- /.box-tools -->
         </div><!-- /.box-header -->
@@ -13,15 +20,11 @@
                         <div class="col-sm-10">
                             <select wire:model.lazy="parent_id" class="form-control asterisk parent_id select2-hidden-accessible" style="width: 100%;" name="parent_id" data-value="" tabindex="-1" aria-hidden="true">
                                 <option value="0" selected="">Сомастаятельная категория</option>
-                                @foreach ($category as $item)
-                                <option value="{{ $item['id'] }}">┝&nbsp;&nbsp;{{ $item['name'] }}</option>
-                                @if (isset($item['childs']))
-                                @foreach ($item['childs'] as $itt)
-                                <option value="{{ $itt['id'] }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;┝&nbsp;&nbsp;{{ $itt['name'] }}</option>
-                                @endforeach
-                                @endif
-                                @endforeach
+                                @if (isset($menu))
 
+                                @include('admin::admin.category.customMenuItemsSelect', ['items'=>$menu])
+
+                                @endif
                             </select>
                         </div>
                     </div>
@@ -111,13 +114,19 @@
                     <div class="col-12">
                         <div>
                             <div class="btn-group pull-left">
-                                <button type="reset" class="btn btn-warning d-flex justify-content-left">Сбросить</button>
+                                <button type="reset" wire:click="resetform" class="btn btn-warning d-flex justify-content-left">Сбросить</button>
                             </div>
                         </div>
                         <div>
                             <div class=" btn-group pull-right">
                                 <div wire:loading.remove wire:target="submit">
-                                    <button type="submit" class="btn btn-info d-flex justify-content-right">Отправить</button>
+
+                                    @if($method == 1)
+                                    <button type="button" wire:click="update" class="btn btn-info d-flex justify-content-right">Отправить</button>
+                                    @else
+                                    <button type="button" wire:click="submit" class="btn btn-info d-flex justify-content-right">Отправить</button>
+                                    @endif
+
                                 </div>
                                 <button type="button" wire:loading.delay wire:target="submit" class="btn btn-info pull-right disabled" disabled="disabled">loading...</button>
                             </div>

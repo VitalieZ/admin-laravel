@@ -34,4 +34,9 @@ class Category extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function cheaild()
+    {
+        return $this->hasMany(Category::class, 'parent_id')->orderBy('ordering', 'asc');
+    }
 }
