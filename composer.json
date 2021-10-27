@@ -30,13 +30,8 @@
                 "Viropanel\\Admin\\AdminServiceProvider",
                 "Viropanel\\Admin\\FortifyAdminPresetServiceProvider",
                 "Viropanel\\Admin\\Providers\\CountUsersServiceProvider",
-                "Spatie\\Permission\\PermissionServiceProvider",
-                "Lavary\\Menu\\ServiceProvider"
+                "Spatie\\Permission\\PermissionServiceProvider"
             ],
-            "aliases":
-            {
-                "Menu": "Lavary\\Menu\\Facade"
-            }
         }
     }
 }
