@@ -9,9 +9,7 @@ use Viropanel\Admin\Http\Controllers\CategoryController;
 Auth::routes();
 
 Route::prefix(config('admin.route.prefix'))->middleware([config('admin.route.middleware')])->group(function () {
-    Route::get('/', function () {
-        return view('admin::admin.dashboard');
-    });
+    Route::get('/', [\Viropanel\Admin\Http\Controllers\DashboardController::class, 'index']);
 
     //Category
     Route::post('/categoryorderingsave', [CategoryController::class, 'categoryorderingsave'])->name('orderingcategory');

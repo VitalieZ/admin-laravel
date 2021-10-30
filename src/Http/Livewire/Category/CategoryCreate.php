@@ -5,6 +5,7 @@ namespace Viropanel\Admin\Http\Livewire\Category;
 use Livewire\Component;
 use Viropanel\Admin\Models\Category;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Gate;
 use Viropanel\Admin\Http\Livewire\Category\Traits\AddCategory;
 use Viropanel\Admin\Http\Livewire\Category\Traits\UpdateCategory;
 use Viropanel\Admin\Http\Livewire\Category\Traits\ResetFormCategory;
@@ -31,7 +32,7 @@ class CategoryCreate extends Component
 
     protected $rules = [
         'parent_id' => '',
-        'name' => 'required|min:4|max:20',
+        'name' => 'required|min:4|max:10',
         'icon' => 'max:20',
         'title' => 'max:255',
         'keywords' => 'max:255',
@@ -53,7 +54,7 @@ class CategoryCreate extends Component
 
     public function edit($id)
     {
-        abort_if(\Gate::denies('category_edit'), Response::HTTP_FORBIDDEN, 'You do not have permission to edit a category.');
+        abort_if(Gate::denies('category_edit'), Response::HTTP_FORBIDDEN, trans('admin::category.create.permissions.not_access_create_cateogy'));
 
         $cat = Category::where('id', $id)->first();
         if ($cat) {
@@ -66,6 +67,11 @@ class CategoryCreate extends Component
             $this->visible = $cat->visible;
             $this->method = 1;
             $this->category_id = $id;
+        } else {
+            $this->dispatchBrowserEvent('alert', [
+                'type' => 'error',
+                'message' => trans('admin::category.edit.not_found_category')
+            ]);
         }
     }
 

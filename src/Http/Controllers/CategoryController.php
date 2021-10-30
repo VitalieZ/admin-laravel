@@ -4,9 +4,6 @@ namespace Viropanel\Admin\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Viropanel\Admin\Models\Category;
-use Illuminate\Support\Str;
-use Viropanel\Admin\Http\Requests\StoreCategoryRequest;
-use Viropanel\Admin\Http\Requests\UpdateCategoryRequest;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -39,45 +36,6 @@ class CategoryController extends Controller
     {
         //
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateCategoryRequest $request, $id)
-    {
-        $slug = Str::slug($request->name, '-');
-        $unique_slug = Category::where('slug', $slug)->where('id', '!=', $id)->first();
-        if ($unique_slug !== null) {
-            return redirect()->back()->withErrors(['slug' => 'Измените названия поста'])->withInput();
-        }
-        $model = Category::where('id', $id)->first();
-        $model->name = $request->name;
-        $model->slug = $slug;
-        $model->icon = $request->icon;
-        $model->content = $request->content;
-        $model->title = $request->title;
-        $model->keywords = $request->keywords;
-        $model->description = $request->description;
-        $model->parent_id = $request->parent_id;
-        $model->ordering = $request->ordering;
-        if ($request->visible == 'on') {
-            $model->visible = 1;
-        } else {
-            $model->visible = 0;
-        }
-        if ($request->parent_id == 0) {
-            $model->tree_id =  $id;
-        } else {
-            $model->tree_id = $request->parent_id;
-        }
-        $model->save();
-        return redirect()->route('menu.index')->withSuccess('Категория "' . $request->name . '" обнавлена.');
-    }
-
 
     public function massDestroy(MassDestroyCategoryRequest $request)
     {

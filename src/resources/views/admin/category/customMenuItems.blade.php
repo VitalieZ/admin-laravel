@@ -7,9 +7,9 @@
         </a>
         <span class="pull-right dd-nodrag">
             @if ($item->visible == 1)
-            <span class="label label-success mr-3">Активен</span>
+            <span class="label label-success mr-3">{{ trans('admin::category.menu_items.active') }}</span>
             @else
-            <span class="label label-warning mr-3">Удален</span>
+            <span class="label label-warning mr-3">{{ trans('admin::category.menu_items.deleted') }}</span>
             @endif
 
             <a href="javascript:void(0);" data-id="{{ $item->id}}" class="tree_branch_edit"><i class="fa fa-edit"></i></a>

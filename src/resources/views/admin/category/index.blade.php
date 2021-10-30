@@ -12,7 +12,7 @@
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
             <h1>
-                Меню <small>Список</small>
+                {{ trans('admin::category.index.menu') }} <small>{{ trans('admin::category.index.list') }}</small>
             </h1>
         </div>
     </div>
@@ -24,40 +24,30 @@
     <div class="card">
         <!-- /.card-header -->
         <div class="box">
-
             <div class="box-header">
-
                 <div class="btn-group">
                     <a class="btn btn-primary btn-sm tree-616ecf2d15e0f-tree-tools" data-action="expand" title="Развернуть">
-                        <i class="fa fa-plus-square-o"></i>&nbsp;Развернуть
+                        <i class="fa fa-plus-square-o"></i>&nbsp;{{ trans('admin::category.index.expand') }}
                     </a>
                     <a class="btn btn-primary btn-sm tree-616ecf2d15e0f-tree-tools" data-action="collapse" title="Свернуть">
-                        <i class="fa fa-minus-square-o"></i>&nbsp;Свернуть
+                        <i class="fa fa-minus-square-o"></i>&nbsp;{{ trans('admin::category.index.collapse') }}
                     </a>
                 </div>
-
                 <div class="btn-group">
-                    <a class="btn btn-info btn-sm tree-616ecf2d15e0f-save" title="Сохранить"><i class="fa fa-save"></i><span class="hidden-xs">&nbsp;Сохранить</span></a>
+                    <a class="btn btn-info btn-sm tree-616ecf2d15e0f-save" title="{{ trans('admin::category.index.save') }}"><i class="fa fa-save"></i><span class="hidden-xs">&nbsp;{{ trans('admin::category.index.save') }}</span></a>
                 </div>
-
                 <div class="btn-group">
-                    <a class="btn btn-warning btn-sm tree-616ecf2d15e0f-refresh" title="Обновить"><i class="fa fa-refresh"></i><span class="hidden-xs">&nbsp;Обновить</span></a>
+                    <a class="btn btn-warning btn-sm tree-616ecf2d15e0f-refresh" title="{{ trans('admin::category.index.refresh') }}"><i class="fa fa-refresh"></i><span class="hidden-xs">&nbsp;{{ trans('admin::category.index.refresh') }}</span></a>
                 </div>
-
                 <div class="btn-group">
-
                 </div>
-
-
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">
                 <div class="dd" id="tree-616ecf2d15e0f">
                     <ol class="dd-list">
                         @if ($menu)
-
                         @include('admin::admin.category.customMenuItems', ['items'=>$menu])
-
                         @endif
                     </ol>
                 </div>
@@ -81,21 +71,16 @@
 <script data-exec-on-popstate>
     $(function() {
         $('#tree-616ecf2d15e0f').nestable([]);
-        // $('#tree-616ecf2d15e0f').on('change', function() {
-        //     var serialize = $('#tree-616ecf2d15e0f').nestable('serialize');
-        //     console.log(serialize);
-        // });
-
         $('.tree_branch_edit').click(function() {
             var id = $(this).data('id');
             swal({
-                title: "Вы уверены, что хотите редактировать эту запись?",
+                title: "{{ trans('admin::category.index.are_you_sure_to_edit') }}",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Подтвердить",
+                confirmButtonText: "{{ trans('admin::category.index.confirm') }}",
                 showLoaderOnConfirm: true,
-                cancelButtonText: "Отмена",
+                cancelButtonText: "{{ trans('admin::category.index.cancel') }}",
                 preConfirm: function() {
                     return new Promise(function(resolve) {
                         Livewire.emit('edit', {
@@ -119,13 +104,13 @@
         $('.tree_branch_delete').click(function() {
             var id = $(this).data('id');
             swal({
-                title: "Вы уверены, что хотите удалить эту запись?",
+                title: "{{ trans('admin::category.index.are_you_sure_to_delete') }}",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Подтвердить",
+                confirmButtonText: "{{ trans('admin::category.index.confirm') }}",
                 showLoaderOnConfirm: true,
-                cancelButtonText: "Отмена",
+                cancelButtonText: "{{ trans('admin::category.index.cancel') }}",
                 preConfirm: function() {
                     return new Promise(function(resolve) {
                         $.ajax({
@@ -140,7 +125,7 @@
                             },
                             success: function(data) {
                                 $.pjax.reload('#pjax-container');
-                                toastr.success('Успешно удалено!');
+                                toastr.success("{{ trans('admin::category.index.success_delete') }}");
                                 resolve(data);
                             }
                         });
@@ -177,7 +162,7 @@
                     });
                     Toast.fire({
                         type: 'success',
-                        title: "Успешно сохранено"
+                        title: "{{ trans('admin::category.index.success_save') }}"
                     })
                 },
                 error: function(error) {
@@ -202,7 +187,7 @@
             $.pjax.reload('#pjax-container', {
                 timeout: 3000
             });
-            toastr.success('Успешно обновлено!');
+            toastr.success("{{ trans('admin::category.index.success_refrech') }}");
         });
 
         $(".accordeon dd").hide().prev().click(function() {

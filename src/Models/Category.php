@@ -29,7 +29,6 @@ class Category extends Model
         'description',
         'parent_id',
         'ordering',
-        'tree_id',
         'visible',
         'created_at',
         'updated_at',

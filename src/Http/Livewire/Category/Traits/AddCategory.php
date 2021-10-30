@@ -4,12 +4,13 @@ namespace Viropanel\Admin\Http\Livewire\Category\Traits;
 
 use Viropanel\Admin\Models\Category;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Gate;
 
 trait AddCategory
 {
     public function submit()
     {
-        abort_if(\Gate::denies('category_create'), Response::HTTP_FORBIDDEN, 'You do not have permission to create a category.');
+        abort_if(Gate::denies('category_create'), Response::HTTP_FORBIDDEN, trans('admin::category.create.permissions.not_access_create_cateogy'));
 
         $validateData = $this->validate();
         $parent_id = $validateData['parent_id'] ?? 0;
@@ -25,24 +26,24 @@ trait AddCategory
             'ordering' => $oder,
             'visible' => $validateData['visible']
         ]);
-        if ($parent_id == 0) {
-            $category->tree_id =  $category->id;
+        if ($category) {
+            $this->reset(['parent_id']);
+            $this->reset(['name']);
+            $this->reset(['icon']);
+            $this->reset(['title']);
+            $this->reset(['keywords']);
+            $this->reset(['description']);
+            $this->reset(['visible']);
+
+            $this->dispatchBrowserEvent('alert', [
+                'type' => 'success',
+                'message' => trans('admin::category.create.success_created')
+            ]);
         } else {
-            $category->tree_id = $parent_id;
+            $this->dispatchBrowserEvent('alert', [
+                'type' => 'success',
+                'message' => trans('admin::category.create.error_created')
+            ]);
         }
-        $category->save();
-
-        $this->reset(['parent_id']);
-        $this->reset(['name']);
-        $this->reset(['icon']);
-        $this->reset(['title']);
-        $this->reset(['keywords']);
-        $this->reset(['description']);
-        $this->reset(['visible']);
-
-        $this->dispatchBrowserEvent('alert', [
-            'type' => 'success',
-            'message' => "Category Created Successfully!!"
-        ]);
     }
 }
