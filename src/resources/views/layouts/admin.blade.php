@@ -112,7 +112,7 @@
                         @can('access_admin_panel')
                         <li class="nav-item">
                             <a href="/admin" class="nav-link">
-                                <i class="fas fa-align-left"></i>
+                                <i class="fa fa-bar-chart"></i>
                                 <p>
                                     Dashboard
                                 </p>
@@ -175,7 +175,8 @@
         <div class="content-wrapper">
             @yield('content-header')
             <!-- Main content -->
-            <section class="content">
+            <section class="content" id='pjax-container'>
+                <x:notify-messages />
                 <div class="container-fluid">
                     <!-- Small boxes (Stat box) -->
                     <div class="row">
@@ -196,33 +197,6 @@
     @include('admin::assets.js')
     @livewireScripts
     @stack('page_scripts')
-    <script>
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            icon: "success",
-            showCloseButton: true,
-            timer: 2500,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        });
-
-        window.addEventListener('alert', ({
-            detail: {
-                type,
-                message
-            }
-        }) => {
-            Toast.fire({
-                type: type,
-                title: message
-            })
-        })
-    </script>
 </body>
 
 </html>

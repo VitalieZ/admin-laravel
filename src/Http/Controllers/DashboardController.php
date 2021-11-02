@@ -15,7 +15,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        abort_if(Gate::denies('access_admin_panels'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('access_admin_panel'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $dependencies_admin_panel = $this->ComposerJsonRequire(base_path('vendor/viropanel/admin-laravel/composer.json'));
 

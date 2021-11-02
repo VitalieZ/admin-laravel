@@ -30,6 +30,7 @@ class InsertBasePermissionsCommand extends Command
     protected function perforadminpanel()
     {
         $permissions = array(
+            "access_admin_panel",
             "category_access",
             "category_show",
             "category_create",

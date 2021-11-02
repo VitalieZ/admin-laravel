@@ -15,7 +15,6 @@ class UpdateCategoryRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
         return Gate::allows('category_edit');
     }
 
@@ -28,13 +27,12 @@ class UpdateCategoryRequest extends FormRequest
     {
         return [
             'parent_id' => 'required|integer',
-            'ordering' => 'required|integer',
-            'name' => 'required|max:255',
-            'icon' => 'max:50',
-            'content' => 'max:255',
+            'name' => 'required|min:4|max:10',
+            'icon' => 'max:30',
             'title' => 'max:255',
             'keywords' => 'max:255',
             'description' => 'max:255',
+            'visible' => '',
         ];
     }
 }

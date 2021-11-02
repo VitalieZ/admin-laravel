@@ -36,7 +36,8 @@ class AdminServiceProvider extends ServiceProvider
 
         /* Publishing Configuration */
         $this->publishes([__DIR__ . '/config/admin.php' => config_path('admin.php')]);
-        $this->publishes([__DIR__ . '/config' => config_path()], 'admin');
+        $this->publishes([__DIR__ . '/config/sluggable.php' => config_path('sluggable.php')]);
+        //$this->publishes([__DIR__ . '/config' => config_path()], 'admin');
 
         /* Publishing Public Assets */
         $this->publishes([__DIR__ . '/resources/assets' => public_path('assets'),], 'public');
@@ -71,7 +72,6 @@ class AdminServiceProvider extends ServiceProvider
 
     public function livewireComponents()
     {
-        \Livewire::component('admin::categorycreate', CategoryCreate::class);
         \Livewire::component('admin::search-permisions', SearchPermissions::class);
     }
 
