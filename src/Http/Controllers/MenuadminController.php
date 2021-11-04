@@ -3,17 +3,17 @@
 namespace Viropanel\Admin\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Viropanel\Admin\Models\Category;
+use Viropanel\Admin\Models\Menuadmin;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Viropanel\Admin\Http\Requests\MassDestroyCategoryRequest;
-use Viropanel\Admin\Http\Requests\StoreCategoryRequest;
+use Viropanel\Admin\Http\Requests\MassDestroyMenuadminRequest;
+use Viropanel\Admin\Http\Requests\StoreMenuadminRequest;
 use Spatie\Permission\Models\Permission;
-use Viropanel\Admin\Http\Requests\UpdateCategoryRequest;
+use Viropanel\Admin\Http\Requests\UpdateMenuadminRequest;
 
 
-class CategoryController extends Controller
+class MenuadminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,46 +22,41 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        abort_if(Gate::denies('category_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('menu_admin_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin::admin.category.index', [
+        return view('admin::admin.menuadmin.index', [
             'menu' => $this->categories(),
         ]);
     }
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Category $menu)
+
+    public function show(Menuadmin $menu)
     {
-        abort_if(Gate::denies('category_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $cat_parent = Category::select('name')->where('id', $menu->parent_id)->first();
-        return view('admin::admin.category.show', [
-            'category' => $menu,
-            'cat_parent_name' => $cat_parent,
+        abort_if(Gate::denies('menu_admin_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $menu_parent = Menuadmin::select('name')->where('id', $menu->parent_id)->first();
+        return view('admin::admin.menuadmin.show', [
+            'menu' => $menu,
+            'menu_parent_name' => $menu_parent,
         ]);
     }
 
-    public function edit(Category $menu)
+    public function edit(Menuadmin $menu)
     {
-        abort_if(Gate::denies('category_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        return view('admin::admin.category.edit', [
-            'category' => $this->categories(),
+        abort_if(Gate::denies('menu_admin_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        return view('admin::admin.menuadmin.edit', [
+            'menu' => $this->categories(),
             'cat' => $menu,
         ]);
     }
 
-    public function update(UpdateCategoryRequest $request, Category $menu)
+    public function update(UpdateMenuadminRequest $request, Menuadmin $menu)
     {
         $cate = $menu->update([
             'parent_id' => $request->parent_id ?? 0,
             'name' => $request->name,
             'icon' => $request->icon,
-            'title' => $request->title,
-            'keywords' => $request->keywords,
-            'description' => $request->description,
+            'uri' => $request->title,
+            'title' => $request->keywords,
+            'permision' => $request->description,
             'visible' => isset($request->visible) ? 1 : 0,
         ]);
         if (!$cate) {
@@ -72,7 +67,7 @@ class CategoryController extends Controller
 
     public function categories()
     {
-        return Category::where('parent_id', 0)->orderBy('ordering', 'asc')->get();
+        return Menuadmin::where('parent_id', 0)->orderBy('order', 'asc')->get();
     }
 
     public function viewManuList(Request $request)
@@ -91,34 +86,33 @@ class CategoryController extends Controller
         return response()->view('admin::admin.category.customMenuItemsSelect', ['items' => $this->categories()]);
     }
 
-    public function store(StoreCategoryRequest $request)
+    public function store(StoreMenuadminRequest $request)
     {
         $validateData = $request->form;
         $parent_id = $validateData['parent_id'] ?? 0;
-        $ordering = Category::where('parent_id', $parent_id)->orderBy('id', 'desc')->first();
-        $order = isset($ordering) ? $ordering->ordering + 1 : 0;
-        $category = Category::create([
+        $order = Menuadmin::where('parent_id', $parent_id)->orderBy('id', 'desc')->first();
+        $menu = Menuadmin::create([
             'parent_id' => $parent_id,
             'name' => $validateData['name'],
             'icon' => $validateData['icon'],
             'title' => $validateData['title'],
             'keywords' => $validateData['keywords'],
             'description' => $validateData['description'],
-            'ordering' => $order,
+            'order' => isset($order) ? $order->order + 1 : 0,
             'visible' => isset($validateData['visible']) ? 1 : 0,
         ]);
-        if (!$category) {
+        if (!$menu) {
             return 'error_created';
         }
     }
 
-    public function massDestroy(MassDestroyCategoryRequest $request)
+    public function massDestroy(MassDestroyMenuadminRequest $request)
     {
-        $issetsubmenu = Category::where('parent_id', request('ids'))->first();
+        $issetsubmenu = Menuadmin::where('parent_id', request('ids'))->first();
         if ($issetsubmenu) {
             return 'sub';
         }
-        Category::where('id', request('ids'))->delete();
+        Menuadmin::where('id', request('ids'))->delete();
     }
 
     public function categoryorderingsave(Request $request)
@@ -127,8 +121,8 @@ class CategoryController extends Controller
         if (isset($book)) {
             $this->getCat($book);
             foreach ($book as $key => $item) {
-                Category::where('id', $item['id'])
-                    ->update(['parent_id' => 0, 'ordering' => $key]);
+                Menuadmin::where('id', $item['id'])
+                    ->update(['parent_id' => 0, 'order' => $key]);
                 if (isset($item['children'])) {
                     $this->getCat($item['children'], $item['id']);
                 }
@@ -140,8 +134,8 @@ class CategoryController extends Controller
     public function getCat($book, $parent_id = 0)
     {
         foreach ($book as $key => $item) {
-            Category::where('id', $item['id'])
-                ->update(['parent_id' => $parent_id, 'ordering' => $key]);
+            Menuadmin::where('id', $item['id'])
+                ->update(['parent_id' => $parent_id, 'order' => $key]);
             if (isset($item['children'])) {
                 $this->getCat($item['children'], $item['id']);
             }

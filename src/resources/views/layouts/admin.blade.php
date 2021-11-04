@@ -176,7 +176,6 @@
             @yield('content-header')
             <!-- Main content -->
             <section class="content" id='pjax-container'>
-                <x:notify-messages />
                 <div class="container-fluid">
                     <!-- Small boxes (Stat box) -->
                     <div class="row">
@@ -193,7 +192,6 @@
         </footer>
     </div>
     <!-- ./wrapper -->
-
     @include('admin::assets.js')
     @livewireScripts
     @stack('page_scripts')

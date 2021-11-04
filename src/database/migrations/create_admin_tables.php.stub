@@ -19,18 +19,19 @@ class CreateAdminTables extends Migration
                 $table->increments('id');
                 $table->integer('parent_id')->default(0);
                 $table->integer('order')->default(0);
-                $table->string('title', 50);
+                $table->string('name', 50);
                 $table->string('icon', 50);
                 $table->string('uri')->nullable();
-                $table->string('permission')->nullable();
+                $table->string('title', 255)->nullable();
+                $table->string('permission', 255)->nullable();
                 $table->timestamps();
         });
         }
-        
+
         if(!Schema::hasTable('categories')){
             Schema::create('categories', function (Blueprint $table) {
                 $table->bigIncrements('id');
-                $table->string('name', 255);
+                $table->string('name', 50);
                 $table->string('slug', 255)->unique();
                 $table->string('icon', 50)->nullable();
                 $table->string('title', 255)->nullable();

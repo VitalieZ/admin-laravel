@@ -30,7 +30,7 @@
                                 {{ trans('admin::category.show.id') }}
                             </th>
                             <td>
-                                {{ $category->id }}
+                                {{ $menu->id }}
                             </td>
                         </tr>
                         <tr>
@@ -38,7 +38,7 @@
                                 {{ trans('admin::category.show.parent') }}
                             </th>
                             <td>
-                                @if ($category->parent_id == 0)
+                                @if ($menu->parent_id == 0)
                                 <div class="label label-warning">{{ trans('admin::category.create.form.independent_category') }}</div>
                                 @else
                                 <div class="label label-success">{{ $cat_parent_name->name }}</div>
@@ -50,7 +50,7 @@
                                 {{ trans('admin::category.show.name') }}
                             </th>
                             <td>
-                                {{ $category->name }}
+                                {{ $menu->name }}
                             </td>
                         </tr>
                         <tr>
@@ -58,7 +58,7 @@
                                 {{ trans('admin::category.show.icon') }}
                             </th>
                             <td>
-                                <i class="{{ $category->icon }}"></i>
+                                <i class="{{ $menu->icon }}"></i>
                             </td>
                         </tr>
                         <tr>
@@ -66,7 +66,7 @@
                                 {{ trans('admin::category.show.title') }}
                             </th>
                             <td>
-                                {{ $category->title }}
+                                {{ $menu->title }}
                             </td>
                         </tr>
                         <tr>
@@ -74,7 +74,7 @@
                                 {{ trans('admin::category.show.keywords') }}
                             </th>
                             <td>
-                                {{ $category->keywords }}
+                                {{ $menu->keywords }}
                             </td>
                         </tr>
                         <tr>
@@ -82,7 +82,7 @@
                                 {{ trans('admin::category.show.description') }}
                             </th>
                             <td>
-                                {{ $category->description }}
+                                {{ $menu->description }}
                             </td>
                         </tr>
                         <tr>
@@ -90,7 +90,7 @@
                                 {{ trans('admin::category.show.visible') }}
                             </th>
                             <td>
-                                @if ($category->visible == 1)
+                                @if ($menu->visible == 1)
                                 <span class="label label-success mr-3">{{ trans('admin::category.menu_items.active') }}</span>
                                 @else
                                 <span class="label label-warning mr-3">{{ trans('admin::category.menu_items.deleted') }}</span>

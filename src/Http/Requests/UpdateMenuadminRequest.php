@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Http\FormRequest;
 
 
-class UpdateCategoryRequest extends FormRequest
+class UpdateMenuadminRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,7 +15,7 @@ class UpdateCategoryRequest extends FormRequest
      */
     public function authorize()
     {
-        return Gate::allows('category_edit');
+        return Gate::allows('menu_admin_edit');
     }
 
     /**
@@ -29,9 +29,9 @@ class UpdateCategoryRequest extends FormRequest
             'parent_id' => 'required|integer',
             'name' => 'required|min:4|max:50',
             'icon' => 'max:50',
+            'uri' => 'max:50',
             'title' => 'max:255',
-            'keywords' => 'max:255',
-            'description' => 'max:255',
+            'permision' => 'max:255',
             'visible' => '',
         ];
     }

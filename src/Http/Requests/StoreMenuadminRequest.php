@@ -4,9 +4,8 @@ namespace Viropanel\Admin\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Http\Response;
 
-class StoreCategoryRequest extends FormRequest
+class StoreMenuadminRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,7 +14,7 @@ class StoreCategoryRequest extends FormRequest
      */
     public function authorize()
     {
-        return Gate::allows('category_create');
+        return Gate::allows('menu_admin_create');
     }
 
     /**
@@ -29,9 +28,9 @@ class StoreCategoryRequest extends FormRequest
             '*.parent_id' => 'required|integer',
             '*.name' => 'required|min:4|max:50',
             '*.icon' => 'max:50',
+            '*.uri' => 'max:50',
             '*.title' => 'max:255',
-            '*.keywords' => 'max:255',
-            '*.description' => 'max:255',
+            '*.permision' => 'max:255',
             '*.visible' => '',
         ];
     }

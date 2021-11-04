@@ -30,4 +30,11 @@ Route::prefix(config('admin.route.prefix'))->middleware([config('admin.route.mid
     // Permissions
     Route::delete('permissions/destroy', [\Viropanel\Admin\Http\Controllers\PermissionsController::class, 'massDestroy'])->name('permissions.massDestroy');
     Route::resource('permissions', \Viropanel\Admin\Http\Controllers\PermissionsController::class);
+
+    //Menu admin
+    Route::get('menu-admin/list', [\Viropanel\Admin\Http\Controllers\MenuadminController::class, 'viewMenuList'])->name('menu-admin.list');
+    Route::get('menu-admin/select', [\Viropanel\Admin\Http\Controllers\MenuadminController::class, 'viewSelectForm'])->name('menu-admin.select');
+    Route::post('menu-admin/categoryorderingsave', [\Viropanel\Admin\Http\Controllers\MenuadminController::class, 'categoryorderingsave'])->name('menu-admin.orderingcategory');
+    Route::post('menu-admin/massDestroy', [\Viropanel\Admin\Http\Controllers\MenuadminController::class, 'massDestroy'])->name('menu-admin.massDestroy');
+    Route::resource('menu-admin', \Viropanel\Admin\Http\Controllers\MenuadminController::class);
 });

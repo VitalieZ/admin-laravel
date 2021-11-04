@@ -45,7 +45,7 @@
             <div class="box-body table-responsive no-padding">
                 <div class="dd" id="tree-616ecf2d15e0f">
                     <ol class="dd-list">
-                        @include('admin::admin.category.customMenuItems', ['items'=>$menu])
+                        @include('admin::admin.menu-admin.customMenuItems', ['items'=>$menu])
                     </ol>
                 </div>
             </div>
@@ -62,7 +62,7 @@
     </div>
     @endif
 </div>
-@can('category_create')
+@can('menu_admin_create')
 <div class="col-md-6">
     <div class="box box-success">
         <div class="box-header with-border">
@@ -82,7 +82,7 @@
                                 <select class="form-control asterisk parent_id select2-hidden-accessible" style="width: 100%;" name="parent_id">
                                     <option value="0" selected="">{{ trans('admin::category.create.form.independent_category') }}</option>
                                     @if ($menu->isNotEmpty())
-                                    @include('admin::admin.category.customMenuItemsSelect', ['items'=>$menu])
+                                    @include('admin::admin.menu-admin.customMenuItemsSelect', ['items'=>$menu])
                                     @endif
                                 </select>
                             </div>
@@ -109,39 +109,32 @@
                             <div class="col-sm-2"></div>
                             <small id="emailHelp" class=" col-sm-10 form-text text-muted"><i class="fa fa-info-circle"></i>&nbsp;{{ trans('admin::category.create.form.for_more_icons') }} <a href="http://fontawesome.io/icons/" target="_blank">http://fontawesome.io/icons/</a></small>
                         </div>
-                        <div class="accordeon">
-                            <dl>
-                                <dt><a href="javascript:void(0);">{{ trans('admin::category.create.form.additional_seo_fields') }}</a></dt>
-                                <dd class="mt-3">
-                                    <div class="form-group row">
-                                        <label class="col-sm-2 control-label d-flex justify-content-center" for="inlineFormInputGroup">{{ trans('admin::category.create.form.title') }}</label>
-                                        <div class="input-group mb-2 col-sm-10">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text"><i class="fa fa-text-width fa-fw"></i></div>
-                                            </div>
-                                            <input type="text" id="ctitle" class="form-control" name="title" placeholder=" {{ trans('admin::category.create.form.placeholder_title_page') }}">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-2 control-label d-flex justify-content-center" for="inlineFormInputGroup">{{ trans('admin::category.create.form.keywords') }}</label>
-                                        <div class="input-group mb-2 col-sm-10">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text"><i class="fa fa-key fa-fw"></i></div>
-                                            </div>
-                                            <input type="text" id="ckeywords" class="form-control" name="keywords" placeholder="{{ trans('admin::category.create.form.placeholder_keywords_page') }}">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-2 control-label d-flex justify-content-center" for="inlineFormInputGroup">{{ trans('admin::category.create.form.description') }}</label>
-                                        <div class="input-group mb-2 col-sm-10">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text"><i class="fa fa-wpforms fa-fw"></i></div>
-                                            </div>
-                                            <input type="text" id="description" class="form-control" name="description" placeholder="{{ trans('admin::category.create.form.placeholder_description_page') }}">
-                                        </div>
-                                    </div>
-                                </dd>
-                            </dl>
+                        <div class="form-group row">
+                            <label class="col-sm-2 control-label asterisk d-flex justify-content-center" for="curi">Route</label>
+                            <div class="input-group mb-2 col-sm-10">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fa fa-pencil fa-fw"></i></div>
+                                </div>
+                                <input type="text" id="сuri" name="uri" class="form-control" placeholder=" {{ trans('admin::category.create.form.placeholder_name') }}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 control-label d-flex justify-content-center" for="ctitle">{{ trans('admin::category.create.form.title') }}</label>
+                            <div class="input-group mb-2 col-sm-10">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fa fa-text-width fa-fw"></i></div>
+                                </div>
+                                <input type="text" id="ctitle" class="form-control" name="title" placeholder=" {{ trans('admin::category.create.form.placeholder_title_page') }}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 control-label d-flex justify-content-center" for="cpermision">Permision</label>
+                            <div class="input-group mb-2 col-sm-10">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fa fa-text-width fa-fw"></i></div>
+                                </div>
+                                <input type="text" id="cpermision" class="form-control" name="permision" placeholder=" {{ trans('admin::category.create.form.placeholder_title_page') }}">
+                            </div>
                         </div>
                         <div class="col-12">
                             <div class="col-sm-2">
@@ -188,7 +181,7 @@
 <script src="{{ asset('assets/plugins/jquery-validation/jquery.form.js') }}"></script>
 <script>
     /* delete category */
-    function delete_category(id) {
+    function delete_menu_admin(id) {
         Swal.fire({
             title: "{{ trans('admin::category.index.are_you_sure_to_delete') }}",
             icon: "warning",
@@ -201,7 +194,7 @@
                 return new Promise(function(resolve) {
                     $.ajax({
                         method: 'POST',
-                        url: "{{ route('massDestroy') }}",
+                        url: "{{ route('menu-admin.massDestroy') }}",
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                             'accept': 'application/json'
@@ -242,7 +235,7 @@
 
     /* reload view select from form */
     function reloadelistSelect() {
-        $.get("{{ route('menu.select') }}", function(data) {
+        $.get("{{ route('menu-admin.select') }}", function(data) {
             let cat = "<option value='0' selected=''>{{ trans('admin::category.create.form.independent_category') }}</option>";
             $('#create_category_form2').find('.parent_id').html(cat + data);
         });
@@ -250,28 +243,28 @@
 
     $(function() {
         /*validation form add and edit */
-        var validator_create_category = $("#create_category_form2").validate({
+        var validator_create_menu_admin = $("#create_category_form2").validate({
             rules: {
                 parent_id: {
                     required: true,
                 },
                 name: {
                     required: true,
-                    maxlength: 10,
+                    maxlength: 50,
                     minlength: 4,
                 },
                 icon: {
-                    maxlength: 30
+                    maxlength: 50
+                },
+                uri: {
+                    maxlength: 50
                 },
                 title: {
                     maxlength: 255
                 },
-                keywords: {
+                permision: {
                     maxlength: 255
                 },
-                description: {
-                    maxlength: 255
-                }
             },
             messages: {
                 name: {
@@ -282,23 +275,23 @@
                 icon: {
                     maxlength: "{{ trans('admin::category.fields.icon_max') }}"
                 },
+                uri: {
+                    maxlength: "{{ trans('admin::category.fields.icon_max') }}"
+                },
                 title: {
                     maxlength: "{{ trans('admin::category.fields.title_max') }}"
                 },
-                keywords: {
+                permision: {
                     maxlength: "{{ trans('admin::category.fields.keywords_max') }}"
                 },
-                description: {
-                    maxlength: "{{ trans('admin::category.fields.description_max') }}"
-                }
             },
             submitHandler: function(form) {
-                addCategory(form);
+                addMenuAdmin(form);
             }
         });
 
         /*Add category */
-        function addCategory() {
+        function addMenuAdmin() {
             let serialize = $("#create_category_form2").serializeArray();
             var config = {};
             serialize.map(function(item) {
@@ -313,7 +306,7 @@
             });
             $.ajax({
                 type: "POST",
-                url: "{{ route('menu.store') }}",
+                url: "{{ route('menu-admin.store') }}",
                 data: {
                     form: config,
                 },
@@ -327,7 +320,7 @@
                             icon: 'success',
                             title: "{{ trans('admin::category.create.success_created') }}"
                         });
-                        validator_create_category.resetForm();
+                        validator_create_menu_admin.resetForm();
                         reloadelistMenu();
                         reloadelistSelect();
                     } else {
@@ -356,7 +349,7 @@
 
         /*reload view menu list */
         function reloadelistMenu() {
-            $.get("{{ route('menu.list') }}", function(data) {
+            $.get("{{ route('menu-admin.list') }}", function(data) {
                 $('#tree-616ecf2d15e0f').find('.dd-list').html(data);
             });
         }
@@ -368,7 +361,7 @@
             var serialize = $('#tree-616ecf2d15e0f').nestable('serialize');
             $.ajax({
                 type: "POST",
-                url: "{{ route('orderingcategory') }}",
+                url: "{{ route('menu-admin.orderingcategory') }}",
                 data: {
                     _order: JSON.stringify(serialize),
                 },

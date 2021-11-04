@@ -35,6 +35,7 @@ class InsertBasePermissionsCommand extends Command
             "category_show",
             "category_create",
             "category_edit",
+            "category_sorting",
             "category_delete",
             "user_management_access",
             "user_access",
