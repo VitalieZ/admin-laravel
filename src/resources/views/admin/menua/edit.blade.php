@@ -26,7 +26,7 @@
             <h3 class="card-title">Редактирование</h3>
         </div>
         <div class="d-flex justify-content-center">
-            <form method="POST" action="{{ route('menu-admin.update', [$cat->id]) }}" class="col-md-8">
+            <form method="POST" action="{{ route('menua.update', [$cat->id]) }}" class="col-md-8">
                 @csrf
                 @method('PUT')
                 <div class="card-body">
@@ -36,7 +36,7 @@
                             <select class="form-control" id="FormController" name='parent_id' @error('parent_id') is-invalid @enderror">
                                 <option value="0">Сомостаятельная категория</option>
                                 @if($category->isNotEmpty())
-                                @include('admin::admin.menu-admin.customMenuItemsSelectUpdate',['items' => $menu, 'selected' => $cat->parent_id, 'current_category' => $cat->id])
+                                @include('admin::admin.menua.customMenuItemsSelectUpdate',['items' => $menu, 'selected' => $cat->parent_id, 'current_category' => $cat->id])
                                 @endif
                             </select>
                             @error('parent_id')
@@ -102,8 +102,8 @@
                             <div class="input-group-prepend">
                                 <div class="input-group-text"><i class="fa fa-text-width fa-fw"></i></div>
                             </div>
-                            <input type="text" value="{{ old('permision', $cat->permision) }}" class="form-control @error('permision') is-invalid @enderror" name="permision" placeholder=" {{ trans('admin::category.create.form.placeholder_title_page') }}">
-                            @error('permision')
+                            <input type="text" value="{{ old('permission', $cat->permission) }}" class="form-control @error('permission') is-invalid @enderror" name="permision" placeholder=" {{ trans('admin::category.create.form.placeholder_title_page') }}">
+                            @error('permission')
                             <div id="validationServer03Feedback" class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>

@@ -24,7 +24,7 @@ class MenuadminController extends Controller
     {
         abort_if(Gate::denies('menu_admin_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin::admin.menuadmin.index', [
+        return view('admin::admin.menua.index', [
             'menu' => $this->categories(),
         ]);
     }
@@ -33,7 +33,7 @@ class MenuadminController extends Controller
     {
         abort_if(Gate::denies('menu_admin_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $menu_parent = Menuadmin::select('name')->where('id', $menu->parent_id)->first();
-        return view('admin::admin.menuadmin.show', [
+        return view('admin::admin.menua.show', [
             'menu' => $menu,
             'menu_parent_name' => $menu_parent,
         ]);
@@ -42,7 +42,7 @@ class MenuadminController extends Controller
     public function edit(Menuadmin $menu)
     {
         abort_if(Gate::denies('menu_admin_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        return view('admin::admin.menuadmin.edit', [
+        return view('admin::admin.menua.edit', [
             'menu' => $this->categories(),
             'cat' => $menu,
         ]);
@@ -55,8 +55,8 @@ class MenuadminController extends Controller
             'name' => $request->name,
             'icon' => $request->icon,
             'uri' => $request->title,
-            'title' => $request->keywords,
-            'permision' => $request->description,
+            'title' => $request->title,
+            'permission' => $request->permission,
             'visible' => isset($request->visible) ? 1 : 0,
         ]);
         if (!$cate) {
@@ -67,7 +67,7 @@ class MenuadminController extends Controller
 
     public function categories()
     {
-        return Menuadmin::where('parent_id', 0)->orderBy('order', 'asc')->get();
+        return Menuadmin::where('parent_id', 0)->orderBy('ordering', 'asc')->get();
     }
 
     public function viewManuList(Request $request)
@@ -95,10 +95,10 @@ class MenuadminController extends Controller
             'parent_id' => $parent_id,
             'name' => $validateData['name'],
             'icon' => $validateData['icon'],
+            'uri' => $validateData['uri'],
             'title' => $validateData['title'],
-            'keywords' => $validateData['keywords'],
-            'description' => $validateData['description'],
-            'order' => isset($order) ? $order->order + 1 : 0,
+            'permission' => $validateData['permission'],
+            'ordering' => isset($order) ? $order->order + 1 : 0,
             'visible' => isset($validateData['visible']) ? 1 : 0,
         ]);
         if (!$menu) {
@@ -122,7 +122,7 @@ class MenuadminController extends Controller
             $this->getCat($book);
             foreach ($book as $key => $item) {
                 Menuadmin::where('id', $item['id'])
-                    ->update(['parent_id' => 0, 'order' => $key]);
+                    ->update(['parent_id' => 0, 'ordering' => $key]);
                 if (isset($item['children'])) {
                     $this->getCat($item['children'], $item['id']);
                 }
@@ -135,7 +135,7 @@ class MenuadminController extends Controller
     {
         foreach ($book as $key => $item) {
             Menuadmin::where('id', $item['id'])
-                ->update(['parent_id' => $parent_id, 'order' => $key]);
+                ->update(['parent_id' => $parent_id, 'ordering' => $key]);
             if (isset($item['children'])) {
                 $this->getCat($item['children'], $item['id']);
             }

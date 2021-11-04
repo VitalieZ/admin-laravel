@@ -163,6 +163,16 @@
                             </a>
                         </li>
                         @endcan
+                        @can('menu_admin_access')
+                        <li class="nav-item">
+                            <a href="{{ route('menua.index') }}" class="nav-link">
+                                <i class="fas fa-user-check"></i>
+                                <p>
+                                    Меню
+                                </p>
+                            </a>
+                        </li>
+                        @endcan
                         @endcan
                     </ul>
                 </nav>

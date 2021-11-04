@@ -32,9 +32,9 @@ Route::prefix(config('admin.route.prefix'))->middleware([config('admin.route.mid
     Route::resource('permissions', \Viropanel\Admin\Http\Controllers\PermissionsController::class);
 
     //Menu admin
-    Route::get('menu-admin/list', [\Viropanel\Admin\Http\Controllers\MenuadminController::class, 'viewMenuList'])->name('menu-admin.list');
-    Route::get('menu-admin/select', [\Viropanel\Admin\Http\Controllers\MenuadminController::class, 'viewSelectForm'])->name('menu-admin.select');
-    Route::post('menu-admin/categoryorderingsave', [\Viropanel\Admin\Http\Controllers\MenuadminController::class, 'categoryorderingsave'])->name('menu-admin.orderingcategory');
-    Route::post('menu-admin/massDestroy', [\Viropanel\Admin\Http\Controllers\MenuadminController::class, 'massDestroy'])->name('menu-admin.massDestroy');
-    Route::resource('menu-admin', \Viropanel\Admin\Http\Controllers\MenuadminController::class);
+    Route::get('menua/list', [\Viropanel\Admin\Http\Controllers\MenuadminController::class, 'viewMenuList'])->name('menua.list');
+    Route::get('menua/select', [\Viropanel\Admin\Http\Controllers\MenuadminController::class, 'viewSelectForm'])->name('menua.select');
+    Route::post('menua/categoryorderingsave', [\Viropanel\Admin\Http\Controllers\MenuadminController::class, 'categoryorderingsave'])->name('menua.orderingcategory');
+    Route::post('menua/massDestroy', [\Viropanel\Admin\Http\Controllers\MenuadminController::class, 'massDestroy'])->name('menua.massDestroy');
+    Route::resource('menua', \Viropanel\Admin\Http\Controllers\MenuadminController::class);
 });

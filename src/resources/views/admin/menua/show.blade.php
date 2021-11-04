@@ -66,6 +66,14 @@
                                 {{ trans('admin::category.show.title') }}
                             </th>
                             <td>
+                                {{ $menu->uri }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                {{ trans('admin::category.show.keywords') }}
+                            </th>
+                            <td>
                                 {{ $menu->title }}
                             </td>
                         </tr>
@@ -74,15 +82,7 @@
                                 {{ trans('admin::category.show.keywords') }}
                             </th>
                             <td>
-                                {{ $menu->keywords }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                {{ trans('admin::category.show.description') }}
-                            </th>
-                            <td>
-                                {{ $menu->description }}
+                                {{ $menu->permission }}
                             </td>
                         </tr>
                         <tr>

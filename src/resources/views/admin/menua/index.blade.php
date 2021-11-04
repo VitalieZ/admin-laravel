@@ -45,7 +45,7 @@
             <div class="box-body table-responsive no-padding">
                 <div class="dd" id="tree-616ecf2d15e0f">
                     <ol class="dd-list">
-                        @include('admin::admin.menu-admin.customMenuItems', ['items'=>$menu])
+                        @include('admin::admin.menua.customMenuItems', ['items'=>$menu])
                     </ol>
                 </div>
             </div>
@@ -82,7 +82,7 @@
                                 <select class="form-control asterisk parent_id select2-hidden-accessible" style="width: 100%;" name="parent_id">
                                     <option value="0" selected="">{{ trans('admin::category.create.form.independent_category') }}</option>
                                     @if ($menu->isNotEmpty())
-                                    @include('admin::admin.menu-admin.customMenuItemsSelect', ['items'=>$menu])
+                                    @include('admin::admin.menua.customMenuItemsSelect', ['items'=>$menu])
                                     @endif
                                 </select>
                             </div>
@@ -128,12 +128,12 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-2 control-label d-flex justify-content-center" for="cpermision">Permision</label>
+                            <label class="col-sm-2 control-label d-flex justify-content-center" for="cpermission">Permision</label>
                             <div class="input-group mb-2 col-sm-10">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text"><i class="fa fa-text-width fa-fw"></i></div>
                                 </div>
-                                <input type="text" id="cpermision" class="form-control" name="permision" placeholder=" {{ trans('admin::category.create.form.placeholder_title_page') }}">
+                                <input type="text" id="cpermission" class="form-control" name="permission" placeholder=" {{ trans('admin::category.create.form.placeholder_title_page') }}">
                             </div>
                         </div>
                         <div class="col-12">
@@ -194,7 +194,7 @@
                 return new Promise(function(resolve) {
                     $.ajax({
                         method: 'POST',
-                        url: "{{ route('menu-admin.massDestroy') }}",
+                        url: "{{ route('menua.massDestroy') }}",
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                             'accept': 'application/json'
@@ -235,7 +235,7 @@
 
     /* reload view select from form */
     function reloadelistSelect() {
-        $.get("{{ route('menu-admin.select') }}", function(data) {
+        $.get("{{ route('menua.select') }}", function(data) {
             let cat = "<option value='0' selected=''>{{ trans('admin::category.create.form.independent_category') }}</option>";
             $('#create_category_form2').find('.parent_id').html(cat + data);
         });
@@ -262,7 +262,7 @@
                 title: {
                     maxlength: 255
                 },
-                permision: {
+                permission: {
                     maxlength: 255
                 },
             },
@@ -281,7 +281,7 @@
                 title: {
                     maxlength: "{{ trans('admin::category.fields.title_max') }}"
                 },
-                permision: {
+                permission: {
                     maxlength: "{{ trans('admin::category.fields.keywords_max') }}"
                 },
             },
@@ -306,7 +306,7 @@
             });
             $.ajax({
                 type: "POST",
-                url: "{{ route('menu-admin.store') }}",
+                url: "{{ route('menua.store') }}",
                 data: {
                     form: config,
                 },
@@ -349,7 +349,7 @@
 
         /*reload view menu list */
         function reloadelistMenu() {
-            $.get("{{ route('menu-admin.list') }}", function(data) {
+            $.get("{{ route('menua.list') }}", function(data) {
                 $('#tree-616ecf2d15e0f').find('.dd-list').html(data);
             });
         }
@@ -361,7 +361,7 @@
             var serialize = $('#tree-616ecf2d15e0f').nestable('serialize');
             $.ajax({
                 type: "POST",
-                url: "{{ route('menu-admin.orderingcategory') }}",
+                url: "{{ route('menua.orderingcategory') }}",
                 data: {
                     _order: JSON.stringify(serialize),
                 },
