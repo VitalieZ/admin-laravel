@@ -36,5 +36,5 @@ Route::prefix(config('admin.route.prefix'))->middleware([config('admin.route.mid
     Route::get('menua/select', [\Viropanel\Admin\Http\Controllers\MenuaController::class, 'viewSelectForm'])->name('menua.select');
     Route::post('menua/categoryorderingsave', [\Viropanel\Admin\Http\Controllers\MenuaController::class, 'categoryorderingsave'])->name('menua.orderingcategory');
     Route::post('menua/massDestroy', [\Viropanel\Admin\Http\Controllers\MenuaController::class, 'massDestroy'])->name('menua.massDestroy');
-    Route::resource('menua', \Viropanel\Admin\Http\Controllers\MenuaController::class);
+    Route::resource('menus', \Viropanel\Admin\Http\Controllers\MenuaController::class);
 });

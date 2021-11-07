@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Viropanel\Admin\Database\Seeders\MenuaSeeder;
 
 class CreateAdminTables extends Migration
 {
@@ -30,16 +31,12 @@ class CreateAdminTables extends Migration
         
         }
 
-        if(!Schema::hasTable('menu_admin')){
-            DB::table('menu_admin')->insert([
-            ['parent_id' => 0, 'ordering' => 0, 'name' => 'Dashboard', icon => 'fa fa-bar-chart', uri => 'admin.dashboard', 'title' => 'Dashboard', 'permission' => 'dashboard_access', visible => 1],
-            ['parent_id' => 0, 'ordering' => 1, 'name' => 'Категорий', icon => 'fas fa-bars', uri => 'menu.index', 'title' => 'Категорий', 'permission' => 'category_access', visible => 1],
-            ['parent_id' => 0, 'ordering' => 2, 'name' => 'Admin', icon => 'fas fa-user-md', 'title' => 'Admin', 'permission' => 'user_management_access', visible => 1],
-            ['parent_id' => 3, 'ordering' => 0, 'name' => 'Меню', icon => 'fas fa-bars', uri => 'menus.index', 'title' => 'Меню', 'permission' => 'menu_admin_access', visible => 1],
-            ['parent_id' => 3, 'ordering' => 1, 'name' => 'Пользыватель', icon => 'fas fa-users', uri => 'user.index', 'title' => 'Пользыватель', 'permission' => 'user_access', visible => 1],
-            ['parent_id' => 3, 'ordering' => 2, 'name' => 'Роль', icon => 'fas fa-user-tag', uri => 'roles.index', 'title' => 'Роль', 'permission' => 'roles_access', visible => 1],
-            ['parent_id' => 3, 'ordering' => 3, 'name' => 'Разрешение', icon => 'fas fa-user-check', uri => permissions.index', 'title' => 'Разрешение', 'permission' => 'permissions_access', visible => 1],
-        ]);
+        if(Schema::hasTable('menu_admin')){
+            Artisan::call( 'db:seed', [
+                '--class' => 'MenuaSeeder',
+                '--force' => true ]
+            );
+
         }
 
         if(!Schema::hasTable('categories')){
