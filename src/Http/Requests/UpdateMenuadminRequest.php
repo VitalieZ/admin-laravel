@@ -31,7 +31,7 @@ class UpdateMenuadminRequest extends FormRequest
             'icon' => 'max:50',
             'uri' => 'max:50',
             'title' => 'max:255',
-            'permision' => 'max:255',
+            'permission' => 'required|max:255',
             'visible' => '',
         ];
     }

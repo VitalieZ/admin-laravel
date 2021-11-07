@@ -1,7 +1,9 @@
 @foreach ($items as $item)
 <li class="dd-item" data-id="{{ $item->id}}">
     <div class="dd-handle">
-        <i class="{{ $item->icon }}"></i>&nbsp;<strong>{{ $item->name }}</strong>&nbsp;&nbsp;&nbsp;<a href="" class="dd-nodrag">
+        <i class="{{ $item->icon }}"></i>&nbsp;<strong>{{ $item->name }}</strong>&nbsp;&nbsp;&nbsp;<a href="@if(\Route::has($item->uri))
+            {{ route($item->uri) }}
+            @endif" class="dd-nodrag">
             @if(\Route::has($item->uri))
             {{ route($item->uri) }}
             @endif

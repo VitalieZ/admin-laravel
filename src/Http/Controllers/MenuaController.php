@@ -63,9 +63,9 @@ class MenuaController extends Controller
             'visible' => isset($request->visible) ? 1 : 0,
         ]);
         if (!$cate) {
-            return back()->with('error', trans('admin::category.edit.error_edit'));
+            return back()->with('error', trans('admin::cruds.menuAdmin.error_edit'));
         }
-        return back()->with('success', trans('admin::category.edit.success_edit'));
+        return back()->with('success', trans('admin::cruds.menuAdmin.success_edit'));
     }
 
     public function categories()
@@ -78,7 +78,7 @@ class MenuaController extends Controller
         if (!$request->ajax()) {
             return redirect()->back();
         }
-        return response()->view('admin::admin.category.customMenuItems', ['items' => $this->categories()]);
+        return response()->view('admin::admin.menus.customMenuItems', ['items' => $this->categories()]);
     }
 
     public function viewSelectForm(Request $request)
@@ -86,7 +86,7 @@ class MenuaController extends Controller
         if (!$request->ajax()) {
             return redirect()->back();
         }
-        return response()->view('admin::admin.category.customMenuItemsSelect', ['items' => $this->categories()]);
+        return response()->view('admin::admin.menus.customMenuItemsSelect', ['items' => $this->categories()]);
     }
 
     public function store(StoreMenuadminRequest $request)

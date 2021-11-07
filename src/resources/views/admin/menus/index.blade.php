@@ -11,7 +11,7 @@
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
             <h1>
-                {{ trans('admin::category.index.menu') }} <small>{{ trans('admin::category.index.list') }}</small>
+                {{ trans('admin::cruds.menuAdmin.index.menu') }} <small>{{ trans('admin::global.list') }}</small>
             </h1>
         </div>
     </div>
@@ -27,17 +27,17 @@
             <div class="box-header">
                 <div class="btn-group">
                     <a class="btn btn-primary btn-sm tree-616ecf2d15e0f-tree-tools" data-action="expand" title="Развернуть">
-                        <i class="fa fa-plus-square-o"></i>&nbsp;{{ trans('admin::category.index.expand') }}
+                        <i class="fa fa-plus-square-o"></i>&nbsp;{{ trans('admin::cruds.menuAdmin.index.expand') }}
                     </a>
                     <a class="btn btn-primary btn-sm tree-616ecf2d15e0f-tree-tools" data-action="collapse" title="Свернуть">
-                        <i class="fa fa-minus-square-o"></i>&nbsp;{{ trans('admin::category.index.collapse') }}
+                        <i class="fa fa-minus-square-o"></i>&nbsp;{{ trans('admin::cruds.menuAdmin.index.collapse') }}
                     </a>
                 </div>
                 <div class="btn-group">
-                    <a class="btn btn-info btn-sm tree-616ecf2d15e0f-save" title="{{ trans('admin::category.index.save') }}"><i class="fa fa-save"></i><span class="hidden-xs">&nbsp;{{ trans('admin::category.index.save') }}</span></a>
+                    <a class="btn btn-info btn-sm tree-616ecf2d15e0f-save" title="{{ trans('admin::global.save') }}"><i class="fa fa-save"></i><span class="hidden-xs">&nbsp;{{ trans('admin::global.save') }}</span></a>
                 </div>
                 <div class="btn-group">
-                    <a class="btn btn-warning btn-sm tree-616ecf2d15e0f-refresh" title="{{ trans('admin::category.index.refresh') }}"><i class="fa fa-refresh"></i><span class="hidden-xs">&nbsp;{{ trans('admin::category.index.refresh') }}</span></a>
+                    <a class="btn btn-warning btn-sm tree-616ecf2d15e0f-refresh" title="{{ trans('admin::global.refresh') }}"><i class="fa fa-refresh"></i><span class="hidden-xs">&nbsp;{{ trans('admin::global.refresh') }}</span></a>
                 </div>
                 <div class="btn-group">
                 </div>
@@ -57,7 +57,7 @@
     @else
     <div class="card card-outline card-warning">
         <div class="card-body">
-            <div class="text-center pt-3 pb-3 lead text-muted">{{ trans('admin::category.index.isEmptyCategory') }}</div>
+            <div class="text-center pt-3 pb-3 lead text-muted">{{ trans('admin::cruds.menuAdmin.index.isEmptyMenu') }}</div>
         </div>
         <!-- /.card-body -->
     </div>
@@ -68,7 +68,7 @@
     <div class="box box-success">
         <div class="box-header with-border">
             <h3 class="box-title">
-                {{ trans('admin::category.create.new') }}
+                {{ trans('admin::global.add') }}
             </h3>
             <div class="box-tools pull-right">
             </div><!-- /.box-tools -->
@@ -78,10 +78,10 @@
                 <fieldset>
                     <div class="box-body fields-group">
                         <div class="form-group row">
-                            <label for="parent_id" class="col-sm-2  control-label d-flex justify-content-center">{{ trans('admin::category.create.form.parent') }}</label>
+                            <label for="parent_id" class="col-sm-2  control-label d-flex justify-content-center">{{ trans('admin::cruds.menuAdmin.form.parent') }}</label>
                             <div class="col-sm-10">
                                 <select class="form-control asterisk parent_id" name="parent_id">
-                                    <option value="0" selected="">{{ trans('admin::category.create.form.independent_category') }}</option>
+                                    <option value="0" selected="">{{ trans('admin::cruds.menuAdmin.form.independent_category') }}</option>
                                     @if ($menu->isNotEmpty())
                                     @include('admin::admin.menus.customMenuItemsSelect', ['items'=>$menu])
                                     @endif
@@ -89,53 +89,53 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-2 control-label asterisk d-flex justify-content-center" for="cname">{{ trans('admin::category.create.form.name') }}</label>
+                            <label class="col-sm-2 control-label asterisk d-flex justify-content-center" for="cname">{{ trans('admin::cruds.menuAdmin.form.name') }}</label>
                             <div class="input-group mb-2 col-sm-10">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text"><i class="fa fa-pencil fa-fw"></i></div>
                                 </div>
-                                <input type="text" id="сname" name="name" class="form-control" placeholder=" {{ trans('admin::category.create.form.placeholder_name') }}">
+                                <input type="text" id="сname" name="name" class="form-control" placeholder="{{ trans('admin::cruds.menuAdmin.form.placeholder_name') }}">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-2 control-label d-flex justify-content-center" for="сicon">{{ trans('admin::category.create.form.icon') }}</label>
+                            <label class="col-sm-2 control-label d-flex justify-content-center" for="сicon">{{ trans('admin::cruds.menuAdmin.form.icon') }}</label>
                             <div class="input-group mb-2 col-sm-10">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
                                         <span class="input-group-addon"><i class="fas fa-icons"></i></span>
                                     </div>
                                 </div>
-                                <input type="text" id="сicon" class="form-control icon col-sm-12" name="icon" value="fab-bars" placeholder="{{ trans('admin::category.create.form.placeholder_icon') }}">
+                                <input type="text" id="сicon" class="form-control icon col-sm-12" name="icon" value="fab-bars" placeholder="{{ trans('admin::cruds.menuAdmin.form.placeholder_icon') }}">
                             </div>
                             <div class="col-sm-2"></div>
-                            <small id="emailHelp" class=" col-sm-10 form-text text-muted"><i class="fa fa-info-circle"></i>&nbsp;{{ trans('admin::category.create.form.for_more_icons') }} <a href="http://fontawesome.io/icons/" target="_blank">http://fontawesome.io/icons/</a></small>
+                            <small id="emailHelp" class=" col-sm-10 form-text text-muted"><i class="fa fa-info-circle"></i>&nbsp;{{ trans('admin::cruds.menuAdmin.form.for_more_icons') }} <a href="http://fontawesome.io/icons/" target="_blank">http://fontawesome.io/icons/</a></small>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-2 control-label d-flex justify-content-center" for="curi">Route</label>
+                            <label class="col-sm-2 control-label d-flex justify-content-center" for="curi">{{ trans('admin::cruds.menuAdmin.form.route') }}</label>
                             <div class="input-group mb-2 col-sm-10">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text"><i class="fas fa-route"></i></div>
                                 </div>
-                                <input type="text" id="сuri" name="uri" class="form-control" placeholder=" {{ trans('admin::category.create.form.placeholder_name') }}">
+                                <input type="text" id="сuri" name="uri" class="form-control" placeholder="{{ trans('admin::cruds.menuAdmin.form.placeholder_route') }}">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-2 control-label d-flex justify-content-center" for="ctitle">{{ trans('admin::category.create.form.title') }}</label>
+                            <label class="col-sm-2 control-label d-flex justify-content-center" for="ctitle">{{ trans('admin::cruds.menuAdmin.form.title') }}</label>
                             <div class="input-group mb-2 col-sm-10">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text"><i class="fa fa-text-width fa-fw"></i></div>
                                 </div>
-                                <input type="text" id="ctitle" class="form-control" name="title" placeholder=" {{ trans('admin::category.create.form.placeholder_title_page') }}">
+                                <input type="text" id="ctitle" class="form-control" name="title" placeholder=" {{ trans('admin::cruds.menuAdmin.form.placeholder_title_page') }}">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-2 asterisk control-label d-flex justify-content-center" for="inlineFormInputGroup">Разрешения</label>
+                            <label class="col-sm-2 asterisk control-label d-flex justify-content-center" for="inlineFormInputGroup">{{ trans('admin::cruds.menuAdmin.form.permission') }}</label>
                             <div class="input-group mb-2 col-sm-10">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text"><i class="fas fa-universal-access"></i></div>
                                 </div>
-                                <select class="form-control select2" name="permission" id="permission">
-                                    <option>Выберите разрешения</option>
+                                <select class="form-control select2" name="permission" id="cpermission">
+                                    <option selected>{{ trans('admin::cruds.menuAdmin.form.select_permission') }}</option>
                                     @foreach ($permissions as $item)
                                     <option value="{{ $item->name }}">{{ $item->name }}</option>
                                     @endforeach
@@ -146,10 +146,7 @@
                             <div class="col-sm-2">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="visible" id="visible">
-                                    <label class="form-check-label font-weight-bold user-select-none" for="visible">{{ trans('admin::category.create.form.visible') }}</label>
-                                    @error('visible')
-                                    <div id="validationServer03Feedback" class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                    <label class="form-check-label font-weight-bold user-select-none" for="visible">{{ trans('admin::cruds.menuAdmin.form.visible') }}</label>
                                 </div>
                             </div>
                         </div>
@@ -158,13 +155,13 @@
                         <div class="col-12">
                             <div>
                                 <div class="btn-group pull-left">
-                                    <button type="reset" class="btn btn-warning d-flex justify-content-left">{{ trans('admin::category.create.form.reset') }}</button>
+                                    <button type="reset" class="button-refresh-form btn btn-warning d-flex justify-content-left">{{ trans('admin::cruds.menuAdmin.form.reset') }}</button>
                                 </div>
                             </div>
                             <div>
                                 <div class="btn-group pull-right">
-                                    <input type="submit" class="submit btn btn-info d-flex justify-content-right" value="{{ trans('admin::category.create.form.send') }}">
-                                    <button type="button" class="btn btn-info pull-right disabled d-none" disabled="disabled">{{ trans('admin::category.create.form.loading') }}</button>
+                                    <input type="submit" class="submit btn btn-info d-flex justify-content-right" value="{{ trans('admin::global.send') }}">
+                                    <button type="button" class="btn btn-info pull-right disabled d-none" disabled="disabled">{{ trans('admin::cruds.menuAdmin.form.loading') }}</button>
                                 </div>
                             </div>
                         </div>
@@ -190,13 +187,13 @@
     /* delete category */
     function delete_menu_admin(id) {
         Swal.fire({
-            title: "{{ trans('admin::category.index.are_you_sure_to_delete') }}",
+            title: "{{ trans('admin::cruds.menuAdmin.index.are_you_sure_to_delete') }}",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
-            confirmButtonText: "{{ trans('admin::category.index.confirm') }}",
+            confirmButtonText: "{{ trans('admin::cruds.menuAdmin.index.confirm') }}",
             showLoaderOnConfirm: true,
-            cancelButtonText: "{{ trans('admin::category.index.cancel') }}",
+            cancelButtonText: "{{ trans('admin::global.cancel') }}",
             preConfirm: function() {
                 return new Promise(function(resolve) {
                     $.ajax({
@@ -213,14 +210,14 @@
                             if (data == 'sub') {
                                 Toast.fire({
                                     icon: 'error',
-                                    title: 'Категория не может быть удалена.Сначала удалите подкатегорий.'
+                                    title: "{{ trans('admin::cruds.menuAdmin.sub_cat') }}"
                                 })
                             } else {
                                 $('.dd-item[data-id="' + id + '"]').remove();
                                 reloadelistSelect();
                                 Toast.fire({
                                     icon: 'success',
-                                    title: "{{ trans('admin::category.index.success_delete') }}",
+                                    title: "{{ trans('admin::global.delete_success') }}",
                                 })
                             }
 
@@ -243,7 +240,7 @@
     /* reload view select from form */
     function reloadelistSelect() {
         $.get("{{ route('menua.select') }}", function(data) {
-            let cat = "<option value='0' selected=''>{{ trans('admin::category.create.form.independent_category') }}</option>";
+            let cat = "<option value='0' selected=''>{{ trans('admin::cruds.menuAdmin.form.independent_category') }}</option>";
             $('#create_category_form2').find('.parent_id').html(cat + data);
         });
     }
@@ -264,7 +261,7 @@
                     maxlength: 50
                 },
                 uri: {
-                    maxlength: 50
+                    maxlength: 255
                 },
                 title: {
                     maxlength: 255
@@ -276,21 +273,21 @@
             },
             messages: {
                 name: {
-                    required: "{{ trans('admin::category.fields.name_required') }}",
-                    maxlength: "{{ trans('admin::category.fields.name_max') }}",
-                    minlength: "{{ trans('admin::category.fields.name_min') }}",
+                    required: "{{ trans('admin::cruds.menuAdmin.validate_js.name_required') }}",
+                    maxlength: "{{ trans('admin::cruds.menuAdmin.validate_js.name_max') }}",
+                    minlength: "{{ trans('admin::cruds.menuAdmin.validate_js.name_min') }}",
                 },
                 icon: {
-                    maxlength: "{{ trans('admin::category.fields.icon_max') }}"
+                    maxlength: "{{ trans('admin::cruds.menuAdmin.validate_js.icon_max') }}"
                 },
                 uri: {
-                    maxlength: "{{ trans('admin::category.fields.icon_max') }}"
+                    maxlength: "{{ trans('admin::cruds.menuAdmin.validate_js.uri_max') }}"
                 },
                 title: {
-                    maxlength: "{{ trans('admin::category.fields.title_max') }}"
+                    maxlength: "{{ trans('admin::cruds.menuAdmin.validate_js.title_max') }}"
                 },
                 permission: {
-                    maxlength: "{{ trans('admin::category.fields.keywords_max') }}"
+                    maxlength: "{{ trans('admin::cruds.menuAdmin.validate_js.permission_max') }}"
                 },
             },
             submitHandler: function(form) {
@@ -326,7 +323,7 @@
                     if (data.length === 0) {
                         Toast.fire({
                             icon: 'success',
-                            title: "{{ trans('admin::category.create.success_created') }}"
+                            title: "{{ trans('admin::global.create_success') }}"
                         });
                         validator_create_menu_admin.resetForm();
                         reloadelistMenu();
@@ -334,7 +331,7 @@
                     } else {
                         Toast.fire({
                             icon: 'error',
-                            title: "{{ trans('admin::category.create.error_created') }}"
+                            title: "{{ trans('admin::cruds.menuAdmin.error_created') }}"
                         })
                     }
                 },
@@ -342,18 +339,22 @@
                     403: function() {
                         Toast.fire({
                             icon: 'error',
-                            title: "{{ trans('admin::category.create.permissions.not_access_create_cateogy') }}"
+                            title: "{{ trans('admin::cruds.menuAdmin.not_access_create_cateogy') }}"
                         })
                     }
                 },
                 error: function(error) {
                     Toast.fire({
                         icon: 'error',
-                        title: "{{ trans('admin::category.create.error_created') }}"
+                        title: "{{ trans('admin::cruds.menuAdmin.error_created') }}"
                     })
                 }
             });
         }
+
+        $('.button-refresh-form').click(function() {
+            validator_create_menu_admin.resetForm();
+        });
 
         /*reload view menu list */
         function reloadelistMenu() {
@@ -379,11 +380,10 @@
                 },
                 dataType: 'json',
                 success: function(html) {
-                    //$.pjax.reload('#pjax-container');
                     reloadelistSelect();
                     Toast.fire({
                         icon: 'success',
-                        title: "{{ trans('admin::category.index.success_save') }}"
+                        title: "{{ trans('admin::cruds.menuAdmin.success_save') }}"
                     })
                 },
                 error: function(error) {
@@ -408,13 +408,8 @@
             $.pjax.reload('#pjax-container');
             Toast.fire({
                 icon: 'success',
-                title: "{{ trans('admin::category.index.success_refrech') }}"
+                title: "{{ trans('admin::cruds.menuAdmin.success_refrech') }}"
             })
-        });
-
-        $(".accordeon dd").hide().prev().click(function() {
-            $(this).parents(".accordeon").find("dd").not(this).slideUp().prev().removeClass("active");
-            $(this).next().not(":visible").slideDown().prev().addClass("active");
         });
 
         $('.icon').iconpicker({

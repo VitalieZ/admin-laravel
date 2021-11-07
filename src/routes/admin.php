@@ -12,7 +12,7 @@ Route::prefix(config('admin.route.prefix'))->middleware([config('admin.route.mid
     Route::get('/', [\Viropanel\Admin\Http\Controllers\DashboardController::class, 'index'])->name('admin.dashboard');
 
     //Category
-    Route::get('menu/list', [\Viropanel\Admin\Http\Controllers\CategoryController::class, 'viewManuList'])->name('menu.list');
+    Route::get('menu/list', [\Viropanel\Admin\Http\Controllers\CategoryController::class, 'viewMenuList'])->name('menu.list');
     Route::get('menu/select', [\Viropanel\Admin\Http\Controllers\CategoryController::class, 'viewSelectForm'])->name('menu.select');
     Route::post('/categoryorderingsave', [CategoryController::class, 'categoryorderingsave'])->name('orderingcategory');
     Route::post('/massDestroy', [CategoryController::class, 'massDestroy'])->name('massDestroy');

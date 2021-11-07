@@ -19,6 +19,7 @@ class Menuadmin extends Model
         'uri',
         'title',
         'permission',
+        'visible',
         'created_at',
         'updated_at',
     ];
