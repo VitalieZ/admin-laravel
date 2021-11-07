@@ -15,7 +15,7 @@ class MenuaSeeder extends Seeder
     public function run()
     {
         foreach ($this->data() as $item) {
-            DB::table('users')->insert([
+            DB::table('menu_admin')->insert([
                 'parent_id' => $item[0],
                 'ordering' => $item[1],
                 'name' => $item[2],
