@@ -75,11 +75,6 @@ return [
         'trial_user'                  => 'Пробный пользователь',
         'plan_purchased_successfully' => 'План успешно оплачен',
     ],
-    'payments' => [
-        'title'        => 'Платежи',
-        'payment_date' => 'Дата платежа',
-        'amount'       => 'Сумма',
-    ],
     'table'                                => 'Таблица',
     'back'                                 => 'Назад',
     'refresh'                              => 'Обновить',
