@@ -9,7 +9,7 @@ use Viropanel\Admin\Http\Controllers\CategoryController;
 Auth::routes();
 
 Route::prefix(config('admin.route.prefix'))->middleware([config('admin.route.middleware')])->group(function () {
-    Route::get('/', [\Viropanel\Admin\Http\Controllers\DashboardController::class, 'index']);
+    Route::get('/', [\Viropanel\Admin\Http\Controllers\DashboardController::class, 'index'])->name('admin.dashboard');
 
     //Category
     Route::get('menu/list', [\Viropanel\Admin\Http\Controllers\CategoryController::class, 'viewManuList'])->name('menu.list');
@@ -32,9 +32,9 @@ Route::prefix(config('admin.route.prefix'))->middleware([config('admin.route.mid
     Route::resource('permissions', \Viropanel\Admin\Http\Controllers\PermissionsController::class);
 
     //Menu admin
-    Route::get('menua/list', [\Viropanel\Admin\Http\Controllers\MenuadminController::class, 'viewMenuList'])->name('menua.list');
-    Route::get('menua/select', [\Viropanel\Admin\Http\Controllers\MenuadminController::class, 'viewSelectForm'])->name('menua.select');
-    Route::post('menua/categoryorderingsave', [\Viropanel\Admin\Http\Controllers\MenuadminController::class, 'categoryorderingsave'])->name('menua.orderingcategory');
-    Route::post('menua/massDestroy', [\Viropanel\Admin\Http\Controllers\MenuadminController::class, 'massDestroy'])->name('menua.massDestroy');
-    Route::resource('menua', \Viropanel\Admin\Http\Controllers\MenuadminController::class);
+    Route::get('menua/list', [\Viropanel\Admin\Http\Controllers\MenuaController::class, 'viewMenuList'])->name('menua.list');
+    Route::get('menua/select', [\Viropanel\Admin\Http\Controllers\MenuaController::class, 'viewSelectForm'])->name('menua.select');
+    Route::post('menua/categoryorderingsave', [\Viropanel\Admin\Http\Controllers\MenuaController::class, 'categoryorderingsave'])->name('menua.orderingcategory');
+    Route::post('menua/massDestroy', [\Viropanel\Admin\Http\Controllers\MenuaController::class, 'massDestroy'])->name('menua.massDestroy');
+    Route::resource('menua', \Viropanel\Admin\Http\Controllers\MenuaController::class);
 });

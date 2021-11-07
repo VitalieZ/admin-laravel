@@ -31,6 +31,7 @@ class InsertBasePermissionsCommand extends Command
     {
         $permissions = array(
             "access_admin_panel",
+            "dashboard_access",
             "category_access",
             "category_show",
             "category_create",
@@ -52,7 +53,8 @@ class InsertBasePermissionsCommand extends Command
             "permission_show",
             "permission_create",
             "permission_edit",
-            "permission_delete"
+            "permission_delete",
+            "menu_admin_access"
 
         );
         return $permissions;

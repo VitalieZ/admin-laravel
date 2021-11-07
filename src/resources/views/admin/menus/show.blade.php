@@ -19,7 +19,7 @@
         <div class="card-body">
             <div class="form-group">
                 <div class="form-group">
-                    <a class="btn btn-default" href="{{ route('menu.index') }}">
+                    <a class="btn btn-default" href="{{ route('menus.index') }}">
                         {{ trans('admin::category.show.back_to_list') }}
                     </a>
                 </div>
@@ -41,7 +41,7 @@
                                 @if ($menu->parent_id == 0)
                                 <div class="label label-warning">{{ trans('admin::category.create.form.independent_category') }}</div>
                                 @else
-                                <div class="label label-success">{{ $cat_parent_name->name }}</div>
+                                <div class="label label-success">{{ $menu_parent_name->name }}</div>
                                 @endif
                             </td>
                         </tr>
@@ -100,7 +100,7 @@
                     </tbody>
                 </table>
                 <div class="form-group">
-                    <a class="btn btn-default" href="{{ route('menu.index') }}">
+                    <a class="btn btn-default" href="{{ route('menus.index') }}">
                         {{ trans('admin::category.show.back_to_list') }}
                     </a>
                 </div>

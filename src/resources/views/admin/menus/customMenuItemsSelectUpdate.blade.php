@@ -10,7 +10,7 @@
 </option>
 @endif
 @if ($item['cheaild'])
-@include('admin::admin.menua.customMenuItemsSelectUpdate',['items' => $item['cheaild'], 'child' => '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'])
+@include('admin::admin.menus.customMenuItemsSelectUpdate',['items' => $item['cheaild'], 'child' => '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'])
 @endif
 @endif
 

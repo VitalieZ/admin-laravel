@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="{{ asset('assets/plugins/nestable/nestable.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/plugins/toastr/build/toastr.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-iconpicker/css/fontawesome-iconpicker.min.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.css') }}">
 @endpush
 @section('content-header')
 <div class="content-header">
@@ -45,7 +46,7 @@
             <div class="box-body table-responsive no-padding">
                 <div class="dd" id="tree-616ecf2d15e0f">
                     <ol class="dd-list">
-                        @include('admin::admin.menua.customMenuItems', ['items'=>$menu])
+                        @include('admin::admin.menus.customMenuItems', ['items'=>$menu])
                     </ol>
                 </div>
             </div>
@@ -79,10 +80,10 @@
                         <div class="form-group row">
                             <label for="parent_id" class="col-sm-2  control-label d-flex justify-content-center">{{ trans('admin::category.create.form.parent') }}</label>
                             <div class="col-sm-10">
-                                <select class="form-control asterisk parent_id select2-hidden-accessible" style="width: 100%;" name="parent_id">
+                                <select class="form-control asterisk parent_id" name="parent_id">
                                     <option value="0" selected="">{{ trans('admin::category.create.form.independent_category') }}</option>
                                     @if ($menu->isNotEmpty())
-                                    @include('admin::admin.menua.customMenuItemsSelect', ['items'=>$menu])
+                                    @include('admin::admin.menus.customMenuItemsSelect', ['items'=>$menu])
                                     @endif
                                 </select>
                             </div>
@@ -101,7 +102,7 @@
                             <div class="input-group mb-2 col-sm-10">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">
-                                        <span class="input-group-addon"><i class="fa fa-pencil fa-fw"></i></span>
+                                        <span class="input-group-addon"><i class="fas fa-icons"></i></span>
                                     </div>
                                 </div>
                                 <input type="text" id="сicon" class="form-control icon col-sm-12" name="icon" value="fab-bars" placeholder="{{ trans('admin::category.create.form.placeholder_icon') }}">
@@ -110,10 +111,10 @@
                             <small id="emailHelp" class=" col-sm-10 form-text text-muted"><i class="fa fa-info-circle"></i>&nbsp;{{ trans('admin::category.create.form.for_more_icons') }} <a href="http://fontawesome.io/icons/" target="_blank">http://fontawesome.io/icons/</a></small>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-2 control-label asterisk d-flex justify-content-center" for="curi">Route</label>
+                            <label class="col-sm-2 control-label d-flex justify-content-center" for="curi">Route</label>
                             <div class="input-group mb-2 col-sm-10">
                                 <div class="input-group-prepend">
-                                    <div class="input-group-text"><i class="fa fa-pencil fa-fw"></i></div>
+                                    <div class="input-group-text"><i class="fas fa-route"></i></div>
                                 </div>
                                 <input type="text" id="сuri" name="uri" class="form-control" placeholder=" {{ trans('admin::category.create.form.placeholder_name') }}">
                             </div>
@@ -128,12 +129,17 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-2 control-label d-flex justify-content-center" for="cpermission">Permision</label>
+                            <label class="col-sm-2 asterisk control-label d-flex justify-content-center" for="inlineFormInputGroup">Разрешения</label>
                             <div class="input-group mb-2 col-sm-10">
                                 <div class="input-group-prepend">
-                                    <div class="input-group-text"><i class="fa fa-text-width fa-fw"></i></div>
+                                    <div class="input-group-text"><i class="fas fa-universal-access"></i></div>
                                 </div>
-                                <input type="text" id="cpermission" class="form-control" name="permission" placeholder=" {{ trans('admin::category.create.form.placeholder_title_page') }}">
+                                <select class="form-control select2" name="permission" id="permission">
+                                    <option>Выберите разрешения</option>
+                                    @foreach ($permissions as $item)
+                                    <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="col-12">
@@ -179,6 +185,7 @@
 <script src="{{ asset('assets/plugins/fontawesome-iconpicker/js/fontawesome-iconpicker.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/jquery-validation/jquery.validate.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/jquery-validation/jquery.form.js') }}"></script>
+<script src="{{ asset('assets/plugins/select2/js/select2.full.min.js') }}"></script>
 <script>
     /* delete category */
     function delete_menu_admin(id) {
@@ -263,6 +270,7 @@
                     maxlength: 255
                 },
                 permission: {
+                    required: true,
                     maxlength: 255
                 },
             },
@@ -306,7 +314,7 @@
             });
             $.ajax({
                 type: "POST",
-                url: "{{ route('menua.store') }}",
+                url: "{{ route('menus.store') }}",
                 data: {
                     form: config,
                 },
@@ -411,6 +419,10 @@
 
         $('.icon').iconpicker({
             placement: 'bottomLeft',
+        });
+
+        $('.select2').select2({
+            tags: true
         });
     });
 </script>

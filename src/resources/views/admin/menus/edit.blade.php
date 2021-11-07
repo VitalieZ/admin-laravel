@@ -1,6 +1,7 @@
 @extends('admin::layouts.admin')
 @push('page_css')
 <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-iconpicker/css/fontawesome-iconpicker.min.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.css') }}">
 @endpush
 @section('content-header')
 <div class="content-header">
@@ -26,17 +27,17 @@
             <h3 class="card-title">Редактирование</h3>
         </div>
         <div class="d-flex justify-content-center">
-            <form method="POST" action="{{ route('menua.update', [$cat->id]) }}" class="col-md-8">
+            <form method="POST" action="{{ route('menus.update', [$cat->id]) }}" class="col-md-8">
                 @csrf
                 @method('PUT')
                 <div class="card-body">
                     <div class="form-group row">
                         <label for="parent_id" class="col-sm-2  control-label d-flex justify-content-center">{{ trans('admin::category.create.form.parent') }}</label>
                         <div class="col-sm-10">
-                            <select class="form-control" id="FormController" name='parent_id' @error('parent_id') is-invalid @enderror">
+                            <select class="form-control @error('parent_id') is-invalid @enderror" id=" FormController" name='parent_id'>
                                 <option value="0">Сомостаятельная категория</option>
-                                @if($category->isNotEmpty())
-                                @include('admin::admin.menua.customMenuItemsSelectUpdate',['items' => $menu, 'selected' => $cat->parent_id, 'current_category' => $cat->id])
+                                @if($menu->isNotEmpty())
+                                @include('admin::admin.menus.customMenuItemsSelectUpdate',['items' => $menu, 'selected' => $cat->parent_id, 'current_category' => $cat->id])
                                 @endif
                             </select>
                             @error('parent_id')
@@ -73,7 +74,7 @@
                         <small id="emailHelp" class=" col-sm-10 form-text text-muted"><i class="fa fa-info-circle"></i>&nbsp;{{ trans('admin::category.create.form.for_more_icons') }} <a href="http://fontawesome.io/icons/" target="_blank">http://fontawesome.io/icons/</a></small>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 control-label asterisk d-flex justify-content-center" for="curi">{{ trans('admin::category.create.form.name') }}</label>
+                        <label class="col-sm-2 control-label d-flex justify-content-center" for="curi">Route</label>
                         <div class="input-group mb-2 col-sm-10">
                             <div class="input-group-prepend">
                                 <div class="input-group-text"><i class="fa fa-pencil fa-fw"></i></div>
@@ -97,12 +98,23 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 control-label d-flex justify-content-center" for="inlineFormInputGroup">{{ trans('admin::category.create.form.title') }}</label>
+                        <label class="col-sm-2 asterisk control-label d-flex justify-content-center" for="inlineFormInputGroup">Разрешения</label>
                         <div class="input-group mb-2 col-sm-10">
                             <div class="input-group-prepend">
                                 <div class="input-group-text"><i class="fa fa-text-width fa-fw"></i></div>
                             </div>
-                            <input type="text" value="{{ old('permission', $cat->permission) }}" class="form-control @error('permission') is-invalid @enderror" name="permision" placeholder=" {{ trans('admin::category.create.form.placeholder_title_page') }}">
+                            <select class="form-control select2" name="permission">
+                                <option>Выберите разрешения</option>
+                                @foreach ($permissions as $item)
+                                <option value="{{ $item->name }}" @if ($cat->permission == $item->name)
+                                    selected
+                                    @endif
+                                    >
+                                    {{ $item->name }}
+                                </option>
+                                @endforeach
+                            </select>
+                            <!-- <input type="text" value="{{ old('permission', $cat->permission) }}" class="form-control @error('permission') is-invalid @enderror" name="permission" placeholder=" {{ trans('admin::category.create.form.placeholder_title_page') }}"> -->
                             @error('permission')
                             <div id="validationServer03Feedback" class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -137,11 +149,16 @@
 @endsection
 @push('page_scripts')
 <script src="{{ asset('assets/plugins/fontawesome-iconpicker/js/fontawesome-iconpicker.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/select2/js/select2.full.min.js') }}"></script>
 <script>
     $(function() {
 
         $('.icon').iconpicker({
             placement: 'bottomLeft',
+        });
+        $('.select2').select2({
+            placeholder: 'Select an option',
+            tags: true
         });
     });
 </script>

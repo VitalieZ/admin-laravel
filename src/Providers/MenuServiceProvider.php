@@ -3,10 +3,10 @@
 namespace Viropanel\Admin\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Models\User;
+use Viropanel\Admin\Models\Menuadmin;
 use Illuminate\Support\Facades\View;
 
-class CountUsersServiceProvider extends ServiceProvider
+class MenuServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
@@ -25,13 +25,18 @@ class CountUsersServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->ViewCountUsers();
+        $this->Menu();
     }
 
-    protected function ViewCountUsers()
+    protected function Menu()
     {
         View::composer('admin::layouts.admin', function ($view) {
-            $view->with('countUsers', User::count());
+            $view->with('menu', $this->menuadmin());
         });
+    }
+
+    public function menuadmin()
+    {
+        return  Menuadmin::where('parent_id', 0)->where('visible', True)->orderBy('ordering', 'asc')->get();
     }
 }

@@ -13,7 +13,7 @@ use Spatie\Permission\Models\Permission;
 use Viropanel\Admin\Http\Requests\UpdateMenuadminRequest;
 
 
-class MenuadminController extends Controller
+class MenuaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,8 +23,9 @@ class MenuadminController extends Controller
     public function index()
     {
         abort_if(Gate::denies('menu_admin_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        return view('admin::admin.menua.index', [
+        $permissions = Permission::select('name')->get();
+        return view('admin::admin.menus.index', [
+            'permissions' => $permissions,
             'menu' => $this->categories(),
         ]);
     }
@@ -33,7 +34,7 @@ class MenuadminController extends Controller
     {
         abort_if(Gate::denies('menu_admin_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $menu_parent = Menuadmin::select('name')->where('id', $menu->parent_id)->first();
-        return view('admin::admin.menua.show', [
+        return view('admin::admin.menus.show', [
             'menu' => $menu,
             'menu_parent_name' => $menu_parent,
         ]);
@@ -42,7 +43,9 @@ class MenuadminController extends Controller
     public function edit(Menuadmin $menu)
     {
         abort_if(Gate::denies('menu_admin_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        return view('admin::admin.menua.edit', [
+        $permissions = Permission::select('name')->get();
+        return view('admin::admin.menus.edit', [
+            'permissions' => $permissions,
             'menu' => $this->categories(),
             'cat' => $menu,
         ]);
@@ -54,7 +57,7 @@ class MenuadminController extends Controller
             'parent_id' => $request->parent_id ?? 0,
             'name' => $request->name,
             'icon' => $request->icon,
-            'uri' => $request->title,
+            'uri' => $request->uri,
             'title' => $request->title,
             'permission' => $request->permission,
             'visible' => isset($request->visible) ? 1 : 0,
@@ -70,7 +73,7 @@ class MenuadminController extends Controller
         return Menuadmin::where('parent_id', 0)->orderBy('ordering', 'asc')->get();
     }
 
-    public function viewManuList(Request $request)
+    public function viewMenuList(Request $request)
     {
         if (!$request->ajax()) {
             return redirect()->back();

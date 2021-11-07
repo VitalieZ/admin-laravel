@@ -107,73 +107,7 @@
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent nav-compact" data-widget="treeview" role="menu" data-accordion="false">
-                        <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-                        @can('access_admin_panel')
-                        <li class="nav-item">
-                            <a href="/admin" class="nav-link">
-                                <i class="fa fa-bar-chart"></i>
-                                <p>
-                                    Dashboard
-                                </p>
-                            </a>
-                        </li>
-                        @endcan
-                        <li class="nav-header">Сайт</li>
-                        @can('category_access')
-                        <li class="nav-item">
-                            <a href="{{ route('menu.index') }}" class="nav-link">
-                                <i class="fas fa-align-left"></i>
-                                <p>
-                                    Категорий
-                                </p>
-                            </a>
-                        </li>
-                        @endcan
-                        @can('user_management_access')
-                        <li class="nav-header">Полизыватель</li>
-                        @can('user_access')
-                        <li class="nav-item">
-                            <a href="{{ route('user.index') }}" class="nav-link">
-                                <i class="fas fa-users"></i>
-                                <p>
-                                    Пользыватель
-                                    <span class="badge badge-info right">{{ $countUsers ?? 0 }}</span>
-                                </p>
-                            </a>
-                        </li>
-                        @endcan
-                        @can('role_access')
-                        <li class="nav-item">
-                            <a href="{{ route('roles.index') }}" class="nav-link">
-                                <i class="fas fa-user-tag"></i>
-                                <p>
-                                    Роли
-                                </p>
-                            </a>
-                        </li>
-                        @endcan
-                        @can('permission_access')
-                        <li class="nav-item">
-                            <a href="{{ route('permissions.index') }}" class="nav-link">
-                                <i class="fas fa-user-check"></i>
-                                <p>
-                                    Разрешения
-                                </p>
-                            </a>
-                        </li>
-                        @endcan
-                        @can('menu_admin_access')
-                        <li class="nav-item">
-                            <a href="{{ route('menua.index') }}" class="nav-link">
-                                <i class="fas fa-user-check"></i>
-                                <p>
-                                    Меню
-                                </p>
-                            </a>
-                        </li>
-                        @endcan
-                        @endcan
+                        @include('admin::admin.menus.customMenuAdminItems',['items' => $menu])
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

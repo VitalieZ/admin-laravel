@@ -13,18 +13,18 @@ class Menuadmin extends Model
 
     protected $fillable = [
         'parent_id',
-        'order',
+        'ordering',
         'name',
         'icon',
         'uri',
         'title',
-        'permision',
+        'permission',
         'created_at',
         'updated_at',
     ];
 
     public function cheaild()
     {
-        return $this->hasMany(Menuadmin::class, 'parent_id')->orderBy('order', 'asc');
+        return $this->hasMany(Menuadmin::class, 'parent_id')->orderBy('ordering', 'asc');
     }
 }

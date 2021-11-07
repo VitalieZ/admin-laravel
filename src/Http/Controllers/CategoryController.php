@@ -75,7 +75,7 @@ class CategoryController extends Controller
         return Category::where('parent_id', 0)->orderBy('ordering', 'asc')->get();
     }
 
-    public function viewManuList(Request $request)
+    public function viewMenuList(Request $request)
     {
         if (!$request->ajax()) {
             return redirect()->back();
