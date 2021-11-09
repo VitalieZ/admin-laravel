@@ -5,6 +5,8 @@ namespace Viropanel\Admin\Commands;
 use Illuminate\Console\Command;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 
 class CreateAdminCommand extends Command
@@ -16,6 +18,7 @@ class CreateAdminCommand extends Command
     public function handle()
     {
         $admin = $this->CreateAdmin();
+        $this->roleToPermission();
         $this->info($admin);
     }
 
@@ -39,5 +42,18 @@ class CreateAdminCommand extends Command
         $user->assignRole('admin');
 
         return "Admin created:\nemail: " . $email . "\npassword`: " . $password;
+    }
+
+    public function roleToPermission()
+    {
+        $role = Role::where('name', 'admin')->first();
+        if ($role) {
+            $permissions = Permission::select('id')->orderBy('id', 'asc')->get();
+            if ($permissions->isNotEmpty()) {
+                foreach ($permissions as $item) {
+                    $role->givePermissionTo($item->id);
+                }
+            }
+        }
     }
 }

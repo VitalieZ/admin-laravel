@@ -44,8 +44,8 @@ class MenuaSeeder extends Seeder
             [0, 2, 'Admin', 'fas fa-user-md', '', 'Admin', 'user_management_access', 1],
             [3, 0, 'Меню', 'fas fa-bars', 'menus.index', 'Меню', 'menu_admin_access', 1],
             [3, 1, 'Пользыватель', 'fas fa-users', 'user.index', 'Пользыватель', 'user_access', 1],
-            [3, 2, 'Роль', 'fas fa-user-tag', 'roles.index', 'Роль', 'roles_access', 1],
-            [3, 3, 'Разрешение', 'fas fa-user-check', 'permissions.index', 'Разрешение', 'permissions_access', 1],
+            [3, 2, 'Роль', 'fas fa-user-tag', 'roles.index', 'Роль', 'role_access', 1],
+            [3, 3, 'Разрешение', 'fas fa-user-check', 'permission.index', 'Разрешение', 'permissions_access', 1],
         );
         return $menu;
     }

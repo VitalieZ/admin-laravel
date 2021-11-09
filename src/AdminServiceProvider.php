@@ -55,11 +55,6 @@ class AdminServiceProvider extends ServiceProvider
             }
         });
 
-        /* Super admin all permissions */
-        Gate::before(function ($user, $ability) {
-            return $user->hasRole('admin') ? true : null;
-        });
-
         //register livewire components
         $this->livewireComponents();
     }
