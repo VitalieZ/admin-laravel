@@ -32,11 +32,10 @@ class CreateAdminTables extends Migration
         }
 
         if(Schema::hasTable('menu_admin')){
-            Artisan::call( 'db:seed', [
+                Artisan::call('db:seed', [
                 '--class' => 'MenuaSeeder',
-                '--force' => true ]
-            );
-
+                '--force' => true
+            ]);
         }
 
         if(!Schema::hasTable('categories')){

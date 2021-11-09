@@ -20,7 +20,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Viropanel\\Admin\\": "src/"
+            "Viropanel\\Admin\\": "src/",
+            "Viropanel\\Admin\\Database\\Seeders": "src/database/seeders/"
             
         }
     },

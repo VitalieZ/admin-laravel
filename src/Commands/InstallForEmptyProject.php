@@ -5,6 +5,7 @@ namespace Viropanel\Admin\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use Viropanel\Admin\AdminPreset;
+use Viropanel\Admin\Database\Seeders\MenuaSeeder;
 
 
 class InstallForEmptyProject extends Command
