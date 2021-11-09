@@ -33,7 +33,7 @@ class CreateAdminTables extends Migration
 
         if(Schema::hasTable('menu_admin')){
                 Artisan::call('db:seed', [
-                '--class' => 'MenuaSeeder',
+                '--class' => 'Viropanel\\Admin\\Database\\Seeders\\MenuaSeeder',
                 '--force' => true
             ]);
         }
