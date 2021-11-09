@@ -1,3 +1,5 @@
+# Admin laravel CRUD
+
 <p align="center">⛵<code>admin-laravel</code> is administrative interface builder for laravel which can help you build CRUD backends just with few lines of code.</p>
 
 ## Requirements
@@ -5,7 +7,7 @@
 - PHP >= 7.0.0
 - Laravel >= 8.0.0
 
-## Installation
+## Installation in empty project
 
 > This package requires PHP 7+ and Laravel 8.0.0.
 
@@ -23,4 +25,4 @@ php artisan admin-panel:empty-project
 
 After run command you can find config file in `config/admin.php`.
 
-Open `http://localhost/admin/` in browser,use username `admin@admin.loc` and password `1234567` to login.
+Open `http://localhost/admin/` in browser,use username `admin@admin.loc` and password `12345678` to login.
