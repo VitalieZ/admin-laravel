@@ -2,6 +2,7 @@
 @push('page_css')
 <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-iconpicker/css/fontawesome-iconpicker.min.css') }}">
 @endpush
+@section('title', trans('admin::category.index.edit').' '.trans('admin::category.index.menu'))
 @section('content-header')
 <div class="content-header">
     <div style="margin-bottom: 10px;" class="row">

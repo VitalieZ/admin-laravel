@@ -1,4 +1,5 @@
 @extends('admin::layouts.admin')
+@section('title', trans('admin::global.show').' '.trans('admin::cruds.role.title'))
 @section('content-header')
 <div class="content-header">
 

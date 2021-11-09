@@ -1,4 +1,5 @@
 @extends('admin::layouts.admin')
+@section('title', trans('admin::global.show').' '.trans('admin::cruds.menuAdmin.index.menu'))
 @section('content-header')
 <div class="content-header">
     <div style="margin-bottom: 10px;" class="row">
