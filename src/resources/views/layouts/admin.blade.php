@@ -9,7 +9,7 @@
     @include('admin::assets.styles')
     @stack('page_css')
     @livewireStyles
-    <title>Document</title>
+    <title>{{ env('APP_NAME') }} Admin - @yield('title')</title>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">

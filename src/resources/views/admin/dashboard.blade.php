@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="{{ asset('assets/plugins/font-awesome/css/font-awesome.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/dist/adminlte/AdminLTE.min.css') }}">
 @endpush
+@section('title', 'Dashboard')
 @section('content')
 <div class="col-md-12">
     <style>

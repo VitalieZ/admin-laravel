@@ -1,4 +1,5 @@
 @extends('admin::layouts.admin')
+@section('title', trans('admin::category.show.show').' '.trans('admin::category.show.category'))
 @section('content-header')
 <div class="content-header">
     <div style="margin-bottom: 10px;" class="row">

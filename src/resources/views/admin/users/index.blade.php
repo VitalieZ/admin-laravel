@@ -1,4 +1,5 @@
 @extends('admin::layouts.admin')
+@section('title', trans('admin::global.add').' '.trans('admin::cruds.user.title_singular'))
 @section('content-header')
 <div class="content-header">
     @can('user_create')

@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="{{ asset('assets/plugins/toastr/build/toastr.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-iconpicker/css/fontawesome-iconpicker.min.css') }}">
 @endpush
+@section('title', trans('admin::category.index.menu'))
 @section('content-header')
 <div class="content-header">
 

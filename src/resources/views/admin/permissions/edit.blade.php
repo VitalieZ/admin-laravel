@@ -1,4 +1,5 @@
 @extends('admin::layouts.admin')
+@section('title', trans('admin::global.edit').' '.trans('admin::cruds.permission.title_singular'))
 @section('content-header')
 <div class="content-header">
 

@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-iconpicker/css/fontawesome-iconpicker.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.css') }}">
 @endpush
+@section('title', trans('admin::global.edit').' '.trans('admin::cruds.menuAdmin.index.menu'))
 @section('content-header')
 <div class="content-header">
     <div style="margin-bottom: 10px;" class="row">
