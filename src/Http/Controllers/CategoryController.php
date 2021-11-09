@@ -58,7 +58,6 @@ class CategoryController extends Controller
         $cate = $menu->update([
             'parent_id' => $request->parent_id ?? 0,
             'name' => $request->name,
-            'icon' => $request->icon,
             'title' => $request->title,
             'keywords' => $request->keywords,
             'description' => $request->description,
@@ -100,7 +99,6 @@ class CategoryController extends Controller
         $category = Category::create([
             'parent_id' => $parent_id,
             'name' => $validateData['name'],
-            'icon' => $validateData['icon'],
             'title' => $validateData['title'],
             'keywords' => $validateData['keywords'],
             'description' => $validateData['description'],

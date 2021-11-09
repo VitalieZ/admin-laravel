@@ -55,14 +55,6 @@
                         </tr>
                         <tr>
                             <th>
-                                {{ trans('admin::category.show.icon') }}
-                            </th>
-                            <td>
-                                <i class="{{ $category->icon }}"></i>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
                                 {{ trans('admin::category.show.title') }}
                             </th>
                             <td>

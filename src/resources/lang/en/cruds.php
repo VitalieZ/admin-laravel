@@ -65,6 +65,26 @@ return [
             'deleted_at_helper'        => ' ',
         ],
     ],
+    'assetsHistory' => [
+        'title'          => 'Assets History',
+        'title_singular' => 'Assets History',
+        'fields'         => [
+            'id'                   => 'ID',
+            'id_helper'            => ' ',
+            'asset'                => 'Asset',
+            'asset_helper'         => ' ',
+            'status'               => 'Status',
+            'status_helper'        => ' ',
+            'location'             => 'Location',
+            'location_helper'      => ' ',
+            'assigned_user'        => 'Assigned User',
+            'assigned_user_helper' => ' ',
+            'created_at'           => 'Created at',
+            'created_at_helper'    => ' ',
+            'updated_at'           => 'Updated At',
+            'updated_at_helper'    => ' ',
+        ],
+    ],
     'menuAdmin' => [
         'index' => [
             'menu' => 'Menu',

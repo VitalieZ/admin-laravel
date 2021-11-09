@@ -23,7 +23,7 @@
 <div class="col-md-12">
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Редактирование</h3>
+            <h3 class="card-title">{{ trans('admin::global.edit') }}</h3>
         </div>
         <div class="d-flex justify-content-center">
             <form method="POST" action="{{ route('menu.update', [$cat->id]) }}" class="col-md-8">
@@ -34,7 +34,7 @@
                         <label for="parent_id" class="col-sm-2  control-label d-flex justify-content-center">{{ trans('admin::category.create.form.parent') }}</label>
                         <div class="col-sm-10">
                             <select class="form-control" id="FormController" name='parent_id' @error('parent_id') is-invalid @enderror">
-                                <option value="0">Сомостаятельная категория</option>
+                                <option value="0">{{ trans('admin::category.create.form.independent_category') }}</option>
                                 @if($category->isNotEmpty())
                                 @include('admin::admin.category.customMenuItemsSelectUpdate',['items' => $category, 'selected' => $cat->parent_id, 'current_category' => $cat->id])
                                 @endif
@@ -55,22 +55,6 @@
                             <div id="validationServer03Feedback" class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 control-label d-flex justify-content-center" for="сicon">{{ trans('admin::category.create.form.icon') }}</label>
-                        <div class="input-group mb-2 col-sm-10">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <span class="input-group-addon"><i class="fa fa-pencil fa-fw"></i></span>
-                                </div>
-                            </div>
-                            <input type="text" class="form-control icon col-sm-12 @error('icon') is-invalid @enderror" name="icon" value="{{ old('icon', $cat->icon) }}" placeholder="{{ trans('admin::category.create.form.placeholder_icon') }}">
-                            @error('icon')
-                            <div id="validationServer03Feedback" class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="col-sm-2"></div>
-                        <small id="emailHelp" class=" col-sm-10 form-text text-muted"><i class="fa fa-info-circle"></i>&nbsp;{{ trans('admin::category.create.form.for_more_icons') }} <a href="http://fontawesome.io/icons/" target="_blank">http://fontawesome.io/icons/</a></small>
                     </div>
                     <div class="accordeon">
                         <dl>

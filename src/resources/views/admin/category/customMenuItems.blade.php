@@ -1,7 +1,7 @@
 @foreach ($items as $item)
 <li class="dd-item" data-id="{{ $item->id}}">
     <div class="dd-handle">
-        <i class="{{ $item->icon }}"></i>&nbsp;<strong>{{ $item->name }}</strong>&nbsp;&nbsp;&nbsp;<a href="" class="dd-nodrag">
+        <strong>{{ $item->name }}</strong>&nbsp;&nbsp;&nbsp;<a href="{{ env('APP_URL') }}/{{ $item->slug}}" class="dd-nodrag">
 
             {{ env('APP_URL') }}/{{ $item->slug}}
         </a>

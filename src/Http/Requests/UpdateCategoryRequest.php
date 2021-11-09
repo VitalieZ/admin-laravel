@@ -28,7 +28,6 @@ class UpdateCategoryRequest extends FormRequest
         return [
             'parent_id' => 'required|integer',
             'name' => 'required|min:4|max:50',
-            'icon' => 'max:50',
             'title' => 'max:255',
             'keywords' => 'max:255',
             'description' => 'max:255',

@@ -96,52 +96,37 @@
                                 <input type="text" id="сname" name="name" class="form-control" placeholder=" {{ trans('admin::category.create.form.placeholder_name') }}">
                             </div>
                         </div>
+                        <div class="mb-3">
+                            <div class="text-primary">{{ trans('admin::category.create.form.additional_seo_fields') }}
+                            </div>
+                        </div>
+
                         <div class="form-group row">
-                            <label class="col-sm-2 control-label d-flex justify-content-center" for="сicon">{{ trans('admin::category.create.form.icon') }}</label>
+                            <label class="col-sm-2 control-label d-flex justify-content-center" for="inlineFormInputGroup">{{ trans('admin::category.create.form.title') }}</label>
                             <div class="input-group mb-2 col-sm-10">
                                 <div class="input-group-prepend">
-                                    <div class="input-group-text">
-                                        <span class="input-group-addon"><i class="fa fa-pencil fa-fw"></i></span>
-                                    </div>
+                                    <div class="input-group-text"><i class="fa fa-text-width fa-fw"></i></div>
                                 </div>
-                                <input type="text" id="сicon" class="form-control icon col-sm-12" name="icon" value="fab-bars" placeholder="{{ trans('admin::category.create.form.placeholder_icon') }}">
+                                <input type="text" id="ctitle" class="form-control" name="title" placeholder=" {{ trans('admin::category.create.form.placeholder_title_page') }}">
                             </div>
-                            <div class="col-sm-2"></div>
-                            <small id="emailHelp" class=" col-sm-10 form-text text-muted"><i class="fa fa-info-circle"></i>&nbsp;{{ trans('admin::category.create.form.for_more_icons') }} <a href="http://fontawesome.io/icons/" target="_blank">http://fontawesome.io/icons/</a></small>
                         </div>
-                        <div class="accordeon">
-                            <dl>
-                                <dt><a href="javascript:void(0);">{{ trans('admin::category.create.form.additional_seo_fields') }}</a></dt>
-                                <dd class="mt-3">
-                                    <div class="form-group row">
-                                        <label class="col-sm-2 control-label d-flex justify-content-center" for="inlineFormInputGroup">{{ trans('admin::category.create.form.title') }}</label>
-                                        <div class="input-group mb-2 col-sm-10">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text"><i class="fa fa-text-width fa-fw"></i></div>
-                                            </div>
-                                            <input type="text" id="ctitle" class="form-control" name="title" placeholder=" {{ trans('admin::category.create.form.placeholder_title_page') }}">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-2 control-label d-flex justify-content-center" for="inlineFormInputGroup">{{ trans('admin::category.create.form.keywords') }}</label>
-                                        <div class="input-group mb-2 col-sm-10">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text"><i class="fa fa-key fa-fw"></i></div>
-                                            </div>
-                                            <input type="text" id="ckeywords" class="form-control" name="keywords" placeholder="{{ trans('admin::category.create.form.placeholder_keywords_page') }}">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-2 control-label d-flex justify-content-center" for="inlineFormInputGroup">{{ trans('admin::category.create.form.description') }}</label>
-                                        <div class="input-group mb-2 col-sm-10">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text"><i class="fa fa-wpforms fa-fw"></i></div>
-                                            </div>
-                                            <input type="text" id="description" class="form-control" name="description" placeholder="{{ trans('admin::category.create.form.placeholder_description_page') }}">
-                                        </div>
-                                    </div>
-                                </dd>
-                            </dl>
+                        <div class="form-group row">
+                            <label class="col-sm-2 control-label d-flex justify-content-center" for="inlineFormInputGroup">{{ trans('admin::category.create.form.keywords') }}</label>
+                            <div class="input-group mb-2 col-sm-10">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fa fa-key fa-fw"></i></div>
+                                </div>
+                                <input type="text" id="ckeywords" class="form-control" name="keywords" placeholder="{{ trans('admin::category.create.form.placeholder_keywords_page') }}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 control-label d-flex justify-content-center" for="inlineFormInputGroup">{{ trans('admin::category.create.form.description') }}</label>
+                            <div class="input-group mb-2 col-sm-10">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fa fa-wpforms fa-fw"></i></div>
+                                </div>
+                                <input type="text" id="description" class="form-control" name="description" placeholder="{{ trans('admin::category.create.form.placeholder_description_page') }}">
+                            </div>
                         </div>
                         <div class="col-12">
                             <div class="col-sm-2">
@@ -260,9 +245,6 @@
                     maxlength: 10,
                     minlength: 4,
                 },
-                icon: {
-                    maxlength: 30
-                },
                 title: {
                     maxlength: 255
                 },
@@ -278,9 +260,6 @@
                     required: "{{ trans('admin::category.fields.name_required') }}",
                     maxlength: "{{ trans('admin::category.fields.name_max') }}",
                     minlength: "{{ trans('admin::category.fields.name_min') }}",
-                },
-                icon: {
-                    maxlength: "{{ trans('admin::category.fields.icon_max') }}"
                 },
                 title: {
                     maxlength: "{{ trans('admin::category.fields.title_max') }}"
@@ -409,11 +388,6 @@
                 icon: 'success',
                 title: "{{ trans('admin::category.index.success_refrech') }}"
             })
-        });
-
-        $(".accordeon dd").hide().prev().click(function() {
-            $(this).parents(".accordeon").find("dd").not(this).slideUp().prev().removeClass("active");
-            $(this).next().not(":visible").slideDown().prev().addClass("active");
         });
 
         $('.icon').iconpicker({
