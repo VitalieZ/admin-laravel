@@ -77,8 +77,7 @@ return [
     'fields' => [
         'name_required' => 'The name is required',
         'name_min' => 'The name must be at least 4 characters.',
-        'name_max' => 'The name must not be greater than 20 characters.',
-        'icon_max' => 'The icon must not be greater than 30 characters.',
+        'name_max' => 'The name must not be greater than 50 characters.',
         'title_max' => 'The title must not be greater than 255 characters.',
         'keywords_max' => 'The keywords must not be greater than 255 characters.',
         'description_max' => 'The description must not be greater than 255 characters.',

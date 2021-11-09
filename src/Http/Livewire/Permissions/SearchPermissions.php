@@ -20,7 +20,7 @@ class SearchPermissions extends Component
         return view('admin::admin.permissions.livewire.search-permisions', [
             'permissions' => Permission::when($this->searchpermison, function ($query, $searchpermison) {
                 return $query->where('name', 'LIKE', "%$searchpermison%");
-            })->orderBy('name', 'asc')->orderBy('id', 'asc')->paginate(5),
+            })->orderBy('name', 'asc')->orderBy('id', 'asc')->paginate(15),
         ]);
     }
 }

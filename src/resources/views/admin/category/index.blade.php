@@ -242,7 +242,7 @@
                 },
                 name: {
                     required: true,
-                    maxlength: 10,
+                    maxlength: 50,
                     minlength: 4,
                 },
                 title: {
@@ -336,6 +336,10 @@
         /*reload view menu list */
         function reloadelistMenu() {
             $.get("{{ route('menu.list') }}", function(data) {
+                let f = $('#tree-616ecf2d15e0f').find('.dd-list');
+                if (f.length == 0) {
+                    $.pjax.reload('#pjax-container');
+                }
                 $('#tree-616ecf2d15e0f').find('.dd-list').html(data);
             });
         }

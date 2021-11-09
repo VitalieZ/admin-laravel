@@ -8,6 +8,7 @@ return [
     'permission' => [
         'title'          => 'Разрешения',
         'title_singular' => 'Разрешение',
+        'search_permission' => 'Поиск разрешений',
         'fields'         => [
             'id'                => 'ID',
             'id_helper'         => ' ',

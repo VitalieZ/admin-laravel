@@ -8,7 +8,7 @@
 <div class="col-md-12">
     <div class="card">
         <div class="card-header">
-            {{ trans('admin::global.show') }} {{ trans('admin::cruds.permission.name') }}
+            {{ trans('admin::global.show') }} {{ trans('admin::cruds.permission.title') }}
         </div>
 
         <div class="card-body">
