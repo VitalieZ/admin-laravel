@@ -14,18 +14,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Details admin register for command admin-panel:create-admin name email password
-    |--------------------------------------------------------------------------
-    */
-    'create-damin' => [
-        'name' => 'Admin',
-        'email' => 'admin@admin.loc',
-        'password' => '12345678',
-    ],
-
-
-    /*
-    |--------------------------------------------------------------------------
     | Laravel-admin logo
     |--------------------------------------------------------------------------
     |
@@ -50,20 +38,5 @@ return [
         'prefix' => 'admin',
 
         'middleware' => 'role_or_permission:admin|access_admin_panel',
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Laravel-admin database settings
-    |--------------------------------------------------------------------------
-    |
-    | Here are database settings for laravel-admin builtin model & tables.
-    |
-    */
-    'database' => [
-
-        // Pivot table for table above.
-        'menu_table' => 'admin_menu',
-        'categories_table' => 'categories',
     ],
 ];
