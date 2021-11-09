@@ -5,6 +5,7 @@ namespace Viropanel\Admin\Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Carbon\Carbon;
 
 class MenuaSeeder extends Seeder
 {
@@ -28,8 +29,8 @@ class MenuaSeeder extends Seeder
                         'title' => $item[5],
                         'permission' => $item[6],
                         'visible' => $item[7],
-                        'created_at' => \Carbon::now()->formatDateTime(),
-                        'updated_at' => \Carbon::now()->formatDateTime(),
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now(),
                     ]);
                 }
             }
