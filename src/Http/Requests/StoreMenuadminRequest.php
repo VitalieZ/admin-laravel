@@ -31,7 +31,6 @@ class StoreMenuadminRequest extends FormRequest
             '*.name_ro' => 'min:4|max:50|nullable',
             '*.icon' => 'max:50',
             '*.uri' => 'max:50',
-            '*.title' => 'max:255',
             '*.permission' => 'required|max:255',
             '*.visible' => '',
         ];

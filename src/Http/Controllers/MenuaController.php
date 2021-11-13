@@ -96,7 +96,6 @@ class MenuaController extends Controller
             'name_ro' => $validateData['name_ro'],
             'icon' => $validateData['icon'],
             'uri' => $validateData['uri'],
-            'title' => $validateData['title'],
             'permission' => $validateData['permission'],
             'ordering' => isset($order) ? $order->order + 1 : 0,
             'visible' => isset($validateData['visible']) ? 1 : 0,
