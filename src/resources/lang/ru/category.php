@@ -19,7 +19,7 @@ return [
     ],
     'menu_items' => [
         'active' => 'Активен',
-        'deleted' => 'Удален',
+        'deleted' => 'Неактивный',
     ],
     'create' => [
         'new' => 'Добавить',
@@ -28,6 +28,10 @@ return [
             'independent_category' => 'Самостоятельная категория',
             'name' => 'Название',
             'placeholder_name' => 'Ввод Название',
+            'name_ru' => 'Название(ru)',
+            'placeholder_name_ru' => 'Ввод Название(ru)',
+            'name_ro' => 'Название(ro)',
+            'placeholder_name_ro' => 'Ввод Название(ro)',
             'placeholder_icon' => 'Ввод Иконку',
             'for_more_icons' => 'Дополнительные значки см.',
             'additional_seo_fields' => 'Дополнительные поля для SEO',

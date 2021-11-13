@@ -12,7 +12,7 @@
     " class="nav-link">
         <i class="{{ $item->icon ?? 'fas fa-angle-double-right' }}"></i>
         <p>
-            {{ $item->name }}
+            {{ $item->__('name') }}
             @if (count($item->cheaild))<i class="fas fa-angle-left right"></i>@endif
         </p>
     </a>

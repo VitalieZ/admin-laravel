@@ -55,14 +55,11 @@ class CategoryController extends Controller
 
     public function update(UpdateCategoryRequest $request, Category $menu)
     {
-        $cate = $menu->update([
-            'parent_id' => $request->parent_id ?? 0,
-            'name' => $request->name,
-            'title' => $request->title,
-            'keywords' => $request->keywords,
-            'description' => $request->description,
-            'visible' => isset($request->visible) ? 1 : 0,
-        ]);
+        ($request->visible == 'on') ? $request->request->add(['visible' => 1]) : $request->request->add(['visible' => 0]);
+        (!isset($request->name_ru)) ?? $request->request->add(['name_ru' => $request->name_ru]);
+        (!isset($request->name_ro)) ?? $request->request->add(['name_ro' => $request->name_ro]);
+
+        $cate = $menu->update($request->all());
         if (!$cate) {
             return back()->with('error', trans('admin::category.edit.error_edit'));
         }
@@ -99,6 +96,8 @@ class CategoryController extends Controller
         $category = Category::create([
             'parent_id' => $parent_id,
             'name' => $validateData['name'],
+            'name_ru' => $validateData['name_ru'],
+            'name_ro' => $validateData['name_ro'],
             'title' => $validateData['title'],
             'keywords' => $validateData['keywords'],
             'description' => $validateData['description'],

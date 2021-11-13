@@ -46,18 +46,15 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 control-label asterisk d-flex justify-content-center" for="cname">{{ trans('admin::cruds.menuAdmin.form.name') }}</label>
-                        <div class="input-group mb-2 col-sm-10">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text"><i class="fa fa-pencil fa-fw"></i></div>
-                            </div>
-                            <input type="text" name="name" value="{{ old('name', $cat->name) }}" class="form-control @error('name') is-invalid @enderror" placeholder=" {{ trans('admin::cruds.menuAdmin.form.placeholder_name') }}">
-                            @error('name')
-                            <div id="validationServer03Feedback" class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
+                    <x-form::input name="name" value="{{ old('name', $cat->name) }}" icon-group-prepend="fa fa-pencil fa-fw" label-text="{{ trans('admin::category.create.form.name') }}" placeholder="{{ trans('admin::category.create.form.placeholder_name') }}" />
+                    @if(isset(config('admin.menu_admin.lang')[0]) and config('admin.menu_admin.localization') == true)
+                    @if (in_array('ru', config('admin.menu_admin.lang'), true))
+                    <x-form::input name="name_ru" id="сname_ru" value="{{ old('name_ru', $cat->name_ru) }}" icon-group-prepend="fa fa-pencil fa-fw" label-text="{{ trans('admin::category.create.form.name_ru') }}" placeholder="{{ trans('admin::category.create.form.placeholder_name_ru') }}" />
+                    @endif
+                    @if (in_array('ro', config('admin.menu_admin.lang'), true))
+                    <x-form::input name="name_ro" id="сname_ro" value="{{ old('name_ro', $cat->name_ro) }}" icon-group-prepend="fa fa-pencil fa-fw" label-text="{{ trans('admin::category.create.form.name_ro') }}" placeholder="{{ trans('admin::category.create.form.placeholder_name_ro') }}" />
+                    @endif
+                    @endif
                     <div class="form-group row">
                         <label class="col-sm-2 control-label d-flex justify-content-center" for="сicon">{{ trans('admin::cruds.menuAdmin.form.icon') }}</label>
                         <div class="input-group mb-2 col-sm-10">
@@ -74,30 +71,7 @@
                         <div class="col-sm-2"></div>
                         <small id="emailHelp" class=" col-sm-10 form-text text-muted"><i class="fa fa-info-circle"></i>&nbsp;{{ trans('admin::cruds.menuAdmin.form.for_more_icons') }} <a href="http://fontawesome.io/icons/" target="_blank">http://fontawesome.io/icons/</a></small>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 control-label d-flex justify-content-center" for="curi">{{ trans('admin::cruds.menuAdmin.form.route') }}</label>
-                        <div class="input-group mb-2 col-sm-10">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text"><i class="fas fa-route"></i></div>
-                            </div>
-                            <input type="text" name="uri" value="{{ old('uri', $cat->uri) }}" class="form-control @error('uri') is-invalid @enderror" placeholder=" {{ trans('admin::cruds.menuAdmin.form.placeholder_route') }}">
-                            @error('uri')
-                            <div id="validationServer03Feedback" class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 control-label d-flex justify-content-center" for="inlineFormInputGroup">{{ trans('admin::cruds.menuAdmin.form.title') }}</label>
-                        <div class="input-group mb-2 col-sm-10">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text"><i class="fa fa-text-width fa-fw"></i></div>
-                            </div>
-                            <input type="text" value="{{ old('title', $cat->title) }}" class="form-control @error('title') is-invalid @enderror" name="title" placeholder=" {{ trans('admin::cruds.menuAdmin.form.placeholder_title_page') }}">
-                            @error('title')
-                            <div id="validationServer03Feedback" class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
+                    <x-form::input name="uri" value="{{ old('uri', $cat->uri) }}" icon-group-prepend="fas fa-route fa-fw" label-text="{{ trans('admin::cruds.menuAdmin.form.route') }}" placeholder="{{ trans('admin::cruds.menuAdmin.form.placeholder_route') }}" />
                     <div class="form-group row">
                         <label class="col-sm-2 asterisk control-label d-flex justify-content-center" for="inlineFormInputGroup">{{ trans('admin::cruds.menuAdmin.form.permission') }}</label>
                         <div class="input-group mb-2 col-sm-10">
@@ -115,7 +89,6 @@
                                 </option>
                                 @endforeach
                             </select>
-                            <!-- <input type="text" value="{{ old('permission', $cat->permission) }}" class="form-control @error('permission') is-invalid @enderror" name="permission" placeholder=" {{ trans('admin::cruds.menuAdmin.form.placeholder_title_page') }}"> -->
                             @error('permission')
                             <div id="validationServer03Feedback" class="invalid-feedback">{{ $message }}</div>
                             @enderror

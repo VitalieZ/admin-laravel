@@ -38,7 +38,7 @@
     @endcan
     <div class="card">
         <div class="card-header">
-            {{ trans('admin::global.list') }} {{ trans('admin::cruds.permission.title_singular') }}
+            {{ trans('admin::global.list') }} {{ trans('admin::cruds.permission.title') }}
         </div>
         <livewire:admin::search-permisions />
     </div>

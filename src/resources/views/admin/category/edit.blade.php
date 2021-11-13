@@ -45,58 +45,22 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 control-label asterisk d-flex justify-content-center" for="cname">{{ trans('admin::category.create.form.name') }}</label>
-                        <div class="input-group mb-2 col-sm-10">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text"><i class="fa fa-pencil fa-fw"></i></div>
-                            </div>
-                            <input type="text" name="name" value="{{ old('name', $cat->name) }}" class="form-control @error('name') is-invalid @enderror" placeholder=" {{ trans('admin::category.create.form.placeholder_name') }}">
-                            @error('name')
-                            <div id="validationServer03Feedback" class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
+                    <x-form::input name="name" value="{{ old('name', $cat->name) }}" icon-group-prepend="fa fa-pencil fa-fw" label-text="{{ trans('admin::category.create.form.name') }}" placeholder="{{ trans('admin::category.create.form.placeholder_name') }}" />
+                    @if(isset(config('admin.category.lang')[0]) and config('admin.category.localization') == true)
+                    @if (in_array('ru', config('admin.category.lang'), true))
+                    <x-form::input name="name_ru" id="сname_ru" value="{{ old('name_ru', $cat->name_ru) }}" icon-group-prepend="fa fa-pencil fa-fw" label-text="{{ trans('admin::category.create.form.name_ru') }}" placeholder="{{ trans('admin::category.create.form.placeholder_name_ru') }}" />
+                    @endif
+                    @if (in_array('ro', config('admin.category.lang'), true))
+                    <x-form::input name="name_ro" id="сname_ro" value="{{ old('name_ro', $cat->name_ro) }}" icon-group-prepend="fa fa-pencil fa-fw" label-text="{{ trans('admin::category.create.form.name_ro') }}" placeholder="{{ trans('admin::category.create.form.placeholder_name_ro') }}" />
+                    @endif
+                    @endif
                     <div class="accordeon">
                         <dl>
                             <dt><a href="javascript:void(0);">{{ trans('admin::category.create.form.additional_seo_fields') }}</a></dt>
                             <dd class="mt-3">
-                                <div class="form-group row">
-                                    <label class="col-sm-2 control-label d-flex justify-content-center" for="inlineFormInputGroup">{{ trans('admin::category.create.form.title') }}</label>
-                                    <div class="input-group mb-2 col-sm-10">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text"><i class="fa fa-text-width fa-fw"></i></div>
-                                        </div>
-                                        <input type="text" value="{{ old('title', $cat->title) }}" class="form-control @error('title') is-invalid @enderror" name="title" placeholder=" {{ trans('admin::category.create.form.placeholder_title_page') }}">
-                                        @error('title')
-                                        <div id="validationServer03Feedback" class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 control-label d-flex justify-content-center" for="inlineFormInputGroup">{{ trans('admin::category.create.form.keywords') }}</label>
-                                    <div class="input-group mb-2 col-sm-10">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text"><i class="fa fa-key fa-fw"></i></div>
-                                        </div>
-                                        <input type="text" value="{{ old('keywords', $cat->keywords) }}" class="form-control @error('keywords') is-invalid @enderror" name="keywords" placeholder="{{ trans('admin::category.create.form.placeholder_keywords_page') }}">
-                                        @error('keywords')
-                                        <div id="validationServer03Feedback" class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 control-label d-flex justify-content-center" for="inlineFormInputGroup">{{ trans('admin::category.create.form.description') }}</label>
-                                    <div class="input-group mb-2 col-sm-10">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text"><i class="fa fa-wpforms fa-fw"></i></div>
-                                        </div>
-                                        <input type="text" value="{{ old('description', $cat->description) }}" class="form-control @error('description') is-invalid @enderror" name="description" placeholder="{{ trans('admin::category.create.form.placeholder_description_page') }}">
-                                        @error('description')
-                                        <div id="validationServer03Feedback" class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
+                                <x-form::input name="title" id="ctitle" value="{{ old('title', $cat->title) }}" icon-group-prepend="fa fa-text-width fa-fw" label-text="{{ trans('admin::category.create.form.title') }}" placeholder="{{ trans('admin::category.create.form.placeholder_title_page') }}" />
+                                <x-form::input name="keywords" id="ckeywords" value="{{ old('keywords', $cat->keywords) }}" icon-group-prepend="fa fa-key fa-fw" label-text="{{ trans('admin::category.create.form.keywords') }}" placeholder="{{ trans('admin::category.create.form.placeholder_keywords_page') }}" />
+                                <x-form::input name="description" id="description" value="{{ old('description', $cat->description) }}" icon-group-prepend="fa fa-wpforms fa-fw" label-text="{{ trans('admin::category.create.form.description') }}" placeholder="{{ trans('admin::category.create.form.placeholder_description_page') }}" />
                             </dd>
                         </dl>
                     </div>

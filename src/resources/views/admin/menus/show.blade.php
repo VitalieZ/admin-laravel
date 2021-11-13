@@ -56,6 +56,22 @@
                         </tr>
                         <tr>
                             <th>
+                                {{ trans('admin::cruds.menuAdmin.form.name_ru') }}
+                            </th>
+                            <td>
+                                {{ $menu->name_ru }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                {{ trans('admin::cruds.menuAdmin.form.name_ro') }}
+                            </th>
+                            <td>
+                                {{ $menu->name_ro }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
                                 {{ trans('admin::cruds.menuAdmin.form.icon') }}
                             </th>
                             <td>
@@ -68,14 +84,6 @@
                             </th>
                             <td>
                                 {{ $menu->uri }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                {{ trans('admin::cruds.menuAdmin.form.title') }}
-                            </th>
-                            <td>
-                                {{ $menu->title }}
                             </td>
                         </tr>
                         <tr>

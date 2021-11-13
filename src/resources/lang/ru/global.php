@@ -299,4 +299,5 @@ return [
     'team-members'                   => 'Члены команды',
     'calendar'                       => 'Календарь',
     'messenger'                      => 'Мессенджер',
+    'languages'                      => 'Языки',
 ];

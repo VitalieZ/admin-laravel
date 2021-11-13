@@ -38,6 +38,9 @@ return [
             'updated_at_helper'  => ' ',
             'deleted_at'         => 'Deleted at',
             'deleted_at_helper'  => ' ',
+            'filter'             => 'Filter',
+            'empty_list'         => 'Empty list',
+            'show_all'           => 'Showing all'
         ],
     ],
     'user' => [
@@ -105,6 +108,10 @@ return [
             'independent_category' => 'Independent category',
             'name' => 'Name',
             'placeholder_name' => 'Input name',
+            'name_ru' => 'Name(ru)',
+            'placeholder_name_ru' => 'Input name(ru)',
+            'name_ro' => 'Name(ro)',
+            'placeholder_name_ro' => 'Input name(ro)',
             'icon' => 'Icon',
             'placeholder_icon' => 'Input icon',
             'for_more_icons' => 'For more icons please see',

@@ -64,7 +64,11 @@
                                 {{ $user->name ?? '' }}
                             </td>
                             <td>
-                                {!! $user->deleted_at ? '<span class="badge badge-danger">Удален</span>' : '<span class="badge badge-info">Активен</span>' !!}
+                                @if ($user->deleted_at)
+                                <span class='badge badge-danger'>{{ trans('admin::category.menu_items.deleted') }}</span>
+                                @else
+                                <span class='badge badge-info'>{{ trans('admin::category.menu_items.active') }}</span>
+                                @endif
                             </td>
                             <td>
                                 {{ $user->email ?? '' }}
@@ -156,25 +160,6 @@
         }
         dtButtons.push(deleteButton)
         @endcan
-
-        $.extend(true, $.fn.dataTable.defaults, {
-            orderCellsTop: true,
-            order: [
-                [1, 'desc']
-            ],
-            pageLength: 100,
-        });
-        let table = $('.datatable-User:not(.ajaxTable)').DataTable({
-            buttons: dtButtons
-        })
-        $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e) {
-            $($.fn.dataTable.tables(true)).DataTable()
-                .columns.adjust();
-        });
-        $('div#sidebar').on('transitionend', function(e) {
-            $($.fn.dataTable.tables(true)).DataTable().columns.adjust();
-        })
-
     })
 </script>
 @endsection

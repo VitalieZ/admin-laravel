@@ -5,10 +5,12 @@ namespace Viropanel\Admin\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Viropanel\Admin\Models\Traits\Translatable;
 
 class Category extends Model
 {
     use HasFactory, Sluggable;
+    use Translatable;
 
     public function sluggable(): array
     {
@@ -21,6 +23,8 @@ class Category extends Model
 
     protected $fillable = [
         'name',
+        'name_ru',
+        'name_ro',
         'slug',
         'content',
         'title',
