@@ -89,15 +89,15 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 control-label asterisk d-flex justify-content-center" for="cname">{{ trans('admin::cruds.menuAdmin.form.name') }}</label>
-                            <div class="input-group mb-2 col-sm-10">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text"><i class="fa fa-pencil fa-fw"></i></div>
-                                </div>
-                                <input type="text" id="сname" name="name" class="form-control" placeholder="{{ trans('admin::cruds.menuAdmin.form.placeholder_name') }}">
-                            </div>
-                        </div>
+                        <x-form::input name="name" id="сname" required="required" icon-group-prepend="fa fa-pencil fa-fw" label-text="{{ trans('admin::cruds.menuAdmin.form.name') }}" placeholder="{{ trans('admin::cruds.menuAdmin.form.placeholder_name') }}" />
+                        @if(isset(config('admin.menu_admin.lang')[0]) and config('admin.menu_admin.localization') == true)
+                        @if (in_array('ru', config('admin.menu_admin.lang'), true))
+                        <x-form::input name="name_ru" id="сname_ru" icon-group-prepend="fa fa-pencil fa-fw" label-text="{{ trans('admin::category.create.form.name_ru') }}" placeholder="{{ trans('admin::category.create.form.placeholder_name_ru') }}" />
+                        @endif
+                        @if (in_array('ro', config('admin.menu_admin.lang'), true))
+                        <x-form::input name="name_ro" id="сname_ro" icon-group-prepend="fa fa-pencil fa-fw" label-text="{{ trans('admin::category.create.form.name_ro') }}" placeholder="{{ trans('admin::category.create.form.placeholder_name_ro') }}" />
+                        @endif
+                        @endif
                         <div class="form-group row">
                             <label class="col-sm-2 control-label d-flex justify-content-center" for="сicon">{{ trans('admin::cruds.menuAdmin.form.icon') }}</label>
                             <div class="input-group mb-2 col-sm-10">
@@ -118,15 +118,6 @@
                                     <div class="input-group-text"><i class="fas fa-route"></i></div>
                                 </div>
                                 <input type="text" id="сuri" name="uri" class="form-control" placeholder="{{ trans('admin::cruds.menuAdmin.form.placeholder_route') }}">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 control-label d-flex justify-content-center" for="ctitle">{{ trans('admin::cruds.menuAdmin.form.title') }}</label>
-                            <div class="input-group mb-2 col-sm-10">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text"><i class="fa fa-text-width fa-fw"></i></div>
-                                </div>
-                                <input type="text" id="ctitle" class="form-control" name="title" placeholder=" {{ trans('admin::cruds.menuAdmin.form.placeholder_title_page') }}">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -258,13 +249,18 @@
                     maxlength: 50,
                     minlength: 4,
                 },
+                name_ru: {
+                    maxlength: 50,
+                    minlength: 4,
+                },
+                name_ro: {
+                    maxlength: 50,
+                    minlength: 4,
+                },
                 icon: {
                     maxlength: 50
                 },
                 uri: {
-                    maxlength: 255
-                },
-                title: {
                     maxlength: 255
                 },
                 permission: {
@@ -278,14 +274,19 @@
                     maxlength: "{{ trans('admin::cruds.menuAdmin.validate_js.name_max') }}",
                     minlength: "{{ trans('admin::cruds.menuAdmin.validate_js.name_min') }}",
                 },
+                name_ru: {
+                    maxlength: "{{ trans('admin::category.fields.name_max') }}",
+                    minlength: "{{ trans('admin::category.fields.name_min') }}",
+                },
+                name_ro: {
+                    maxlength: "{{ trans('admin::category.fields.name_max') }}",
+                    minlength: "{{ trans('admin::category.fields.name_min') }}",
+                },
                 icon: {
                     maxlength: "{{ trans('admin::cruds.menuAdmin.validate_js.icon_max') }}"
                 },
                 uri: {
                     maxlength: "{{ trans('admin::cruds.menuAdmin.validate_js.uri_max') }}"
-                },
-                title: {
-                    maxlength: "{{ trans('admin::cruds.menuAdmin.validate_js.title_max') }}"
                 },
                 permission: {
                     maxlength: "{{ trans('admin::cruds.menuAdmin.validate_js.permission_max') }}"
@@ -310,6 +311,12 @@
                     config[item.name] = item.value;
                 }
             });
+            if (!('name_ru' in config)) {
+                config.name_ru = '';
+            }
+            if (!('name_ro' in config)) {
+                config.name_ro = '';
+            }
             $.ajax({
                 type: "POST",
                 url: "{{ route('menus.store') }}",

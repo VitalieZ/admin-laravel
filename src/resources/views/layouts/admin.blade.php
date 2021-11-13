@@ -55,25 +55,45 @@
                         <i class="fas fa-expand-arrows-alt"></i>
                     </a>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <div class="flag-icon flag-icon-{{ LaravelLocalization::getCurrentLocale() }}"></div>
+                        <span>{{ LaravelLocalization::getCurrentLocaleNative() }}</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;">
+                        @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                        <a href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}" class="dropdown-item">
+                            <div class="media">
+                                <div class="flag-icon flag-icon-{{ $localeCode }} mr-3"></div>
+                                <div class="media-body">
+                                    <h3 class="dropdown-item-title">
+                                        {{ $properties['native'] }}
+                                    </h3>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        @endforeach
+                    </div>
+                </li>
                 <li class="nav-item dropdown user-menu">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                         <img src="{{ asset('assets/dist/img/user2-160x160.jpg') }}" class="user-image img-circle elevation-2" alt="User Image">
-                        <span class="d-none d-md-inline">Vitalie</span>
+                        <span class="d-none d-md-inline">{{ Auth::user()->name ?? 'Admin'}}</span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <!-- User image -->
                         <li class="user-header bg-primary">
                             <img src="{{ asset('assets/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
                             <p>
-                                Vitalie
-                                <small>Member since Oct. 2021</small>
+                                {{ Auth::user()->name ?? 'Admin'}}
+                                <small>{{ trans('admin::global.created_at')}} {{ Auth::user()->created_at->format('d.m.Y') ?? ''}}</small>
                             </p>
                         </li>
                         <!-- Menu Footer-->
                         <li class="user-footer">
-                            <a href="#" class="btn btn-default btn-flat">Profile</a>
                             <a href="{{ route('logout') }}" class="btn btn-default btn-flat float-right" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                Logout
+                                {{ trans('admin::global.logout')}}
                             </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 {{ csrf_field() }}
@@ -131,9 +151,6 @@
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-        <footer class="main-footer">
-            <strong>Copyright &copy; 2014-2021</strong>
-        </footer>
     </div>
     <!-- ./wrapper -->
     @include('admin::assets.js')

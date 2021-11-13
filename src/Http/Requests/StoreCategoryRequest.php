@@ -4,7 +4,6 @@ namespace Viropanel\Admin\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Http\Response;
 
 class StoreCategoryRequest extends FormRequest
 {
@@ -28,6 +27,8 @@ class StoreCategoryRequest extends FormRequest
         return [
             '*.parent_id' => 'required|integer',
             '*.name' => 'required|min:4|max:50',
+            '*.name_ru' => 'min:4|max:50|nullable',
+            '*.name_ro' => 'min:4|max:50|nullable',
             '*.title' => 'max:255',
             '*.keywords' => 'max:255',
             '*.description' => 'max:255',

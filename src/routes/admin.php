@@ -1,14 +1,13 @@
 <?php
 
-namespace Viropanel\Admin;
-
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Viropanel\Admin\Http\Controllers\CategoryController;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 Auth::routes();
 
-Route::prefix(config('admin.route.prefix'))->middleware([config('admin.route.middleware')])->group(function () {
+Route::prefix(LaravelLocalization::setLocale() . '/' . config('admin.route.prefix'))->middleware([config('admin.route.middleware')])->group(function () {
     Route::get('/', [\Viropanel\Admin\Http\Controllers\DashboardController::class, 'index'])->name('admin.dashboard');
 
     //Category

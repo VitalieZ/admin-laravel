@@ -24,11 +24,12 @@ class MenuaSeeder extends Seeder
                         'parent_id' => $item[0],
                         'ordering' => $item[1],
                         'name' => $item[2],
-                        'icon' => $item[3],
-                        'uri' => $item[4],
-                        'title' => $item[5],
-                        'permission' => $item[6],
-                        'visible' => $item[7],
+                        'name_ru' => $item[3],
+                        'name_ro' => $item[4],
+                        'icon' => $item[5],
+                        'uri' => $item[6],
+                        'permission' => $item[7],
+                        'visible' => $item[8],
                         'created_at' => Carbon::now(),
                         'updated_at' => Carbon::now(),
                     ]);
@@ -40,13 +41,13 @@ class MenuaSeeder extends Seeder
     public function data()
     {
         $menu = array(
-            [0, 0, 'Dashboard', 'fa fa-bar-chart', 'admin.dashboard', 'Dashboard', 'dashboard_access', 1],
-            [0, 1, 'Категорий', 'fas fa-bars', 'menu.index', 'Категорий', 'category_access', 1],
-            [0, 2, 'Admin', 'fas fa-user-md', '', 'Admin', 'user_management_access', 1],
-            [3, 0, 'Меню', 'fas fa-bars', 'menus.index', 'Меню админ', 'menu_admin_access', 1],
-            [3, 1, 'Пользыватель', 'fas fa-users', 'user.index', 'Пользыватель', 'user_access', 1],
-            [3, 2, 'Роль', 'fas fa-user-tag', 'roles.index', 'Роль', 'role_access', 1],
-            [3, 3, 'Разрешение', 'fas fa-user-check', 'permissions.index', 'Разрешение', 'permission_access', 1],
+            [0, 0, 'Dashboard', null, null, 'fa fa-bar-chart', 'admin.dashboard', 'dashboard_access', 1],
+            [0, 1, 'Categories', 'Категории', 'Categorii', 'fas fa-bars', 'menu.index', 'category_access', 1],
+            [0, 2, 'Admin', 'Админ', 'Admin', 'fas fa-user-md', '', 'user_management_access', 1],
+            [3, 0, 'Menu', 'Меню', 'Meniul', 'fas fa-bars', 'menus.index', 'menu_admin_access', 1],
+            [3, 1, 'Users', 'Пользователи', 'Utilizatori', 'fas fa-users', 'user.index', 'user_access', 1],
+            [3, 2, 'Roles', 'Роли', 'Roluri', 'fas fa-user-tag', 'roles.index', 'role_access', 1],
+            [3, 3, 'Permissions', 'Разрешения', 'Permisiuni', 'fas fa-user-check', 'permissions.index', 'permission_access', 1],
         );
         return $menu;
     }

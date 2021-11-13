@@ -17,7 +17,7 @@
 <div class="col-md-12">
     <div class="card">
         <div class="card-header">
-            {{ trans('admin::global.list') }} {{ trans('admin::cruds.role.title_singular') }}
+            {{ trans('admin::global.list') }} {{ trans('admin::cruds.role.title') }}
         </div>
 
         <div class="card-body">
@@ -140,25 +140,6 @@
         }
         dtButtons.push(deleteButton)
         @endcan
-
-        $.extend(true, $.fn.dataTable.defaults, {
-            orderCellsTop: true,
-            order: [
-                [1, 'desc']
-            ],
-            pageLength: 100,
-        });
-        let table = $('.datatable-Role:not(.ajaxTable)').DataTable({
-            buttons: dtButtons
-        })
-        $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e) {
-            $($.fn.dataTable.tables(true)).DataTable()
-                .columns.adjust();
-        });
-        $('div#sidebar').on('transitionend', function(e) {
-            $($.fn.dataTable.tables(true)).DataTable().columns.adjust();
-        })
-
     })
 </script>
 @endsection

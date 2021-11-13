@@ -74,6 +74,7 @@
             </div><!-- /.box-tools -->
         </div><!-- /.box-header -->
         <div class="box-body" style="display: block;">
+
             <form class="cmxform" id="create_category_form2">
                 <fieldset>
                     <div class="box-body fields-group">
@@ -88,47 +89,21 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 control-label asterisk d-flex justify-content-center" for="cname">{{ trans('admin::category.create.form.name') }}</label>
-                            <div class="input-group mb-2 col-sm-10">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text"><i class="fa fa-pencil fa-fw"></i></div>
-                                </div>
-                                <input type="text" id="сname" name="name" class="form-control" placeholder=" {{ trans('admin::category.create.form.placeholder_name') }}">
-                            </div>
-                        </div>
+                        <x-form::input name="name" id="сname" icon-group-prepend="fa fa-pencil fa-fw" label-text="{{ trans('admin::category.create.form.name') }}" placeholder="{{ trans('admin::category.create.form.placeholder_name') }}" />
+                        @if(isset(config('admin.category.lang')[0]) and config('admin.category.localization') == true)
+                        @if (in_array('ru', config('admin.category.lang'), true))
+                        <x-form::input name="name_ru" id="сname_ru" icon-group-prepend="fa fa-pencil fa-fw" label-text="{{ trans('admin::category.create.form.name_ru') }}" placeholder="{{ trans('admin::category.create.form.placeholder_name_ru') }}" />
+                        @endif
+                        @if (in_array('ro', config('admin.category.lang'), true))
+                        <x-form::input name="name_ro" id="сname_ro" icon-group-prepend="fa fa-pencil fa-fw" label-text="{{ trans('admin::category.create.form.name_ro') }}" placeholder="{{ trans('admin::category.create.form.placeholder_name_ro') }}" />
+                        @endif
+                        @endif
                         <div class="mb-3">
-                            <div class="text-primary">{{ trans('admin::category.create.form.additional_seo_fields') }}
-                            </div>
+                            <div class="text-primary">{{ trans('admin::category.create.form.additional_seo_fields') }}</div>
                         </div>
-
-                        <div class="form-group row">
-                            <label class="col-sm-2 control-label d-flex justify-content-center" for="inlineFormInputGroup">{{ trans('admin::category.create.form.title') }}</label>
-                            <div class="input-group mb-2 col-sm-10">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text"><i class="fa fa-text-width fa-fw"></i></div>
-                                </div>
-                                <input type="text" id="ctitle" class="form-control" name="title" placeholder=" {{ trans('admin::category.create.form.placeholder_title_page') }}">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 control-label d-flex justify-content-center" for="inlineFormInputGroup">{{ trans('admin::category.create.form.keywords') }}</label>
-                            <div class="input-group mb-2 col-sm-10">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text"><i class="fa fa-key fa-fw"></i></div>
-                                </div>
-                                <input type="text" id="ckeywords" class="form-control" name="keywords" placeholder="{{ trans('admin::category.create.form.placeholder_keywords_page') }}">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 control-label d-flex justify-content-center" for="inlineFormInputGroup">{{ trans('admin::category.create.form.description') }}</label>
-                            <div class="input-group mb-2 col-sm-10">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text"><i class="fa fa-wpforms fa-fw"></i></div>
-                                </div>
-                                <input type="text" id="description" class="form-control" name="description" placeholder="{{ trans('admin::category.create.form.placeholder_description_page') }}">
-                            </div>
-                        </div>
+                        <x-form::input name="title" id="ctitle" icon-group-prepend="fa fa-text-width fa-fw" label-text="{{ trans('admin::category.create.form.title') }}" placeholder="{{ trans('admin::category.create.form.placeholder_title_page') }}" />
+                        <x-form::input name="keywords" id="ckeywords" icon-group-prepend="fa fa-key fa-fw" label-text="{{ trans('admin::category.create.form.keywords') }}" placeholder="{{ trans('admin::category.create.form.placeholder_keywords_page') }}" />
+                        <x-form::input name="description" id="description" icon-group-prepend="fa fa-wpforms fa-fw" label-text="{{ trans('admin::category.create.form.description') }}" placeholder="{{ trans('admin::category.create.form.placeholder_description_page') }}" />
                         <div class="col-12">
                             <div class="col-sm-2">
                                 <div class="form-check">
@@ -199,7 +174,7 @@
                             if (data == 'sub') {
                                 Toast.fire({
                                     icon: 'error',
-                                    title: 'Категория не может быть удалена.Сначала удалите подкатегорий.'
+                                    title: "{{ trans('admin::cruds.menuAdmin.sub_cat') }}"
                                 })
                             } else {
                                 $('.dd-item[data-id="' + id + '"]').remove();
@@ -246,6 +221,14 @@
                     maxlength: 50,
                     minlength: 4,
                 },
+                name_ru: {
+                    maxlength: 50,
+                    minlength: 4,
+                },
+                name_ro: {
+                    maxlength: 50,
+                    minlength: 4,
+                },
                 title: {
                     maxlength: 255
                 },
@@ -259,6 +242,14 @@
             messages: {
                 name: {
                     required: "{{ trans('admin::category.fields.name_required') }}",
+                    maxlength: "{{ trans('admin::category.fields.name_max') }}",
+                    minlength: "{{ trans('admin::category.fields.name_min') }}",
+                },
+                name_ru: {
+                    maxlength: "{{ trans('admin::category.fields.name_max') }}",
+                    minlength: "{{ trans('admin::category.fields.name_min') }}",
+                },
+                name_ro: {
                     maxlength: "{{ trans('admin::category.fields.name_max') }}",
                     minlength: "{{ trans('admin::category.fields.name_min') }}",
                 },
@@ -291,6 +282,12 @@
                     config[item.name] = item.value;
                 }
             });
+            if (!('name_ru' in config)) {
+                config.name_ru = '';
+            }
+            if (!('name_ro' in config)) {
+                config.name_ro = '';
+            }
             $.ajax({
                 type: "POST",
                 url: "{{ route('menu.store') }}",

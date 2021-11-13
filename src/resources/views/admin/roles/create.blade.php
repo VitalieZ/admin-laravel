@@ -52,9 +52,9 @@
         //Bootstrap Duallistbox
         $('.duallistbox').bootstrapDualListbox({
             selectorMinimalHeight: '300',
-            filterPlaceHolder: 'Фильтр',
-            infoTextEmpty: 'Пустой список',
-            infoText: 'Показаны все {0}',
+            filterPlaceHolder: "{{ trans('admin::cruds.role.fields.filter') }}",
+            infoTextEmpty: "{{ trans('admin::cruds.role.fields.empty_list') }}",
+            infoText: "{{ trans('admin::cruds.role.fields.show_all') }} {0}",
         });
     });
 </script>

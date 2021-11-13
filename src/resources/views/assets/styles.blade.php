@@ -9,3 +9,4 @@
 <!-- Bootstrap4 Duallistbox -->
 <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/dist/adminlte/AdminLTE.min.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/plugins/flag-icon-css/css/flag-icon.min.css') }}">

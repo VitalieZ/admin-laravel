@@ -6,8 +6,8 @@ use Carbon\Laravel\ServiceProvider;
 use Illuminate\Filesystem\Filesystem;
 use Laravel\Ui\UiCommand;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Gate;
 use Viropanel\Admin\Http\Livewire\Permissions\SearchPermissions;
+use Illuminate\Support\Facades\Blade;
 
 
 class AdminServiceProvider extends ServiceProvider
@@ -36,7 +36,7 @@ class AdminServiceProvider extends ServiceProvider
         /* Publishing Configuration */
         $this->publishes([__DIR__ . '/config/admin.php' => config_path('admin.php')]);
         $this->publishes([__DIR__ . '/config/sluggable.php' => config_path('sluggable.php')]);
-        //$this->publishes([__DIR__ . '/config' => config_path()], 'admin');
+        $this->publishes([__DIR__ . '/config/laravellocalization.php' => config_path('laravellocalization.php')]);
 
         /* Publishing Public Assets */
         $this->publishes([__DIR__ . '/resources/assets' => public_path('assets'),], 'public');
@@ -57,6 +57,9 @@ class AdminServiceProvider extends ServiceProvider
 
         //register livewire components
         $this->livewireComponents();
+
+        //register components
+        $this->registercomponents();
     }
 
 
@@ -67,6 +70,12 @@ class AdminServiceProvider extends ServiceProvider
     public function livewireComponents()
     {
         \Livewire::component('admin::search-permisions', SearchPermissions::class);
+    }
+
+    public function registercomponents()
+    {
+
+        Blade::componentNamespace('Viropanel\\Admin\\Http\\View\\Components\\Form', 'form');
     }
 
     /**

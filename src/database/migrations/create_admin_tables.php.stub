@@ -21,9 +21,10 @@ class CreateAdminTables extends Migration
                 $table->integer('parent_id')->default(0);
                 $table->integer('ordering')->default(0)->nullable();
                 $table->string('name', 50);
+                $table->string('name_ru', 50)->nullable();
+                $table->string('name_ro', 50)->nullable();
                 $table->string('icon', 50);
                 $table->string('uri')->nullable();
-                $table->string('title', 255)->nullable();
                 $table->string('permission', 255)->nullable();
                 $table->tinyInteger('visible')->default('0')->nullable();
                 $table->timestamps();
@@ -42,8 +43,9 @@ class CreateAdminTables extends Migration
             Schema::create('categories', function (Blueprint $table) {
                 $table->bigIncrements('id');
                 $table->string('name', 50);
+                $table->string('name_ru', 50)->nullable();
+                $table->string('name_ro', 50)->nullable();
                 $table->string('slug', 255)->unique();
-                $table->string('icon', 50)->nullable();
                 $table->string('title', 255)->nullable();
                 $table->string('keywords', 255)->nullable();
                 $table->string('description', 255)->nullable();

@@ -4,10 +4,12 @@ namespace Viropanel\Admin\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Viropanel\Admin\Models\Traits\Translatable;
 
 class Menuadmin extends Model
 {
     use HasFactory;
+    use Translatable;
 
     protected $table = 'menu_admin';
 
@@ -15,6 +17,8 @@ class Menuadmin extends Model
         'parent_id',
         'ordering',
         'name',
+        'name_ru',
+        'name_ro',
         'icon',
         'uri',
         'title',
