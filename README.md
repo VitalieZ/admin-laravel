@@ -27,3 +27,26 @@ php artisan admin-panel:empty-project
 ```
 
 Open `http://localhost/admin/` in browser,use username `admin@admin.loc` and password `12345678` to login.
+
+## Multilanguage
+
+If you need localization set `localization` => `true` from `config/admin.php`.
+Default languege is only `en` optional you can use `ro` and `ru`, or use optional only one `ru` or `ro`
+
+For categories
+
+```
+'category' => [
+    'localization' => true
+    'lang' => ['ru', 'ro']
+],
+```
+
+For menu admin
+
+```
+'menu_admin' => [
+    'localization' => true,
+    'lang' => ['ru', 'ro']
+]
+```
