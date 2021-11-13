@@ -30,7 +30,7 @@ Open `http://localhost/admin/` in browser,use username `admin@admin.loc` and pas
 
 ## Multilanguage
 
-If you need localization set `localization` => `true` from `config/admin.php`.
+If you need localization set `'localization' => true` from `config/admin.php`.
 Default languege is only `en` optional you can use `ro` and `ru`, or use optional only one `ru` or `ro`
 
 For categories
