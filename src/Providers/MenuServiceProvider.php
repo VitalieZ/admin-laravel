@@ -5,6 +5,7 @@ namespace Viropanel\Admin\Providers;
 use Illuminate\Support\ServiceProvider;
 use Viropanel\Admin\Models\Menuadmin;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\App;
 
 class MenuServiceProvider extends ServiceProvider
 {
@@ -37,6 +38,6 @@ class MenuServiceProvider extends ServiceProvider
 
     public function menuadmin()
     {
-        return  Menuadmin::where('parent_id', 0)->where('visible', True)->orderBy('ordering', 'asc')->get();
+        return App::make(MenuAdmin::class)->getMenuadmin();
     }
 }

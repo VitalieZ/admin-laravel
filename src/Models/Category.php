@@ -39,6 +39,6 @@ class Category extends Model
 
     public function cheaild()
     {
-        return $this->hasMany(Category::class, 'parent_id')->orderBy('ordering', 'asc');
+        return $this->hasMany(Category::class, 'parent_id')->orderBy('ordering', 'asc')->with('cheaild');
     }
 }
