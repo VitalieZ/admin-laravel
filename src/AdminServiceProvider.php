@@ -8,6 +8,7 @@ use Laravel\Ui\UiCommand;
 use Illuminate\Support\Collection;
 use Viropanel\Admin\Http\Livewire\Permissions\SearchPermissions;
 use Illuminate\Support\Facades\Blade;
+use Viropanel\Admin\Services\MenuAdmin\MenuAdmin;
 
 
 class AdminServiceProvider extends ServiceProvider
@@ -60,6 +61,9 @@ class AdminServiceProvider extends ServiceProvider
 
         //register components
         $this->registercomponents();
+
+        //register services
+        $this->registerservices();
     }
 
 
@@ -76,6 +80,13 @@ class AdminServiceProvider extends ServiceProvider
     {
 
         Blade::componentNamespace('Viropanel\\Admin\\Http\\View\\Components\\Form', 'form');
+    }
+
+    public function registerservices()
+    {
+        $this->app->singleton(MenuAdmin::class, function ($app) {
+            return new MenuAdmin;
+        });
     }
 
     /**

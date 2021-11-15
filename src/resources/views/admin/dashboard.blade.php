@@ -52,7 +52,7 @@
         {{ config('admin.name') }}
     </div>
     <div class="links">
-        <a href="#" target="_blank">Github</a>
+        <a href="https://github.com/VitalieZ/admin-laravel" target="_blank">Github</a>
         <a href="#" target="_blank">{{ trans('admin::dashboard.documentation') }}</a>
     </div>
 </div>

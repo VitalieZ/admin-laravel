@@ -68,7 +68,7 @@ class CategoryController extends Controller
 
     public function categories()
     {
-        return Category::where('parent_id', 0)->orderBy('ordering', 'asc')->get();
+        return Category::where('parent_id', 0)->with('cheaild')->orderBy('ordering', 'asc')->get();
     }
 
     public function viewMenuList(Request $request)

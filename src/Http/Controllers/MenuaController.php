@@ -11,6 +11,7 @@ use Viropanel\Admin\Http\Requests\MassDestroyMenuadminRequest;
 use Viropanel\Admin\Http\Requests\StoreMenuadminRequest;
 use Spatie\Permission\Models\Permission;
 use Viropanel\Admin\Http\Requests\UpdateMenuadminRequest;
+use Illuminate\Support\Facades\App;
 
 
 class MenuaController extends Controller
@@ -65,7 +66,7 @@ class MenuaController extends Controller
 
     public function categories()
     {
-        return Menuadmin::where('parent_id', 0)->orderBy('ordering', 'asc')->get();
+        return App::make(MenuAdmin::class)->getMenuadmin();
     }
 
     public function viewMenuList(Request $request)

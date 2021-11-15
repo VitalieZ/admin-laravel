@@ -30,6 +30,6 @@ class Menuadmin extends Model
 
     public function cheaild()
     {
-        return $this->hasMany(Menuadmin::class, 'parent_id')->orderBy('ordering', 'asc');
+        return $this->hasMany(Menuadmin::class, 'parent_id')->orderBy('ordering', 'asc')->with('cheaild');
     }
 }
