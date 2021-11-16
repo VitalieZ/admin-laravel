@@ -34,9 +34,11 @@
                         <i class="fa fa-minus-square-o"></i>&nbsp;{{ trans('admin::cruds.menuAdmin.index.collapse') }}
                     </a>
                 </div>
+                @can('menu_admin_sorting')
                 <div class="btn-group">
                     <a class="btn btn-info btn-sm tree-616ecf2d15e0f-save" title="{{ trans('admin::global.save') }}"><i class="fa fa-save"></i><span class="hidden-xs">&nbsp;{{ trans('admin::global.save') }}</span></a>
                 </div>
+                @endcan
                 <div class="btn-group">
                     <a class="btn btn-warning btn-sm tree-616ecf2d15e0f-refresh" title="{{ trans('admin::global.refresh') }}"><i class="fa fa-refresh"></i><span class="hidden-xs">&nbsp;{{ trans('admin::global.refresh') }}</span></a>
                 </div>

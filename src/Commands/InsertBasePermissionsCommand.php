@@ -58,7 +58,8 @@ class InsertBasePermissionsCommand extends Command
             "menu_admin_create",
             "menu_admin_edit",
             "menu_admin_show",
-            "menu_admin_delete"
+            "menu_admin_delete",
+            "menu_admin_sorting"
         );
         return $permissions;
     }
