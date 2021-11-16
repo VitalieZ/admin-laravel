@@ -32,9 +32,11 @@
                         <i class="fa fa-minus-square-o"></i>&nbsp;{{ trans('admin::category.index.collapse') }}
                     </a>
                 </div>
+                @can('category_sorting')
                 <div class="btn-group">
                     <a class="btn btn-info btn-sm tree-616ecf2d15e0f-save" title="{{ trans('admin::category.index.save') }}"><i class="fa fa-save"></i><span class="hidden-xs">&nbsp;{{ trans('admin::category.index.save') }}</span></a>
                 </div>
+                @endcan
                 <div class="btn-group">
                     <a class="btn btn-warning btn-sm tree-616ecf2d15e0f-refresh" title="{{ trans('admin::category.index.refresh') }}"><i class="fa fa-refresh"></i><span class="hidden-xs">&nbsp;{{ trans('admin::category.index.refresh') }}</span></a>
                 </div>
