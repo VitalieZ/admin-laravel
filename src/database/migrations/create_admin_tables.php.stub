@@ -56,10 +56,12 @@ class CreateAdminTables extends Migration
             });
         }
 
-        if(Schema::hasTable('users')){
-            Schema::table('users', function (Blueprint $table) {
-            $table->dateTime('deleted_at', 0)->nullable();
-        });
+        if (Schema::hasTable('users')) {
+            if (!Schema::hasColumn('users', 'deleted_at')) {
+                Schema::table('users', function (Blueprint $table) {
+                    $table->dateTime('deleted_at', 0)->nullable();
+                });
+            }
         }
 
         
