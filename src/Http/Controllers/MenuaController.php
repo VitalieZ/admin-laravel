@@ -12,6 +12,7 @@ use Viropanel\Admin\Http\Requests\StoreMenuadminRequest;
 use Spatie\Permission\Models\Permission;
 use Viropanel\Admin\Http\Requests\UpdateMenuadminRequest;
 use Illuminate\Support\Facades\App;
+use Viropanel\Admin\Services\MenuAdmin as ServicesMenuAdmin;
 
 
 class MenuaController extends Controller
@@ -66,7 +67,7 @@ class MenuaController extends Controller
 
     public function categories()
     {
-        return App::make(MenuAdmin::class)->getMenuadmin();
+        return App::make(ServicesMenuAdmin::class)->getMenuadmin();
     }
 
     public function viewMenuList(Request $request)
