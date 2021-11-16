@@ -1,6 +1,6 @@
 <?php
 
-namespace Viropanel\Admin\Services\MenuAdmin;
+namespace Viropanel\Admin\Services;
 
 use Viropanel\Admin\Models\Menuadmin as ModelsMenuadmin;
 

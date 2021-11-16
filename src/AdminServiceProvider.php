@@ -8,7 +8,7 @@ use Laravel\Ui\UiCommand;
 use Illuminate\Support\Collection;
 use Viropanel\Admin\Http\Livewire\Permissions\SearchPermissions;
 use Illuminate\Support\Facades\Blade;
-use Viropanel\Admin\Services\MenuAdmin\MenuAdmin;
+use Viropanel\Admin\Services\MenuAdmin;
 
 
 class AdminServiceProvider extends ServiceProvider

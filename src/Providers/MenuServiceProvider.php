@@ -3,9 +3,9 @@
 namespace Viropanel\Admin\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Viropanel\Admin\Models\Menuadmin;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\App;
+use Viropanel\Admin\Services\MenuAdmin;
 
 class MenuServiceProvider extends ServiceProvider
 {
